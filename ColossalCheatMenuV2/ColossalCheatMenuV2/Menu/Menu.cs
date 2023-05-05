@@ -85,7 +85,7 @@ namespace Colossal.Menu
             Testtext.text = "";
             Testtext.fontSize = 10;
             Testtext.font = GameObject.Find("COC Text").GetComponent<Text>().font;
-            Testtext.rectTransform.sizeDelta = new Vector2(260, 100);
+            Testtext.rectTransform.sizeDelta = new Vector2(260, 160);
             Testtext.alignment = TextAnchor.UpperLeft;
             Testtext.rectTransform.localScale = new Vector3(0.01f, 0.01f, 1f);
             Testtext.rectTransform.localPosition = new Vector3(-1.5f, 1f, 2f);
@@ -138,21 +138,21 @@ namespace Colossal.Menu
             Sky[5] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
 
-            Player = new MenuOption[8];
+            Player = new MenuOption[7];
             Player[0] = new MenuOption { DisplayName = "NoFinger", _type = "toggle", AssociatedBool = false };
             Player[1] = new MenuOption { DisplayName = "TagGun", _type = "toggle", AssociatedBool = false };
             Player[2] = new MenuOption { DisplayName = "LegMod", _type = "toggle", AssociatedBool = false };
             Player[3] = new MenuOption { DisplayName = "CreeperMonkey", _type = "toggle", AssociatedBool = false };
             Player[4] = new MenuOption { DisplayName = "GhostMonkey", _type = "toggle", AssociatedBool = false };
             Player[5] = new MenuOption { DisplayName = "InvisMonkey", _type = "toggle", AssociatedBool = false };
-            Player[6] = new MenuOption { DisplayName = "RGB", _type = "toggle", AssociatedBool = false };
-            Player[7] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            Player[6] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
-            Other = new MenuOption[4];
+            Other = new MenuOption[5];
             Other[0] = new MenuOption { DisplayName = "Break NameTags", _type = "toggle", AssociatedBool = false };
             Other[1] = new MenuOption { DisplayName = "Break ModCheckers", _type = "toggle", AssociatedBool = false };
             Other[2] = new MenuOption { DisplayName = "Break PunchMod", _type = "toggle", AssociatedBool = false };
-            Other[3] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            Other[3] = new MenuOption { DisplayName = "FPSBooster", _type = "toggle", AssociatedBool = false };
+            Other[4] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
             Computer = new MenuOption[8];
             Computer[0] = new MenuOption { DisplayName = "Disconnect", _type = "button", AssociatedString = "disconnect" };
@@ -335,12 +335,12 @@ namespace Colossal.Menu
             CreeperMonkey.creepermonkey = Player[3].AssociatedBool;
             GhostMonkey.ghostmonkey = Player[4].AssociatedBool;
             InvisMonkey.invismonkey = Player[5].AssociatedBool;
-            RGB.rbg = Player[6].AssociatedBool;
 
             //Other
             BreakNameTags.breaknametags = Other[0].AssociatedBool;
             BreakModChecker.breakmodcheckers = Other[1].AssociatedBool;
             BreakPunchMod.breakpunchmod= Other[2].AssociatedBool;
+            FPSBooster.fpsbooster = Other[3].AssociatedBool;
         }
         static void UpdateMenuState(MenuOption option, string _MenuState, string OperationType)
         {
@@ -490,15 +490,21 @@ namespace Colossal.Menu
                         }
                         if (option.AssociatedString == "serverusw")
                         {
+                            PhotonNetworkController.Instance.FullDisconnect();
                             PhotonNetworkController.Instance.ConnectToRegion("USW");
+                            PhotonNetworkController.Instance.InitiateConnection();
                         }
                         if (option.AssociatedString == "serverus")
                         {
+                            PhotonNetworkController.Instance.FullDisconnect();
                             PhotonNetworkController.Instance.ConnectToRegion("USW");
+                            PhotonNetworkController.Instance.InitiateConnection();
                         }
                         if (option.AssociatedString == "servereu")
                         {
+                            PhotonNetworkController.Instance.FullDisconnect();
                             PhotonNetworkController.Instance.ConnectToRegion("EU");
+                            PhotonNetworkController.Instance.InitiateConnection();
                         }
 
                         //Sky

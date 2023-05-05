@@ -41,6 +41,7 @@
     <Compile Include="Menu\Mods\Other\BreakModCheckers.cs" />
     <Compile Include="Menu\Mods\Other\BreakNameTags.cs" />
     <Compile Include="Menu\Mods\Other\BreakPunchMod.cs" />
+    <Compile Include="Menu\Mods\Other\FPSBooster.cs" />
     <Compile Include="Menu\Mods\Visual\BoxEsp.cs" />
     <Compile Include="Menu\Mods\Visual\Chams.cs" />
     <Compile Include="Menu\Mods\Player\CreeperMonkey.cs" />
@@ -53,7 +54,6 @@
     <Compile Include="Menu\Mods\Player\TagGun.cs" />
     <Compile Include="Menu\Mods\Movement\TFly.cs" />
     <Compile Include="Menu\Mods\Movement\WallWalk.cs" />
-    <Compile Include="Menu\Mods\Player\RGB.cs" />
     <Compile Include="Menu\Mods\Visual\HollowBoxEsp.cs" />
     <Compile Include="Patches\Events.cs" />
     <Compile Include="Patches\GeneralFailMessage.cs" />

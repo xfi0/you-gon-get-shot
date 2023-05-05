@@ -70,13 +70,13 @@ namespace Colossal
             dynamicClasses.Add(new CreeperMonkey());
             dynamicClasses.Add(new GhostMonkey());
             dynamicClasses.Add(new InvisMonkey());
-            dynamicClasses.Add(new RGB());
             //NoFinger is a harmony patch. This is not needed
 
             //Other
             dynamicClasses.Add(new BreakNameTags());
             dynamicClasses.Add(new BreakModChecker());
             dynamicClasses.Add(new BreakPunchMod());
+            dynamicClasses.Add(new FPSBooster());
 
             //AntiCrashes
             dynamicClasses.Add(new AntiDestroyPlayerObjects());
@@ -101,19 +101,6 @@ namespace Colossal
                 GameObject.Find("COC Text").GetComponent<Text>().text = $"CREDITS:\n<color=magenta>LARS : MENU TEMPLATE (THANKS AGAIN)</color>\n<color=magenta>COLOSSUS : MENU CREATOR</color>\n<color=yellow>WILL : NO FINGERS</color>\n<color=white>FAULT : LEG MOD</color>";
                 Debug.Log("<color=magenta>Loaded COC!</color>");
 
-                doonce = true;
-            }
-
-            if (PhotonNetwork.InRoom && !inroom)
-            {
-                //To update the MOTD live.
-                WebClient webClient = new WebClient();
-                string motd = webClient.DownloadString(new Uri("https://pastebin.com/raw/bhLzrd4F"));
-                GameObject.Find("Level/lower level/UI/Tree Room Texts/motdtext").GetComponent<Text>().text = motd;
-                webClient.Dispose();
-
-                Debug.Log("<color=magenta>Loaded MOTD!</color>");
-
                 string filePath = Path.Combine("mat.png");
                 if (!File.Exists(filePath))
                 {
@@ -126,6 +113,19 @@ namespace Colossal
                 texture.LoadImage(fileData);
 
                 Debug.Log("<color=magenta>Downloaded Mat!</color>");
+
+                doonce = true;
+            }
+
+            if (PhotonNetwork.InRoom && !inroom)
+            {
+                //To update the MOTD live.
+                WebClient webClient = new WebClient();
+                string motd = webClient.DownloadString(new Uri("https://pastebin.com/raw/bhLzrd4F"));
+                GameObject.Find("Level/lower level/UI/Tree Room Texts/motdtext").GetComponent<Text>().text = motd;
+                webClient.Dispose();
+
+                Debug.Log("<color=magenta>Loaded MOTD!</color>");
 
                 inroom = true;
             }
