@@ -18,7 +18,7 @@ Computer
 Other
 Account
 
-~Movement~
+*Movement*
 -Excel Fly
 -TFly
 -Wall Walk
@@ -35,7 +35,7 @@ Account
 -UpsidedownMonkey
 -FreezeMonkey
 
-~Visual~
+*Visual*
 -Chams
 -BoxEsp
 -HollowBoxEsp
@@ -46,7 +46,7 @@ Account
 *Cyan*
 *Green*
 
-~Player~
+*Player*
 -NoFingers
 -TagGun
 -LegMod
@@ -55,7 +55,7 @@ Account
 -InvisMonkey
 -RBG
 
-~Computer~
+*Computer*
 -Disconnect
 -Random Identity
 -Join CGT
@@ -64,12 +64,12 @@ Account
 -Modded Infection
 -Modded Casual
 
-~Other~
+*Other*
 -Break NameTags
 -Break ModCheckers
 -Break PunchMod
 
-~Account~
+*Account*
 -Disconnect(From Playfab)
 -Server : USW
 -Server : US
