@@ -108,7 +108,7 @@ namespace Colossal
             {
                 //To update the MOTD live.
                 WebClient webClient = new WebClient();
-                string motd = webClient.DownloadString(new Uri("https://raw.githubusercontent.com/ColossusYTTV/ColossalCheatMenuV2/main/Files/MOTD.txt?token=GHSAT0AAAAAACCIVNXBZPZHFVFXETSCJAPSZCVIKRQ"));
+                string motd = webClient.DownloadString(new Uri("https://raw.githubusercontent.com/ColossusYTTV/ColossalCheatMenuV2/main/Files/MOTD.txt?token=GHSAT0AAAAAACCIVNXAUHAUFI7UUTFBU7ZSZCVIN7Q"));
                 GameObject.Find("Level/lower level/UI/Tree Room Texts/motdtext").GetComponent<Text>().text = motd;
                 webClient.Dispose();
 
