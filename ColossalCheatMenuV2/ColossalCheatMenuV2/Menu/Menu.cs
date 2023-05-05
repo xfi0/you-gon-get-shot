@@ -179,15 +179,17 @@ namespace Colossal.Menu
         public static void Load()
         {
             bool toggle;
+            bool toggle2;
 
-            InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.menuButton, out toggle);
-            if (toggle && !menutogglecooldown)
+            InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxisClick, out toggle);
+            InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxisClick, out toggle2);
+            if (toggle && toggle2 && !menutogglecooldown)
             {
                 menutogglecooldown = true;
                 HUDObj2.active = !HUDObj2.active;
                 GUIToggled = !GUIToggled;
             }
-            if (!toggle && menutogglecooldown)
+            if (!toggle && !toggle2 && menutogglecooldown)
             {
                 menutogglecooldown = false;
             }
