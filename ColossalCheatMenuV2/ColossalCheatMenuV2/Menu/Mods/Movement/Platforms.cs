@@ -33,7 +33,7 @@ namespace Colossal.Mods
                     if (!PlatLonce)
                     {
                         PlatL = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                        //PlatL.GetComponent<Renderer>().material.color = Color.magenta;
+                        PlatL.GetComponent<Renderer>().material.color = Color.magenta;
                         PlatL.GetComponent<Renderer>().material.mainTexture = Plugin.texture;
                         PlatL.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                         PlatL.transform.position = GorillaLocomotion.Player.Instance.leftHandTransform.position;
@@ -52,7 +52,7 @@ namespace Colossal.Mods
                     if (!PlatRonce)
                     {
                         PlatR = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                        //PlatR.GetComponent<Renderer>().material.color = Color.magenta;
+                        PlatR.GetComponent<Renderer>().material.color = Color.magenta;
                         PlatR.GetComponent<Renderer>().material.mainTexture = Plugin.texture;
                         PlatR.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                         PlatR.transform.position = GorillaLocomotion.Player.Instance.rightHandTransform.position;

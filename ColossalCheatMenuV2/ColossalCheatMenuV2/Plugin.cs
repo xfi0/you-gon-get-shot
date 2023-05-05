@@ -101,19 +101,6 @@ namespace Colossal
                 GameObject.Find("COC Text").GetComponent<Text>().text = $"CREDITS:\n<color=magenta>LARS : MENU TEMPLATE (THANKS AGAIN)</color>\n<color=magenta>COLOSSUS : MENU CREATOR</color>\n<color=yellow>WILL : NO FINGERS</color>\n<color=white>FAULT : LEG MOD</color>";
                 Debug.Log("<color=magenta>Loaded COC!</color>");
 
-                string filePath = Path.Combine("mat.png");
-                if (!File.Exists(filePath))
-                {
-                    WebClient webClient2 = new WebClient();
-                    webClient2.DownloadFile("https://cdn.discordapp.com/attachments/1088949023085428776/1103767961744969898/iu.png", "mat.png");
-                    webClient2.Dispose();
-                }
-                byte[] fileData = File.ReadAllBytes(filePath);
-                texture = new Texture2D(2, 2);
-                texture.LoadImage(fileData);
-
-                Debug.Log("<color=magenta>Downloaded Mat!</color>");
-
                 doonce = true;
             }
 
@@ -121,7 +108,7 @@ namespace Colossal
             {
                 //To update the MOTD live.
                 WebClient webClient = new WebClient();
-                string motd = webClient.DownloadString(new Uri("https://pastebin.com/raw/bhLzrd4F"));
+                string motd = webClient.DownloadString(new Uri("https://raw.githubusercontent.com/ColossusYTTV/ColossalCheatMenuV2/main/Files/MOTD.txt?token=GHSAT0AAAAAACCIVNXBZPZHFVFXETSCJAPSZCVIKRQ"));
                 GameObject.Find("Level/lower level/UI/Tree Room Texts/motdtext").GetComponent<Text>().text = motd;
                 webClient.Dispose();
 
