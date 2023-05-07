@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.XR;
 using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class FPSBooster : DynamicClass
+    public class FPSBooster : MonoBehaviour
     {
-        public static bool fpsbooster = false;
         public void Update()
         {
-            if (fpsbooster)
+            if (Plugin.fpsbooster)
             {
                 ParticleSystem[] particleSystems = GameObject.FindObjectsOfType<ParticleSystem>();
                 foreach (ParticleSystem system in particleSystems)
@@ -22,7 +22,12 @@ namespace Colossal.Mods
                     system.Stop();
                     system.gameObject.SetActive(false);
                 }
-                QualitySettings.masterTextureLimit = 5;
+                Renderer[] renderers = GameObject.FindObjectsOfType<Renderer>();
+                foreach (Renderer renderer in renderers)
+                {
+                    renderer.shadowCastingMode = ShadowCastingMode.Off;
+                }
+                QualitySettings.masterTextureLimit = 10;
             }
             else
             {
@@ -31,7 +36,14 @@ namespace Colossal.Mods
                 {
                     system.gameObject.SetActive(true);
                 }
+                Renderer[] renderers = GameObject.FindObjectsOfType<Renderer>();
+                foreach (Renderer renderer in renderers)
+                {
+                    renderer.shadowCastingMode = ShadowCastingMode.On;
+                }
                 QualitySettings.masterTextureLimit = 0;
+
+                Destroy(Plugin.hud.GetComponent<FPSBooster>());
             }
         }
     }

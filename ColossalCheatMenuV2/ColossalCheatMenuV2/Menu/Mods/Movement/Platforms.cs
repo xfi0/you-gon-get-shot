@@ -12,9 +12,8 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class Platforms : DynamicClass
+    public class Platforms : MonoBehaviour
     {
-        public static bool platforms = false;
         public static GameObject PlatL;
         private bool PlatLonce = false;
 
@@ -22,7 +21,7 @@ namespace Colossal.Mods
         private bool PlatRonce = false;
         public void Update()
         {
-            if (platforms)
+            if (Plugin.platforms)
             {
                 bool platL;
                 bool platR;
@@ -65,6 +64,10 @@ namespace Colossal.Mods
                     UnityEngine.Object.Destroy(PlatR);
                     PlatRonce = false;
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<Platform>());
             }
         }
     }

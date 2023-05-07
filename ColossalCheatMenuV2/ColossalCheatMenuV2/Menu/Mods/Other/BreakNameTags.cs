@@ -11,14 +11,13 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class BreakNameTags : DynamicClass
+    public class BreakNameTags : MonoBehaviour
     {
-        public static bool breaknametags = false;
         bool once = false;
         string name = "GET FUCKED BY COLOSSAL CHEAT MENU V2 GET FUCKED BY COLOSSAL CHEAT MENU V2\nGET FUCKED BY COLOSSAL CHEAT MENU V2 GET FUCKED BY COLOSSAL CHEAT MENU V2\nGET FUCKED BY COLOSSAL CHEAT MENU V2 GET FUCKED BY COLOSSAL CHEAT MENU V2\nGET FUCKED BY COLOSSAL CHEAT MENU V2 GET FUCKED BY COLOSSAL CHEAT MENU V2\nGET FUCKED BY COLOSSAL CHEAT MENU V2 GET FUCKED BY COLOSSAL CHEAT MENU V2\nGET FUCKED BY COLOSSAL CHEAT MENU V2 GET FUCKED BY COLOSSAL CHEAT MENU V2\n";
         public void Update()
         {
-            if (breaknametags && !once && PhotonNetwork.InRoom)
+            if (Plugin.breaknametags && !once && PhotonNetwork.InRoom)
             {
                 PhotonNetwork.LocalPlayer.NickName = name;
                 GorillaComputer.instance.currentName = name;
@@ -29,6 +28,7 @@ namespace Colossal.Mods
             else
             {
                 once = false;
+                Destroy(Plugin.hud.GetComponent<BreakNameTags>());
             }
         }
     }

@@ -15,14 +15,13 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class HollowBoxEsp : DynamicClass
+    public class HollowBoxEsp : MonoBehaviour
     {
-        public static bool hollowboxesp = false;
         public static float objectScale;
 
         public void Update()
         {
-            if (hollowboxesp && PhotonNetwork.InRoom)
+            if (Plugin.hollowboxesp && PhotonNetwork.InRoom)
             {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
                 {
@@ -36,26 +35,53 @@ namespace Colossal.Mods
                         {
                             AddBoxHollow addbox = vrrig.GetComponent<AddBoxHollow>();
 
-                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Length == 0)
                             {
-                                addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
-                                addbox.bottomSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
-                                addbox.leftSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
-                                addbox.rightSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                    addbox.bottomSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                    addbox.leftSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                    addbox.rightSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                }
+                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                    addbox.bottomSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                    addbox.leftSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                    addbox.rightSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                }
+                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.IsMasterClient)
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                    addbox.bottomSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                    addbox.leftSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                    addbox.rightSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                }
                             }
-                            if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                            else
                             {
-                                addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
-                                addbox.bottomSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
-                                addbox.leftSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
-                                addbox.rightSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
-                            }
-                            if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.IsMasterClient)
-                            {
-                                addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
-                                addbox.bottomSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
-                                addbox.leftSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
-                                addbox.rightSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                if (vrrig.mainSkin.material.name.Contains("fected"))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                    addbox.bottomSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                    addbox.leftSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                    addbox.rightSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                }
+                                if (!vrrig.mainSkin.material.name.Contains("fected"))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                    addbox.bottomSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                    addbox.leftSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                    addbox.rightSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                }
+                                if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.IsMasterClient)
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                    addbox.bottomSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                    addbox.leftSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                    addbox.rightSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                }
                             }
                         }
                     }

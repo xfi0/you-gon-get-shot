@@ -9,9 +9,8 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class WallWalk : DynamicClass
+    public class WallWalk : MonoBehaviour
     {
-        public static bool wallwalk = false;
         private Vector3 normal2;
         private Vector3 vel1;
         private Vector3 vel2;
@@ -22,7 +21,7 @@ namespace Colossal.Mods
         private float maxD2;
         public void Update()
         {
-            if (wallwalk)
+            if (Plugin.wallwalk)
             {
                 bool wallwalkActiveR;
                 InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out wallwalkActiveR);
@@ -63,6 +62,10 @@ namespace Colossal.Mods
                 {
                     GorillaTagger.Instance.bodyCollider.attachedRigidbody.useGravity = true;
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<WallWalk>());
             }
         }
     }

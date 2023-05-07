@@ -9,12 +9,11 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class CreeperMonkey : DynamicClass
+    public class CreeperMonkey : MonoBehaviour
     {
-        public static bool creepermonkey = false;
         public void Update()
         {
-            if (creepermonkey)
+            if (Plugin.creepermonkey)
             {
                 bool hand;
                 bool head;
@@ -52,6 +51,10 @@ namespace Colossal.Mods
                         }
                     }
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<CreeperMonkey>());
             }
         }
     }

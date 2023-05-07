@@ -26,7 +26,7 @@ namespace Colossal.Mods
         }
         private static bool Prefix()
         {
-            if(Plugin.called >= 15)
+            if(Plugin.called >= 30)
             {
                 return false;
             }

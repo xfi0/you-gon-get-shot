@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using BepInEx;
 using Colossal.Menu;
 using Colossal.Mods;
@@ -21,6 +22,7 @@ using UnityEngine.UI;
 using UnityEngine.XR;
 using Utilla;
 using Valve.Newtonsoft.Json;
+using Valve.VR;
 using static Photon.Voice.Unity.Recorder;
 
 namespace Colossal
@@ -37,60 +39,46 @@ namespace Colossal
         {
             HarmonyLoader.RemoveHarmonyPatches();
         }
-
-        private List<DynamicClass> dynamicClasses = new List<DynamicClass>();
         private bool inroom = false;
         private bool doonce = false;
+
         public static Texture2D texture;
 
         public static int called = 0;
         public static float instantate = 0;
 
-        public static float boxespdestroy = 0;
-        public void Awake()
-        {
-            //Movement Mods
-            dynamicClasses.Add(new ExcelFly());
-            dynamicClasses.Add(new TFly());
-            dynamicClasses.Add(new WallWalk());
-            dynamicClasses.Add(new Platforms());
-            dynamicClasses.Add(new UpsideDownMonkey());
-            dynamicClasses.Add(new FreezeMonkey());
-            //Speed
-            dynamicClasses.Add(new SpeedMod());
+        public static GameObject hud;
 
-            //Visual Mods
-            dynamicClasses.Add(new Chams());
-            dynamicClasses.Add(new BoxEsp());
-            dynamicClasses.Add(new HollowBoxEsp());
-
-            //Player Mods
-            dynamicClasses.Add(new TagGun());
-            dynamicClasses.Add(new LegMod());
-            dynamicClasses.Add(new CreeperMonkey());
-            dynamicClasses.Add(new GhostMonkey());
-            dynamicClasses.Add(new InvisMonkey());
-            //NoFinger is a harmony patch. This is not needed
-
-            //Other
-            dynamicClasses.Add(new BreakNameTags());
-            dynamicClasses.Add(new BreakModChecker());
-            dynamicClasses.Add(new BreakPunchMod());
-            dynamicClasses.Add(new FPSBooster());
-
-            //AntiCrashes
-            dynamicClasses.Add(new AntiDestroyPlayerObjects());
-
-            Debug.Log("<color=magenta>Loaded all mods!</color>");
-        }
-        public interface DynamicClass
-        {
-            void Update();
-        }
+        public static bool excelfly = false;
+        public static bool freezemonkey = false;
+        public static bool platforms = false;
+        public static bool mosa = false;
+        public static bool coke = false;
+        public static bool pixi = false;
+        public static bool rgrip85 = false;
+        public static bool rgrip95 = false;
+        public static bool lgrip85 = false;
+        public static bool lgrip95 = false;
+        public static bool tfly = false;
+        public static bool upsidedownmonkey = false;
+        public static bool wallwalk = false;
+        public static bool boxesp = false;
+        public static bool chams = false;
+        public static bool hollowboxesp = false;
+        public static bool creepermonkey = false;
+        public static bool ghostmonkey = false;
+        public static bool invismonkey = false;
+        public static bool legmod = false;
+        public static bool nofinger = false;
+        public static bool taggun = false;
+        public static bool breakmodcheckers = false;
+        public static bool breaknametags = false;
+        public static bool breakpunchmod = false;
+        public static bool fpsbooster = false;
 
         public void Update()
         {
-            if(!doonce)
+            if (!doonce)
             {
                 //Loads the menus start function
                 Menu.Menu.LoadOnce();
@@ -98,20 +86,28 @@ namespace Colossal
 
                 //for the credits board
                 GameObject.Find("CodeOfConduct").GetComponent<Text>().text = "<color=magenta>COLOSSAL CHEAT MENU V2</color>";
-                GameObject.Find("COC Text").GetComponent<Text>().text = $"CREDITS:\n<color=magenta>LARS : MENU TEMPLATE (THANKS AGAIN)</color>\n<color=magenta>COLOSSUS : MENU CREATOR</color>\n<color=yellow>WILL : NO FINGERS</color>\n<color=white>FAULT : LEG MOD</color>";
+                GameObject.Find("COC Text").GetComponent<Text>().text = $"CREDITS:\n<color=magenta>LARS : MENU TEMPLATE (THANKS AGAIN)</color>\n<color=magenta>COLOSSUS : MENU CREATOR</color>\n<color=yellow>WILL : NO FINGERS</color>\n<color=white>FAULT : LEG MOD\n<color=yellow>STARRY : CREEPERMOKNEY (HALF)</color>";
                 Debug.Log("<color=magenta>Loaded COC!</color>");
+
+                hud = GameObject.Find("CLIENT_HUB");
 
                 doonce = true;
             }
-
             if (PhotonNetwork.InRoom && !inroom)
             {
-                //To update the MOTD live.
-                WebClient webClient = new WebClient();
-                string motd = webClient.DownloadString(new Uri("https://raw.githubusercontent.com/ColossusYTTV/ColossalCheatMenuV2/main/Files/MOTD.txt?token=GHSAT0AAAAAACCIVNXAUHAUFI7UUTFBU7ZSZCVIN7Q"));
-                GameObject.Find("Level/lower level/UI/Tree Room Texts/motdtext").GetComponent<Text>().text = motd;
-                webClient.Dispose();
-
+                using (WebClient client = new WebClient())
+                {
+                    try
+                    {
+                        string rawData = client.DownloadString("https://pastebin.com/raw/bhLzrd4F");
+                        Console.WriteLine($"\n<color=magenta>{rawData}</color>\n");
+                        GameObject.Find("Level/lower level/UI/Tree Room Texts/motdtext").GetComponent<Text>().text = rawData;
+                    }
+                    catch (WebException ex)
+                    {
+                        Console.WriteLine("Error: " + ex.Message);
+                    }
+                }
                 Debug.Log("<color=magenta>Loaded MOTD!</color>");
 
                 inroom = true;
@@ -122,16 +118,11 @@ namespace Colossal
             }
 
             Menu.Menu.Load();
-
-            //Loads all the mods update functions.
-            foreach (DynamicClass dynamicClass in dynamicClasses)
-            {
-                dynamicClass.Update();
-            }
+            ModManager();
         }
         public void FixedUpdate()
         {
-            if(PhotonNetwork.InRoom)
+            if (PhotonNetwork.InRoom)
             {
                 instantate += Time.deltaTime;
             }
@@ -140,14 +131,161 @@ namespace Colossal
                 instantate = 0;
                 called = 0;
             }
-            if (instantate >= 40)
+            if (instantate >= 120)
             {
                 called = 0;
             }
-
-            if(BoxEsp.boxesp && PhotonNetwork.InRoom)
+        }
+        private void ModManager()
+        {
+            if(excelfly)
             {
-                boxespdestroy += Time.deltaTime;
+                if(hud.GetComponent<ExcelFly>() == null)
+                    hud.AddComponent<ExcelFly>();
+            }
+
+            if (freezemonkey)
+            {
+                if (hud.GetComponent<FreezeMonkey>() == null)
+                    hud.AddComponent<FreezeMonkey>();
+            }
+
+            if (platforms)
+            {
+                if (hud.GetComponent<Platforms>() == null)
+                    hud.AddComponent<Platforms>();
+            }
+
+            if (mosa)
+            {
+                if (hud.GetComponent<SpeedMod>() == null)
+                    hud.AddComponent<SpeedMod>();
+            }
+
+            if (coke)
+            {
+                if (hud.GetComponent<SpeedMod>() == null)
+                    hud.AddComponent<SpeedMod>();
+            }
+
+            if (pixi)
+            {
+                if (hud.GetComponent<SpeedMod>() == null)
+                    hud.AddComponent<SpeedMod>();
+            }
+
+            if (rgrip85)
+            {
+                if (hud.GetComponent<SpeedMod>() == null)
+                    hud.AddComponent<SpeedMod>();
+            }
+
+            if (rgrip95)
+            {
+                if (hud.GetComponent<SpeedMod>() == null)
+                    hud.AddComponent<SpeedMod>();
+            }
+
+            if (lgrip85)
+            {
+                if (hud.GetComponent<SpeedMod>() == null)
+                    hud.AddComponent<SpeedMod>();
+            }
+
+            if (lgrip95)
+            {
+                if (hud.GetComponent<SpeedMod>() == null)
+                    hud.AddComponent<SpeedMod>();
+            }
+
+            if (tfly)
+            {
+                if (hud.GetComponent<TFly>() == null)
+                    hud.AddComponent<TFly>();
+            }
+
+            if (upsidedownmonkey)
+            {
+                if (hud.GetComponent<UpsideDownMonkey>() == null)
+                    hud.AddComponent<UpsideDownMonkey>();
+            }
+
+            if (wallwalk)
+            {
+                if (hud.GetComponent<WallWalk>() == null)
+                    hud.AddComponent<WallWalk>();
+            }
+
+            if (chams)
+            {
+                if (hud.GetComponent<Chams>() == null)
+                    hud.AddComponent<Chams>();
+            }
+
+            if (boxesp)
+            {
+                if (hud.GetComponent<BoxEsp>() == null)
+                    hud.AddComponent<BoxEsp>();
+            }
+
+            if (hollowboxesp)
+            {
+                if (hud.GetComponent<HollowBoxEsp>() == null)
+                    hud.AddComponent<HollowBoxEsp>();
+            }
+
+            if (creepermonkey)
+            {
+                if (hud.GetComponent<CreeperMonkey>() == null)
+                    hud.AddComponent<CreeperMonkey>();
+            }
+
+            if (ghostmonkey)
+            {
+                if (hud.GetComponent<GhostMonkey>() == null)
+                    hud.AddComponent<GhostMonkey>();
+            }
+
+            if (invismonkey)
+            {
+                if (hud.GetComponent<InvisMonkey>() == null)
+                    hud.AddComponent<InvisMonkey>();
+            }
+
+            if (legmod)
+            {
+                if (hud.GetComponent<LegMod>() == null)
+                    hud.AddComponent<LegMod>();
+            }
+
+            if (taggun)
+            {
+                if (hud.GetComponent<TagGun>() == null)
+                    hud.AddComponent<TagGun>();
+            }
+
+            if (breakmodcheckers)
+            {
+                if (hud.GetComponent<BreakModChecker>() == null)
+                    hud.AddComponent<BreakModChecker>();
+            }
+
+            if (breaknametags)
+            {
+                if (hud.GetComponent<BreakNameTags>() == null)
+                    hud.AddComponent<BreakNameTags>();
+            }
+
+            if (breakpunchmod)
+            {
+                if (hud.GetComponent<BreakPunchMod>() == null)
+                    hud.AddComponent<BreakPunchMod>();
+            }
+
+            if (fpsbooster)
+            {
+                if (hud.GetComponent<FPSBooster>() == null)
+                    hud.AddComponent<FPSBooster>();
             }
         }
     }

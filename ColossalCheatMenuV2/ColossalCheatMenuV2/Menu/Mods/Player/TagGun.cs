@@ -10,12 +10,11 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class TagGun : DynamicClass
+    public class TagGun : MonoBehaviour
     {
-        public static bool taggun = false;
         public void Update()
         {
-            if (taggun && PhotonNetwork.InRoom)
+            if (Plugin.taggun && PhotonNetwork.InRoom)
             {
                 bool shoot = false;
                 InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxisClick, out shoot);
@@ -31,6 +30,10 @@ namespace Colossal.Mods
                 {
                     GorillaTagger.Instance.myVRRig.enabled = true;
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<TagGun>());
             }
         }
     }

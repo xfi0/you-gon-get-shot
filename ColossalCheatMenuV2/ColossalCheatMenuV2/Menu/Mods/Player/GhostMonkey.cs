@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.XR;
 using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class GhostMonkey : DynamicClass
+    public class GhostMonkey : MonoBehaviour
     {
-        public static bool ghostmonkey = false;
         public void Update()
         {
-            if (ghostmonkey && PhotonNetwork.InRoom)
+            if (Plugin.ghostmonkey && PhotonNetwork.InRoom)
             {
                 bool ghostR;
                 InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out ghostR);
@@ -26,6 +26,10 @@ namespace Colossal.Mods
                 {
                     GorillaTagger.Instance.myVRRig.enabled = true;
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<GhostMonkey>());
             }
         }
     }

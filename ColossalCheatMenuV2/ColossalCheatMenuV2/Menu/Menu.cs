@@ -273,7 +273,7 @@ namespace Colossal.Menu
                 {
                     bool holding;
                     InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxisClick, out holding);
-                    if(holding)
+                    if (holding)
                     {
                         bool down;
                         bool select;
@@ -291,56 +291,56 @@ namespace Colossal.Menu
 
                             UpdateMenuState(new MenuOption(), null, null);
                         }
-                        if(select && !inputcooldown)
+                        if (select && !inputcooldown)
                         {
                             inputcooldown = true;
                             UpdateMenuState(CurrentViewingMenu[SelectedOptionIndex], null, "optionhit");
                         }
-                        if(!down && !select && inputcooldown)
+                        if (!down && !select && inputcooldown)
                         {
                             inputcooldown = false;
                         }
                     }
-                }   
+                }
             }
 
             //DriftMode
             Menu.driftmode = MainMenu[6].AssociatedBool;
 
             //Movement
-            ExcelFly.excelfly = Movement[0].AssociatedBool;
-            TFly.tfly= Movement[1].AssociatedBool;
-            WallWalk.wallwalk = Movement[2].AssociatedBool;
-            Platforms.platforms = Movement[4].AssociatedBool;
-            UpsideDownMonkey.upsidedownmonkey = Movement[5].AssociatedBool;
-            FreezeMonkey.freezemonkey = Movement[6].AssociatedBool;
+            Plugin.excelfly = Movement[0].AssociatedBool;
+            Plugin.tfly = Movement[1].AssociatedBool;
+            Plugin.wallwalk = Movement[2].AssociatedBool;
+            Plugin.platforms = Movement[4].AssociatedBool;
+            Plugin.upsidedownmonkey = Movement[5].AssociatedBool;
+            Plugin.freezemonkey = Movement[6].AssociatedBool;
             //Speed
-            SpeedMod.mosa = Speed[0].AssociatedBool;
-            SpeedMod.coke = Speed[1].AssociatedBool;
-            SpeedMod.pixi = Speed[2].AssociatedBool;
-            SpeedMod.rgrip85 = Speed[3].AssociatedBool;
-            SpeedMod.rgrip95 = Speed[4].AssociatedBool;
-            SpeedMod.lgrip85 = Speed[5].AssociatedBool;
-            SpeedMod.lgrip95 = Speed[6].AssociatedBool;
+            Plugin.mosa = Speed[0].AssociatedBool;
+            Plugin.coke = Speed[1].AssociatedBool;
+            Plugin.pixi = Speed[2].AssociatedBool;
+            Plugin.rgrip85 = Speed[3].AssociatedBool;
+            Plugin.rgrip95 = Speed[4].AssociatedBool;
+            Plugin.lgrip85 = Speed[5].AssociatedBool;
+            Plugin.lgrip95 = Speed[6].AssociatedBool;
 
             //Visual
-            Chams.chams = Visual[0].AssociatedBool;
-            BoxEsp.boxesp= Visual[1].AssociatedBool;
-            HollowBoxEsp.hollowboxesp = Visual[2].AssociatedBool;
+            Plugin.chams = Visual[0].AssociatedBool;
+            Plugin.boxesp = Visual[1].AssociatedBool;
+            Plugin.hollowboxesp = Visual[2].AssociatedBool;
 
             //Player
-            LiterallyJustForABool.nofinger = Player[0].AssociatedBool;
-            TagGun.taggun= Player[1].AssociatedBool;
-            LegMod.legmod = Player[2].AssociatedBool;
-            CreeperMonkey.creepermonkey = Player[3].AssociatedBool;
-            GhostMonkey.ghostmonkey = Player[4].AssociatedBool;
-            InvisMonkey.invismonkey = Player[5].AssociatedBool;
+            Plugin.nofinger = Player[0].AssociatedBool;
+            Plugin.taggun = Player[1].AssociatedBool;
+            Plugin.legmod = Player[2].AssociatedBool;
+            Plugin.creepermonkey = Player[3].AssociatedBool;
+            Plugin.ghostmonkey = Player[4].AssociatedBool;
+            Plugin.invismonkey = Player[5].AssociatedBool;
 
             //Other
-            BreakNameTags.breaknametags = Other[0].AssociatedBool;
-            BreakModChecker.breakmodcheckers = Other[1].AssociatedBool;
-            BreakPunchMod.breakpunchmod= Other[2].AssociatedBool;
-            FPSBooster.fpsbooster = Other[3].AssociatedBool;
+            Plugin.breaknametags = Other[0].AssociatedBool;
+            Plugin.breakmodcheckers = Other[1].AssociatedBool;
+            Plugin.breakpunchmod = Other[2].AssociatedBool;
+            Plugin.fpsbooster = Other[3].AssociatedBool;
         }
         static void UpdateMenuState(MenuOption option, string _MenuState, string OperationType)
         {
@@ -472,7 +472,7 @@ namespace Colossal.Menu
                         {
                             PhotonNetworkController.Instance.AttemptToJoinSpecificRoom("CBOT");
                         }
-                        if(option.AssociatedString == "moddedcasual")
+                        if (option.AssociatedString == "moddedcasual")
                         {
                             GorillaComputer.instance.currentGameMode = "MODDED_MODDED_CASUALCASUAL";
                         }

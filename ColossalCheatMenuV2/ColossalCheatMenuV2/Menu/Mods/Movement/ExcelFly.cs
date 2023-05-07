@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.XR;
 using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class ExcelFly : DynamicClass
+    public class ExcelFly : MonoBehaviour
     {
-        public static bool excelfly = false;
         public void Update()
         {
-            if (excelfly)
+            if (Plugin.excelfly)
             {
                 bool excelL;
                 bool excelR;
@@ -27,6 +27,10 @@ namespace Colossal.Mods
                 {
                     GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity += GorillaLocomotion.Player.Instance.rightHandTransform.right / 2f;
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<ExcelFly>());
             }
         }
     }

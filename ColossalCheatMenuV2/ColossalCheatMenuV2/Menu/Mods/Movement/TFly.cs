@@ -9,12 +9,11 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class TFly : DynamicClass
+    public class TFly : MonoBehaviour
     {
-        public static bool tfly = false;
         public void Update()
         {
-            if (tfly)
+            if (Plugin.tfly)
             {
                 bool stop;
                 bool right;
@@ -29,6 +28,10 @@ namespace Colossal.Mods
                     GorillaLocomotion.Player.Instance.transform.position += GorillaLocomotion.Player.Instance.leftHandTransform.forward * 0.45f;
                     GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity = Vector3.zero;
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<TFly>());
             }
         }
     }

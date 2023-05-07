@@ -10,12 +10,11 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class InvisMonkey : DynamicClass
+    public class InvisMonkey : MonoBehaviour
     {
-        public static bool invismonkey = false;
         public void Update()
         {
-            if (invismonkey && PhotonNetwork.InRoom)
+            if (Plugin.invismonkey && PhotonNetwork.InRoom)
             {
                 bool invisL;
                 InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out invisL);
@@ -28,6 +27,10 @@ namespace Colossal.Mods
                 {
                     GorillaTagger.Instance.myVRRig.enabled = true;
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<InvisMonkey>());
             }
         }
     }

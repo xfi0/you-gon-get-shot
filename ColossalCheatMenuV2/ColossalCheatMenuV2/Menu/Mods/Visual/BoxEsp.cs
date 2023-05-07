@@ -15,15 +15,13 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class BoxEsp : DynamicClass
+    public class BoxEsp : MonoBehaviour
     {
-        public static bool boxesp = false;
-
         public static float objectScale;
 
         public void Update()
         {
-            if (boxesp && PhotonNetwork.InRoom)
+            if (Plugin.boxesp && PhotonNetwork.InRoom)
             {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
                 {
@@ -56,17 +54,35 @@ namespace Colossal.Mods
                             objectScale = Mathf.Clamp(objectScale, minScale, maxScale);
                             addbox.topSide.transform.localScale = new Vector3(BoxEsp.objectScale / 40, BoxEsp.objectScale / 40, BoxEsp.objectScale / 40);
 
-                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                            if(GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Length == 0)
                             {
-                                addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                }
+                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                }
+                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.IsMasterClient)
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                }
                             }
-                            if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                            else
                             {
-                                addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
-                            }
-                            if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.IsMasterClient)
-                            {
-                                addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                if (vrrig.mainSkin.material.name.Contains("fected"))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.4f);
+                                }
+                                if (!vrrig.mainSkin.material.name.Contains("fected"))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                }
+                                if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.IsMasterClient)
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 1f, 0f, 0.4f);
+                                }
                             }
                         }
                     }

@@ -9,12 +9,11 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class UpsideDownMonkey : DynamicClass
+    public class UpsideDownMonkey : MonoBehaviour
     {
-        public static bool upsidedownmonkey = false;
         public void Update()
         {
-            if (upsidedownmonkey)
+            if (Plugin.upsidedownmonkey)
             {
                 GorillaLocomotion.Player.Instance.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
                 try
@@ -75,6 +74,9 @@ namespace Colossal.Mods
                 catch
                 {
                 }
+
+
+                Destroy(Plugin.hud.GetComponent<UpsideDownMonkey>());
             }
         }
     }

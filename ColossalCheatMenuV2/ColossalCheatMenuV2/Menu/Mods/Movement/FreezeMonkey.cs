@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.XR;
 using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class FreezeMonkey : DynamicClass
+    public class FreezeMonkey : MonoBehaviour
     {
-        public static bool freezemonkey = false;
         public void Update()
         {
-            if (freezemonkey)
+            if (Plugin.freezemonkey)
             {
                 bool freeze;
                 InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out freeze);
@@ -27,6 +27,10 @@ namespace Colossal.Mods
                 {
                     GorillaTagger.Instance.myVRRig.enabled = true;
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<FreezeMonkey>());
             }
         }
     }

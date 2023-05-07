@@ -11,16 +11,15 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class BreakPunchMod : DynamicClass
+    public class BreakPunchMod : MonoBehaviour
     {
-        public static bool breakpunchmod = false;
         private float counter;
         public void Update()
         {
             counter += Time.deltaTime;
             GorillaLocomotion.Player.Instance.teleportThresholdNoVel = int.MaxValue;
 
-            if (breakpunchmod && PhotonNetwork.InRoom)
+            if (Plugin.breakpunchmod && PhotonNetwork.InRoom)
             {
                 var photonViews = PhotonNetwork.PhotonViews;
                 foreach (var photonView in photonViews)
@@ -44,6 +43,7 @@ namespace Colossal.Mods
             else
             {
                 counter = 0;
+                Destroy(Plugin.hud.GetComponent<BreakPunchMod>());
             }
         }
     }

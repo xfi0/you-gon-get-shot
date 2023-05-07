@@ -10,7 +10,7 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class SpeedMod : DynamicClass
+    public class SpeedMod : MonoBehaviour
     {
         public static bool mosa = false;
         public static bool coke = false;
@@ -21,19 +21,19 @@ namespace Colossal.Mods
         public static bool lgrip95 = false;
         public void Update()
         {
-            if (mosa)
+            if (Plugin.mosa)
             {
                 GorillaLocomotion.Player.Instance.maxJumpSpeed = 7.5f;
             }
-            if (coke)
+            if (Plugin.coke)
             {
                 GorillaLocomotion.Player.Instance.maxJumpSpeed = 8.5f;
             }
-            if (pixi)
+            if (Plugin.pixi)
             {
                 GorillaLocomotion.Player.Instance.maxJumpSpeed = 9.5f;
             }
-            if (rgrip85)
+            if (Plugin.rgrip85)
             {
                 bool grip;
                 InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out grip);
@@ -42,7 +42,7 @@ namespace Colossal.Mods
                     GorillaLocomotion.Player.Instance.maxJumpSpeed = 8.5f;
                 }
             }
-            if (rgrip95)
+            if (Plugin.rgrip95)
             {
                 bool grip;
                 InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out grip);
@@ -51,7 +51,7 @@ namespace Colossal.Mods
                     GorillaLocomotion.Player.Instance.maxJumpSpeed = 9.5f;
                 }
             }
-            if (lgrip85)
+            if (Plugin.lgrip85)
             {
                 bool grip;
                 InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out grip);
@@ -60,7 +60,7 @@ namespace Colossal.Mods
                     GorillaLocomotion.Player.Instance.maxJumpSpeed = 8.5f;
                 }
             }
-            if (lgrip95)
+            if (Plugin.lgrip95)
             {
                 bool grip;
                 InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out grip);
@@ -70,7 +70,7 @@ namespace Colossal.Mods
                 }
             }
             bool once = false;
-            if (!mosa && !coke && !pixi && !rgrip85 && !rgrip95 && !lgrip85 && !lgrip95 && !once)
+            if (!Plugin.mosa && !Plugin.coke && !Plugin.pixi && !Plugin.rgrip85 && !Plugin.rgrip95 && !Plugin.lgrip85 && !Plugin.lgrip95 && !once)
             {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
                 {
@@ -87,6 +87,8 @@ namespace Colossal.Mods
                     }
                 }
                 once = true;
+
+                Destroy(Plugin.hud.GetComponent<SpeedMod>());
             }
         }
     }

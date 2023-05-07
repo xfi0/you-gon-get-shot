@@ -10,12 +10,11 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class LegMod : DynamicClass
+    public class LegMod : MonoBehaviour
     {
-        public static bool legmod = false;
         public void Update()
         {
-            if (legmod)
+            if (Plugin.legmod)
             {
                 bool inroom = false;
                 if (legmod && !inroom && PhotonNetwork.InRoom)
@@ -33,6 +32,10 @@ namespace Colossal.Mods
                         inroom = false;
                     }
                 }
+            }
+            else
+            {
+                Destroy(Plugin.hud.GetComponent<LegMod>());
             }
         }
     }

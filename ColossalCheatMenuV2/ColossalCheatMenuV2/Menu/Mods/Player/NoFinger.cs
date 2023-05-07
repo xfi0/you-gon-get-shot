@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 
 namespace Colossal.Mods
 {
-    class LiterallyJustForABool
-    {
-        public static bool nofinger = false;
-    }
-
     [HarmonyPatch(typeof(VRMapIndex), "MapMyFinger", MethodType.Normal)]
     class FingerIndex
     {
         public static bool Prefix()
         {
-            if (LiterallyJustForABool.nofinger)
+            if (Plugin.nofinger)
             {
                 return false;
             }
@@ -29,7 +24,7 @@ namespace Colossal.Mods
     {
         public static bool Prefix()
         {
-            if (LiterallyJustForABool.nofinger)
+            if (Plugin.nofinger)
             {
                 return false;
             }
@@ -41,7 +36,7 @@ namespace Colossal.Mods
     {
         public static bool Prefix()
         {
-            if (LiterallyJustForABool.nofinger)
+            if (Plugin.nofinger)
             {
                 return false;
             }

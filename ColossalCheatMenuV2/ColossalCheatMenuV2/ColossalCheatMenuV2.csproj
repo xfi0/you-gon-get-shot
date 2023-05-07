@@ -33,7 +33,6 @@
   <ItemGroup>
     <Compile Include="HarmonyLoader.cs" />
     <Compile Include="Menu\Menu.cs" />
-    <Compile Include="Menu\Mods\AntiCrashes\AntiDestroyPlayerObjects.cs" />
     <Compile Include="Menu\Mods\AntiCrashes\AntiRigSpam.cs" />
     <Compile Include="Menu\Mods\Movement\FreezeMonkey.cs" />
     <Compile Include="Menu\Mods\Movement\Platforms.cs" />

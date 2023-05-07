@@ -10,31 +10,51 @@ using static Colossal.Plugin;
 
 namespace Colossal.Mods
 {
-    public class Chams : DynamicClass
+    public class Chams : MonoBehaviour
     {
-        public static bool chams = false;
         public void Update()
         {
-            if (chams && PhotonNetwork.InRoom)
+            if (Plugin.chams && PhotonNetwork.InRoom)
             {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
                 {
                     if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !vrrig.photonView.IsMine)
                     {
-                        if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                        if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Length == 0)
                         {
-                            vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
-                            vrrig.mainSkin.material.color = new Color(1f, 0f, 0f, 0.4f);
+                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                            {
+                                vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
+                                vrrig.mainSkin.material.color = new Color(1f, 0f, 0f, 0.4f);
+                            }
+                            if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                            {
+                                vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
+                                vrrig.mainSkin.material.color = new Color(1f, 0f, 1f, 0.4f);
+                            }
+                            if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.IsMasterClient)
+                            {
+                                vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
+                                vrrig.mainSkin.material.color = new Color(0f, 1f, 0f, 0.4f);
+                            }
                         }
-                        if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
+                        else
                         {
-                            vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
-                            vrrig.mainSkin.material.color = new Color(1f, 0f, 1f, 0.4f);
-                        }
-                        if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.IsMasterClient)
-                        {
-                            vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
-                            vrrig.mainSkin.material.color = new Color(0f, 1f, 0f, 0.4f);
+                            if (vrrig.mainSkin.material.name.Contains("fected"))
+                            {
+                                vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
+                                vrrig.mainSkin.material.color = new Color(1f, 0f, 0f, 0.4f);
+                            }
+                            if (!vrrig.mainSkin.material.name.Contains("fected"))
+                            {
+                                vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
+                                vrrig.mainSkin.material.color = new Color(1f, 0f, 1f, 0.4f);
+                            }
+                            if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.IsMasterClient)
+                            {
+                                vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
+                                vrrig.mainSkin.material.color = new Color(0f, 1f, 0f, 0.4f);
+                            }
                         }
                     }
                 }
