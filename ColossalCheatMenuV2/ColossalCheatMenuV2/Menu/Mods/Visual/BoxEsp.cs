@@ -54,7 +54,7 @@ namespace Colossal.Mods
                             objectScale = Mathf.Clamp(objectScale, minScale, maxScale);
                             addbox.topSide.transform.localScale = new Vector3(BoxEsp.objectScale / 40, BoxEsp.objectScale / 40, BoxEsp.objectScale / 40);
 
-                            if(GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Length == 0)
+                            if(!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().isCasual)
                             {
                                 if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
                                 {
@@ -63,6 +63,14 @@ namespace Colossal.Mods
                                 if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
                                 {
                                     addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                }
+                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.CustomProperties.ContainsValue("colossal"))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 0f, 1f, 0.4f);
+                                }
+                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.CustomProperties.ContainsValue("colossaladmin"))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = ThisGuyIsUsingColossal.colour;
                                 }
                                 if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.IsMasterClient)
                                 {
@@ -78,6 +86,14 @@ namespace Colossal.Mods
                                 if (!vrrig.mainSkin.material.name.Contains("fected"))
                                 {
                                     addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
+                                }
+                                if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.CustomProperties.ContainsValue("colossal"))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 0f, 1f, 0.4f);
+                                }
+                                if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.CustomProperties.ContainsValue("colossaladmin"))
+                                {
+                                    addbox.topSide.GetComponent<Renderer>().material.color = ThisGuyIsUsingColossal.colour;
                                 }
                                 if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.IsMasterClient)
                                 {

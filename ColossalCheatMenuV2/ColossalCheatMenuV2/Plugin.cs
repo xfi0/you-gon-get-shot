@@ -24,6 +24,7 @@ using Utilla;
 using Valve.Newtonsoft.Json;
 using Valve.VR;
 using static Photon.Voice.Unity.Recorder;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace Colossal
 {
@@ -76,6 +77,8 @@ namespace Colossal
         public static bool breakpunchmod = false;
         public static bool fpsbooster = false;
 
+        public static bool isadmin = false;
+
         public void Update()
         {
             if (!doonce)
@@ -86,15 +89,17 @@ namespace Colossal
 
                 //for the credits board
                 GameObject.Find("CodeOfConduct").GetComponent<Text>().text = "<color=magenta>COLOSSAL CHEAT MENU V2</color>";
-                GameObject.Find("COC Text").GetComponent<Text>().text = $"CREDITS:\n<color=magenta>LARS : MENU TEMPLATE (THANKS AGAIN)</color>\n<color=magenta>COLOSSUS : MENU CREATOR</color>\n<color=yellow>WILL : NO FINGERS</color>\n<color=white>FAULT : LEG MOD\n<color=yellow>STARRY : CREEPERMOKNEY (HALF)</color>";
+                GameObject.Find("COC Text").GetComponent<Text>().text = $"CREDITS:\n<color=magenta>LARS : MENU TEMPLATE (THANKS AGAIN)</color>\n<color=magenta>COLOSSUS : MENU CREATOR</color>\n<color=yellow>WILL : NO FINGERS</color>\n<color=white>FAULT : LEG MOD</color>\n<color=yellow>STARRY : CREEPERMOKNEY (HALF)</color>";
                 Debug.Log("<color=magenta>Loaded COC!</color>");
 
+                //just for components
                 hud = GameObject.Find("CLIENT_HUB");
 
                 doonce = true;
             }
             if (PhotonNetwork.InRoom && !inroom)
             {
+                //getting motd
                 using (WebClient client = new WebClient())
                 {
                     try
@@ -138,154 +143,157 @@ namespace Colossal
         }
         private void ModManager()
         {
-            if(excelfly)
+            if (GorillaTagger.Instance.gameObject.GetComponent<ThisGuyIsUsingColossal>() == null)
+                GorillaTagger.Instance.gameObject.AddComponent<ThisGuyIsUsingColossal>();
+
+            if (excelfly)
             {
-                if(hud.GetComponent<ExcelFly>() == null)
-                    hud.AddComponent<ExcelFly>();
+                if(GorillaTagger.Instance.gameObject.GetComponent<ExcelFly>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<ExcelFly>();
             }
 
             if (freezemonkey)
             {
-                if (hud.GetComponent<FreezeMonkey>() == null)
-                    hud.AddComponent<FreezeMonkey>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<FreezeMonkey>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<FreezeMonkey>();
             }
 
             if (platforms)
             {
-                if (hud.GetComponent<Platforms>() == null)
-                    hud.AddComponent<Platforms>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<Platforms>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<Platforms>();
             }
 
             if (mosa)
             {
-                if (hud.GetComponent<SpeedMod>() == null)
-                    hud.AddComponent<SpeedMod>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<SpeedMod>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<SpeedMod>();
             }
 
             if (coke)
             {
-                if (hud.GetComponent<SpeedMod>() == null)
-                    hud.AddComponent<SpeedMod>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<SpeedMod>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<SpeedMod>();
             }
 
             if (pixi)
             {
-                if (hud.GetComponent<SpeedMod>() == null)
-                    hud.AddComponent<SpeedMod>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<SpeedMod>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<SpeedMod>();
             }
 
             if (rgrip85)
             {
-                if (hud.GetComponent<SpeedMod>() == null)
-                    hud.AddComponent<SpeedMod>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<SpeedMod>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<SpeedMod>();
             }
 
             if (rgrip95)
             {
-                if (hud.GetComponent<SpeedMod>() == null)
-                    hud.AddComponent<SpeedMod>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<SpeedMod>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<SpeedMod>();
             }
 
             if (lgrip85)
             {
-                if (hud.GetComponent<SpeedMod>() == null)
-                    hud.AddComponent<SpeedMod>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<SpeedMod>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<SpeedMod>();
             }
 
             if (lgrip95)
             {
-                if (hud.GetComponent<SpeedMod>() == null)
-                    hud.AddComponent<SpeedMod>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<SpeedMod>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<SpeedMod>();
             }
 
             if (tfly)
             {
-                if (hud.GetComponent<TFly>() == null)
-                    hud.AddComponent<TFly>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<TFly>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<TFly>();
             }
 
             if (upsidedownmonkey)
             {
-                if (hud.GetComponent<UpsideDownMonkey>() == null)
-                    hud.AddComponent<UpsideDownMonkey>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<UpsideDownMonkey>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<UpsideDownMonkey>();
             }
 
             if (wallwalk)
             {
-                if (hud.GetComponent<WallWalk>() == null)
-                    hud.AddComponent<WallWalk>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<WallWalk>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<WallWalk>();
             }
 
             if (chams)
             {
-                if (hud.GetComponent<Chams>() == null)
-                    hud.AddComponent<Chams>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<Chams>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<Chams>();
             }
 
             if (boxesp)
             {
-                if (hud.GetComponent<BoxEsp>() == null)
-                    hud.AddComponent<BoxEsp>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<BoxEsp>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<BoxEsp>();
             }
 
             if (hollowboxesp)
             {
-                if (hud.GetComponent<HollowBoxEsp>() == null)
-                    hud.AddComponent<HollowBoxEsp>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<HollowBoxEsp>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<HollowBoxEsp>();
             }
 
             if (creepermonkey)
             {
-                if (hud.GetComponent<CreeperMonkey>() == null)
-                    hud.AddComponent<CreeperMonkey>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<CreeperMonkey>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<CreeperMonkey>();
             }
 
             if (ghostmonkey)
             {
-                if (hud.GetComponent<GhostMonkey>() == null)
-                    hud.AddComponent<GhostMonkey>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<GhostMonkey>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<GhostMonkey>();
             }
 
             if (invismonkey)
             {
-                if (hud.GetComponent<InvisMonkey>() == null)
-                    hud.AddComponent<InvisMonkey>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<InvisMonkey>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<InvisMonkey>();
             }
 
             if (legmod)
             {
-                if (hud.GetComponent<LegMod>() == null)
-                    hud.AddComponent<LegMod>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<LegMod>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<LegMod>();
             }
 
             if (taggun)
             {
-                if (hud.GetComponent<TagGun>() == null)
-                    hud.AddComponent<TagGun>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<TagGun>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<TagGun>();
             }
 
             if (breakmodcheckers)
             {
-                if (hud.GetComponent<BreakModChecker>() == null)
-                    hud.AddComponent<BreakModChecker>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<BreakModChecker>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<BreakModChecker>();
             }
 
             if (breaknametags)
             {
-                if (hud.GetComponent<BreakNameTags>() == null)
-                    hud.AddComponent<BreakNameTags>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<BreakNameTags>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<BreakNameTags>();
             }
 
             if (breakpunchmod)
             {
-                if (hud.GetComponent<BreakPunchMod>() == null)
-                    hud.AddComponent<BreakPunchMod>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<BreakPunchMod>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<BreakPunchMod>();
             }
 
             if (fpsbooster)
             {
-                if (hud.GetComponent<FPSBooster>() == null)
-                    hud.AddComponent<FPSBooster>();
+                if (GorillaTagger.Instance.gameObject.GetComponent<FPSBooster>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<FPSBooster>();
             }
         }
     }

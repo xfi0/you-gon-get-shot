@@ -41,6 +41,7 @@
     <Compile Include="Menu\Mods\Other\BreakNameTags.cs" />
     <Compile Include="Menu\Mods\Other\BreakPunchMod.cs" />
     <Compile Include="Menu\Mods\Other\FPSBooster.cs" />
+    <Compile Include="Menu\Mods\ThisGuyIsUsingColossal!!!.cs" />
     <Compile Include="Menu\Mods\Visual\BoxEsp.cs" />
     <Compile Include="Menu\Mods\Visual\Chams.cs" />
     <Compile Include="Menu\Mods\Player\CreeperMonkey.cs" />
