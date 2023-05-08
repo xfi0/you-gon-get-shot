@@ -77,7 +77,32 @@ namespace Colossal
         public static bool breakpunchmod = false;
         public static bool fpsbooster = false;
 
-        public static bool isadmin = false;
+        public static bool isadmin = true;
+        public static string version = "1.0";
+
+        public async void Awake()
+        {
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    string versiondownload = client.DownloadString("https://pastebin.com/raw/2uU6L7NZ");
+                    if (versiondownload != version)
+                    {
+                        Debug.Log("<color=magenta>Update needed... Downloading</color>");
+                        await update();
+                    }
+                    else
+                    {
+                        Debug.Log("<color=magenta>Up To Date!</color>");
+                    }
+                }
+                catch (WebException ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+        }
 
         public void Update()
         {
@@ -94,6 +119,8 @@ namespace Colossal
 
                 //just for components
                 hud = GameObject.Find("CLIENT_HUB");
+
+                Debug.Log("<color=magenta>Loaded MOTD!</color>");
 
                 doonce = true;
             }
@@ -139,6 +166,21 @@ namespace Colossal
             if (instantate >= 120)
             {
                 called = 0;
+            }
+        }
+        public async Task update()
+        {
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    string downloadfilelink = client.DownloadString("https://pastebin.com/raw/SqF7czTS");
+                    client.DownloadFile(downloadfilelink, "BepInEx/plugins/ColossalCheatMenuV2.dll");
+                }
+                catch (WebException ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
             }
         }
         private void ModManager()
