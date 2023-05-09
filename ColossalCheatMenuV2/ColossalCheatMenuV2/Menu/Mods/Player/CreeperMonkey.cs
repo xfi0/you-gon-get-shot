@@ -54,7 +54,7 @@ namespace Colossal.Mods
             }
             else
             {
-                Destroy(Plugin.hud.GetComponent<CreeperMonkey>());
+                Destroy(GorillaTagger.Instance.GetComponent<CreeperMonkey>());
             }
         }
     }

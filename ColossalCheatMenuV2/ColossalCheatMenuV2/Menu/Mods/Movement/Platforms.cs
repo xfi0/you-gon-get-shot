@@ -67,7 +67,7 @@ namespace Colossal.Mods
             }
             else
             {
-                Destroy(Plugin.hud.GetComponent<Platform>());
+                Destroy(GorillaTagger.Instance.GetComponent<Platform>());
             }
         }
     }

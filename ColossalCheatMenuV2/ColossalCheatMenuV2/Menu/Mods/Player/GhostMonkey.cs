@@ -29,7 +29,7 @@ namespace Colossal.Mods
             }
             else
             {
-                Destroy(Plugin.hud.GetComponent<GhostMonkey>());
+                Destroy(GorillaTagger.Instance.GetComponent<GhostMonkey>());
             }
         }
     }

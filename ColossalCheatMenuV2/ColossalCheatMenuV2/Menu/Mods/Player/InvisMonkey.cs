@@ -30,7 +30,7 @@ namespace Colossal.Mods
             }
             else
             {
-                Destroy(Plugin.hud.GetComponent<InvisMonkey>());
+                Destroy(GorillaTagger.Instance.GetComponent<InvisMonkey>());
             }
         }
     }

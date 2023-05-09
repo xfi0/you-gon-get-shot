@@ -31,7 +31,7 @@ namespace Colossal.Mods
             }
             else
             {
-                Destroy(Plugin.hud.GetComponent<TFly>());
+                Destroy(GorillaTagger.Instance.GetComponent<TFly>());
             }
         }
     }

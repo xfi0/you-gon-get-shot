@@ -66,6 +66,7 @@ namespace Colossal
         public static bool boxesp = false;
         public static bool chams = false;
         public static bool hollowboxesp = false;
+        public static bool fpsbooster = false;
         public static bool creepermonkey = false;
         public static bool ghostmonkey = false;
         public static bool invismonkey = false;
@@ -75,10 +76,9 @@ namespace Colossal
         public static bool breakmodcheckers = false;
         public static bool breaknametags = false;
         public static bool breakpunchmod = false;
-        public static bool fpsbooster = false;
 
-        public static bool isadmin = true;
-        public static string version = "1.0";
+        public static bool isadmin = false;
+        public static string version = "1.2";
 
         public async void Awake()
         {

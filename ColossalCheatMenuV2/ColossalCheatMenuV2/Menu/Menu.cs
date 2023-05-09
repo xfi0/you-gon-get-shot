@@ -46,7 +46,7 @@ namespace Colossal.Menu
         public static MenuOption[] Visual;
         public static MenuOption[] Player;
         public static MenuOption[] Computer;
-        public static MenuOption[] Other;
+        public static MenuOption[] Modders;
         public static MenuOption[] Account;
 
         public static MenuOption[] Speed;
@@ -100,7 +100,7 @@ namespace Colossal.Menu
             MainMenu[1] = new MenuOption { DisplayName = "Visual", _type = "submenu", AssociatedString = "Visual" };
             MainMenu[2] = new MenuOption { DisplayName = "Player", _type = "submenu", AssociatedString = "Player" };
             MainMenu[3] = new MenuOption { DisplayName = "Computer", _type = "submenu", AssociatedString = "Computer" };
-            MainMenu[4] = new MenuOption { DisplayName = "Other", _type = "submenu", AssociatedString = "Other" };
+            MainMenu[4] = new MenuOption { DisplayName = "Modders", _type = "submenu", AssociatedString = "Modders" };
             MainMenu[5] = new MenuOption { DisplayName = "Account", _type = "submenu", AssociatedString = "Account" };
             MainMenu[6] = new MenuOption { DisplayName = "DriftMode", _type = "toggle", AssociatedBool = true };
 
@@ -123,12 +123,13 @@ namespace Colossal.Menu
             Speed[6] = new MenuOption { DisplayName = "LGrip(9.5)", _type = "toggle", AssociatedBool = false };
             Speed[7] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
-            Visual = new MenuOption[5];
+            Visual = new MenuOption[6];
             Visual[0] = new MenuOption { DisplayName = "Chams", _type = "toggle", AssociatedBool = false };
             Visual[1] = new MenuOption { DisplayName = "BoxEsp", _type = "toggle", AssociatedBool = false };
             Visual[2] = new MenuOption { DisplayName = "HollowBoxEsp", _type = "toggle", AssociatedBool = false };
-            Visual[3] = new MenuOption { DisplayName = "Sky Colour", _type = "submenu", AssociatedString = "Sky" };
-            Visual[4] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            Visual[3] = new MenuOption { DisplayName = "FPSBooster", _type = "toggle", AssociatedBool = false };
+            Visual[4] = new MenuOption { DisplayName = "Sky Colour", _type = "submenu", AssociatedString = "Sky" };
+            Visual[5] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
             Sky = new MenuOption[6];
             Sky[0] = new MenuOption { DisplayName = "MonkeyColour", _type = "button", AssociatedString = "monkeycoloursky" };
             Sky[1] = new MenuOption { DisplayName = "Purple", _type = "button", AssociatedString = "purplesky" };
@@ -147,12 +148,11 @@ namespace Colossal.Menu
             Player[5] = new MenuOption { DisplayName = "InvisMonkey", _type = "toggle", AssociatedBool = false };
             Player[6] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
-            Other = new MenuOption[5];
-            Other[0] = new MenuOption { DisplayName = "Break NameTags", _type = "toggle", AssociatedBool = false };
-            Other[1] = new MenuOption { DisplayName = "Break ModCheckers", _type = "toggle", AssociatedBool = false };
-            Other[2] = new MenuOption { DisplayName = "Break PunchMod", _type = "toggle", AssociatedBool = false };
-            Other[3] = new MenuOption { DisplayName = "FPSBooster", _type = "toggle", AssociatedBool = false };
-            Other[4] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            Modders = new MenuOption[4];
+            Modders[0] = new MenuOption { DisplayName = "Break NameTags", _type = "toggle", AssociatedBool = false };
+            Modders[1] = new MenuOption { DisplayName = "Break ModCheckers", _type = "toggle", AssociatedBool = false };
+            Modders[2] = new MenuOption { DisplayName = "Break PunchMod", _type = "toggle", AssociatedBool = false };
+            Modders[3] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
             Computer = new MenuOption[8];
             Computer[0] = new MenuOption { DisplayName = "Disconnect", _type = "button", AssociatedString = "disconnect" };
@@ -327,6 +327,7 @@ namespace Colossal.Menu
             Plugin.chams = Visual[0].AssociatedBool;
             Plugin.boxesp = Visual[1].AssociatedBool;
             Plugin.hollowboxesp = Visual[2].AssociatedBool;
+            Plugin.fpsbooster = Visual[3].AssociatedBool;
 
             //Player
             Plugin.nofinger = Player[0].AssociatedBool;
@@ -336,11 +337,10 @@ namespace Colossal.Menu
             Plugin.ghostmonkey = Player[4].AssociatedBool;
             Plugin.invismonkey = Player[5].AssociatedBool;
 
-            //Other
-            Plugin.breaknametags = Other[0].AssociatedBool;
-            Plugin.breakmodcheckers = Other[1].AssociatedBool;
-            Plugin.breakpunchmod = Other[2].AssociatedBool;
-            Plugin.fpsbooster = Other[3].AssociatedBool;
+            //Modders
+            Plugin.breaknametags = Modders[0].AssociatedBool;
+            Plugin.breakmodcheckers = Modders[1].AssociatedBool;
+            Plugin.breakpunchmod = Modders[2].AssociatedBool;
         }
         static void UpdateMenuState(MenuOption option, string _MenuState, string OperationType)
         {
@@ -370,10 +370,10 @@ namespace Colossal.Menu
                             CurrentViewingMenu = Computer;
                             Debug.Log("<color=magenta>Computer...</color>");
                         }
-                        if (option.AssociatedString == "Other")
+                        if (option.AssociatedString == "Modders")
                         {
-                            CurrentViewingMenu = Other;
-                            Debug.Log("<color=magenta>Other...</color>");
+                            CurrentViewingMenu = Modders;
+                            Debug.Log("<color=magenta>Modders...</color>");
                         }
                         if (option.AssociatedString == "Account")
                         {

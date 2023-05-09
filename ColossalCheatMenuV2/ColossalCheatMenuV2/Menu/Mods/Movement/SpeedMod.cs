@@ -88,7 +88,7 @@ namespace Colossal.Mods
                 }
                 once = true;
 
-                Destroy(Plugin.hud.GetComponent<SpeedMod>());
+                Destroy(GorillaTagger.Instance.GetComponent<SpeedMod>());
             }
         }
     }

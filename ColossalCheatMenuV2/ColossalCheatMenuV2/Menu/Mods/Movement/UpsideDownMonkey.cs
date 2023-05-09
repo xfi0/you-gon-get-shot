@@ -76,7 +76,7 @@ namespace Colossal.Mods
                 }
 
 
-                Destroy(Plugin.hud.GetComponent<UpsideDownMonkey>());
+                Destroy(GorillaTagger.Instance.GetComponent<UpsideDownMonkey>());
             }
         }
     }

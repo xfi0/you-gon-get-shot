@@ -30,7 +30,7 @@ namespace Colossal.Mods
             }
             else
             {
-                Destroy(Plugin.hud.GetComponent<FreezeMonkey>());
+                Destroy(GorillaTagger.Instance.GetComponent<FreezeMonkey>());
             }
         }
     }

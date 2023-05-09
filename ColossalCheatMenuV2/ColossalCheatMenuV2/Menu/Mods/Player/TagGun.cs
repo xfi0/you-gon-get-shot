@@ -33,7 +33,7 @@ namespace Colossal.Mods
             }
             else
             {
-                Destroy(Plugin.hud.GetComponent<TagGun>());
+                Destroy(GorillaTagger.Instance.GetComponent<TagGun>());
             }
         }
     }

@@ -35,7 +35,7 @@ namespace Colossal.Mods
             }
             else
             {
-                Destroy(Plugin.hud.GetComponent<LegMod>());
+                Destroy(GorillaTagger.Instance.GetComponent<LegMod>());
             }
         }
     }

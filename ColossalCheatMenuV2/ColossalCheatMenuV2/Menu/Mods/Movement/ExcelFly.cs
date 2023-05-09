@@ -30,7 +30,7 @@ namespace Colossal.Mods
             }
             else
             {
-                Destroy(Plugin.hud.GetComponent<ExcelFly>());
+                Destroy(GorillaTagger.Instance.GetComponent<ExcelFly>());
             }
         }
     }
