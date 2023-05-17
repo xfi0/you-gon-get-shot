@@ -62,7 +62,9 @@ namespace Colossal
         public static bool lgrip95 = false;
         public static bool tfly = false;
         public static bool upsidedownmonkey = false;
-        public static bool wallwalk = false;
+        public static bool colossalsettingswallwalk = false;
+        public static bool ghostwallwalk = false;
+        public static bool blatantwallwalk = false;
         public static bool boxesp = false;
         public static bool chams = false;
         public static bool hollowboxesp = false;
@@ -76,9 +78,9 @@ namespace Colossal
         public static bool breakmodcheckers = false;
         public static bool breaknametags = false;
         public static bool breakpunchmod = false;
+        public static bool makemoddedpublic = false;
 
-        public static bool isadmin = false;
-        public static string version = "1.2";
+        public static string version = "1.3";
 
         public async void Awake()
         {
@@ -166,6 +168,14 @@ namespace Colossal
             if (instantate >= 120)
             {
                 called = 0;
+            }
+            if(Menu.Menu.MenuRGB) {
+                Menu.Menu.menurgb += Time.deltaTime;
+            }
+            else {
+                if (Menu.Menu.menurgb != 0) {
+                    Menu.Menu.menurgb = 0;
+                }
             }
         }
         public async Task update()
@@ -260,8 +270,18 @@ namespace Colossal
                     GorillaTagger.Instance.gameObject.AddComponent<UpsideDownMonkey>();
             }
 
-            if (wallwalk)
+            if (colossalsettingswallwalk)
             {
+                if (GorillaTagger.Instance.gameObject.GetComponent<WallWalk>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<WallWalk>();
+            }
+
+            if (ghostwallwalk) {
+                if (GorillaTagger.Instance.gameObject.GetComponent<WallWalk>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<WallWalk>();
+            }
+
+            if (blatantwallwalk) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<WallWalk>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<WallWalk>();
             }
@@ -331,6 +351,7 @@ namespace Colossal
                 if (GorillaTagger.Instance.gameObject.GetComponent<BreakPunchMod>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<BreakPunchMod>();
             }
+
 
             if (fpsbooster)
             {

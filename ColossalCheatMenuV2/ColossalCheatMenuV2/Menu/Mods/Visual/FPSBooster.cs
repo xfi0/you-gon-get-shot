@@ -20,28 +20,40 @@ namespace Colossal.Mods
                 foreach (ParticleSystem system in particleSystems)
                 {
                     system.Stop();
-                    system.gameObject.SetActive(false);
+                    if(system.gameObject.active) {
+                        system.gameObject.SetActive(false);
+                    }
                 }
                 Renderer[] renderers = GameObject.FindObjectsOfType<Renderer>();
                 foreach (Renderer renderer in renderers)
                 {
-                    renderer.shadowCastingMode = ShadowCastingMode.Off;
+                    if(renderer.shadowCastingMode == ShadowCastingMode.On) {
+                        renderer.shadowCastingMode = ShadowCastingMode.Off;
+                    }
                 }
-                QualitySettings.masterTextureLimit = 10;
+                if(QualitySettings.masterTextureLimit == 0) {
+                    QualitySettings.masterTextureLimit = 10;
+                }
             }
             else
             {
                 ParticleSystem[] particleSystems = GameObject.FindObjectsOfType<ParticleSystem>();
                 foreach (ParticleSystem system in particleSystems)
                 {
-                    system.gameObject.SetActive(true);
+                    if(!system.gameObject.active) {
+                        system.gameObject.SetActive(true);
+                    }
                 }
                 Renderer[] renderers = GameObject.FindObjectsOfType<Renderer>();
                 foreach (Renderer renderer in renderers)
                 {
-                    renderer.shadowCastingMode = ShadowCastingMode.On;
+                    if(renderer.shadowCastingMode!= ShadowCastingMode.Off) {
+                        renderer.shadowCastingMode = ShadowCastingMode.On;
+                    }
                 }
-                QualitySettings.masterTextureLimit = 0;
+                if(QualitySettings.masterTextureLimit == 10) {
+                    QualitySettings.masterTextureLimit = 0;
+                }
 
                 Destroy(GorillaTagger.Instance.GetComponent<FPSBooster>());
             }

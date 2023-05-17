@@ -12,13 +12,6 @@ namespace Colossal.Mods
 {
     public class SpeedMod : MonoBehaviour
     {
-        public static bool mosa = false;
-        public static bool coke = false;
-        public static bool pixi = false;
-        public static bool rgrip85 = false;
-        public static bool rgrip95 = false;
-        public static bool lgrip85 = false;
-        public static bool lgrip95 = false;
         public void Update()
         {
             if (Plugin.mosa)

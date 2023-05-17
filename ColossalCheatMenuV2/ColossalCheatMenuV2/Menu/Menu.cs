@@ -14,6 +14,9 @@ using GorillaNetworking;
 using Photon.Pun;
 using PlayFab;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
+using DevExpress.Utils.Design.DataAccess;
+using Mono.Cecil.Cil;
 
 namespace Colossal.Menu
 {
@@ -34,11 +37,14 @@ namespace Colossal.Menu
         static GameObject HUDObj2;
         static GameObject MainCamera;
         static Text Testtext;
+        private static TextAnchor textAnchor = TextAnchor.UpperRight;
         static Material AlertText = new Material(Shader.Find("GUI/Text Shader"));
         static Text NotifiText;
 
         public static string MenuState = "Main";
-        static bool TestBool = false;
+        public static string MenuColour = "magenta";
+        public static bool MenuRGB = false;
+        public static float menurgb = 0;
         public static int SelectedOptionIndex = 0;
         public static MenuOption[] CurrentViewingMenu = null;
         public static MenuOption[] MainMenu;
@@ -48,10 +54,12 @@ namespace Colossal.Menu
         public static MenuOption[] Computer;
         public static MenuOption[] Modders;
         public static MenuOption[] Account;
+        public static MenuOption[] Settings;
 
         public static MenuOption[] Speed;
+        public static MenuOption[] Presets;
+        public static MenuOption[] WallWalk;
         public static MenuOption[] Sky;
-        public static MenuOption[] Materials;
 
         public static bool inputcooldown = false;
         public static bool menutogglecooldown = false;
@@ -86,28 +94,29 @@ namespace Colossal.Menu
             Testtext.fontSize = 10;
             Testtext.font = GameObject.Find("COC Text").GetComponent<Text>().font;
             Testtext.rectTransform.sizeDelta = new Vector2(260, 160);
-            Testtext.alignment = TextAnchor.UpperLeft;
             Testtext.rectTransform.localScale = new Vector3(0.01f, 0.01f, 1f);
             Testtext.rectTransform.localPosition = new Vector3(-1.5f, 1f, 2f);
             Testtext.material = AlertText;
             NotifiText = Testtext;
+            Testtext.alignment = TextAnchor.UpperLeft;
 
             HUDObj2.transform.transform.position = new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y, MainCamera.transform.position.z);
             HUDObj2.transform.rotation = MainCamera.transform.rotation;
 
-            MainMenu = new MenuOption[7];
+            MainMenu = new MenuOption[8];
             MainMenu[0] = new MenuOption { DisplayName = "Movement", _type = "submenu", AssociatedString = "Movement" };
             MainMenu[1] = new MenuOption { DisplayName = "Visual", _type = "submenu", AssociatedString = "Visual" };
             MainMenu[2] = new MenuOption { DisplayName = "Player", _type = "submenu", AssociatedString = "Player" };
             MainMenu[3] = new MenuOption { DisplayName = "Computer", _type = "submenu", AssociatedString = "Computer" };
             MainMenu[4] = new MenuOption { DisplayName = "Modders", _type = "submenu", AssociatedString = "Modders" };
             MainMenu[5] = new MenuOption { DisplayName = "Account", _type = "submenu", AssociatedString = "Account" };
-            MainMenu[6] = new MenuOption { DisplayName = "DriftMode", _type = "toggle", AssociatedBool = true };
+            MainMenu[6] = new MenuOption { DisplayName = "Settings", _type = "submenu", AssociatedString = "Settings" };
+            MainMenu[7] = new MenuOption { DisplayName = "DriftMode", _type = "toggle", AssociatedBool = true };
 
             Movement = new MenuOption[8];
             Movement[0] = new MenuOption { DisplayName = "ExcelFly", _type = "toggle", AssociatedBool = false };
             Movement[1] = new MenuOption { DisplayName = "TFly", _type = "toggle", AssociatedBool = false };
-            Movement[2] = new MenuOption { DisplayName = "WallWalk", _type = "toggle", AssociatedBool = false };
+            Movement[2] = new MenuOption { DisplayName = "WallWalk", _type = "submenu", AssociatedString = "WallWalk" };
             Movement[3] = new MenuOption { DisplayName = "Speed", _type = "submenu", AssociatedString = "Speed" };
             Movement[4] = new MenuOption { DisplayName = "Platforms", _type = "toggle", AssociatedBool = false };
             Movement[5] = new MenuOption { DisplayName = "UpsideDown Monkey", _type = "toggle", AssociatedBool = false };
@@ -122,6 +131,11 @@ namespace Colossal.Menu
             Speed[5] = new MenuOption { DisplayName = "LGrip(8.5)", _type = "toggle", AssociatedBool = false };
             Speed[6] = new MenuOption { DisplayName = "LGrip(9.5)", _type = "toggle", AssociatedBool = false };
             Speed[7] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            WallWalk = new MenuOption[4];
+            WallWalk[0] = new MenuOption { DisplayName = "Colossal Settings", _type = "toggle", AssociatedBool = false };
+            WallWalk[1] = new MenuOption { DisplayName = "Ghost", _type = "toggle", AssociatedBool = false };
+            WallWalk[2] = new MenuOption { DisplayName = "Blatant", _type = "toggle", AssociatedBool = false };
+            WallWalk[3] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
             Visual = new MenuOption[6];
             Visual[0] = new MenuOption { DisplayName = "Chams", _type = "toggle", AssociatedBool = false };
@@ -171,6 +185,15 @@ namespace Colossal.Menu
             Account[3] = new MenuOption { DisplayName = "Server: EU", _type = "button", AssociatedString = "servereu" };
             Account[4] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
+            Settings = new MenuOption[7];
+            Settings[0] = new MenuOption { DisplayName = "MenuColour : Purple", _type = "button", AssociatedString = "menupurple" };
+            Settings[1] = new MenuOption { DisplayName = "MenuColour : Red", _type = "button", AssociatedString = "menured" };
+            Settings[2] = new MenuOption { DisplayName = "MenuColour : Yellow", _type = "button", AssociatedString = "menuyellow" };
+            Settings[3] = new MenuOption { DisplayName = "MenuColour : Green", _type = "button", AssociatedString = "menugreen" };
+            Settings[4] = new MenuOption { DisplayName = "MenuColour : Blue", _type = "button", AssociatedString = "menublue" };
+            Settings[5] = new MenuOption { DisplayName = "MenuColour : RGB", _type = "toggle", AssociatedBool = false };
+            Settings[6] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+
             MenuState = "Main";
             CurrentViewingMenu = MainMenu;
 
@@ -183,14 +206,12 @@ namespace Colossal.Menu
 
             InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxisClick, out toggle);
             InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxisClick, out toggle2);
-            if (toggle && toggle2 && !menutogglecooldown)
-            {
+            if (toggle && toggle2 && !menutogglecooldown) {
                 menutogglecooldown = true;
                 HUDObj2.active = !HUDObj2.active;
                 GUIToggled = !GUIToggled;
             }
-            if (!toggle && !toggle2 && menutogglecooldown)
-            {
+            if (!toggle && !toggle2 && menutogglecooldown) {
                 menutogglecooldown = false;
             }
 
@@ -200,32 +221,27 @@ namespace Colossal.Menu
                 HUDObj2.transform.rotation = MainCamera.transform.rotation;
 
                 Keyboard current = Keyboard.current;
-                if (current.upArrowKey.wasPressedThisFrame)
-                {
+                if (current.upArrowKey.wasPressedThisFrame) {
                     inputcooldown = true;
                     if (SelectedOptionIndex == 0)
                         SelectedOptionIndex = CurrentViewingMenu.Count() - 1;
-                    else
-                    {
+                    else {
                         SelectedOptionIndex = SelectedOptionIndex - 1;
                     }
 
                     UpdateMenuState(new MenuOption(), null, null);
                 }
-                if (current.downArrowKey.wasPressedThisFrame)
-                {
+                if (current.downArrowKey.wasPressedThisFrame) {
                     inputcooldown = true;
                     if ((SelectedOptionIndex + 1) == CurrentViewingMenu.Count())
                         SelectedOptionIndex = 0;
-                    else
-                    {
+                    else {
                         SelectedOptionIndex = SelectedOptionIndex + 1;
                     }
 
                     UpdateMenuState(new MenuOption(), null, null);
                 }
-                if (current.enterKey.wasPressedThisFrame)
-                {
+                if (current.enterKey.wasPressedThisFrame) {
                     inputcooldown = true;
                     UpdateMenuState(CurrentViewingMenu[SelectedOptionIndex], null, "optionhit");
                 }
@@ -234,38 +250,32 @@ namespace Colossal.Menu
                 {
                     Vector2 axis;
                     InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out axis);
-                    if (axis.y >= 0.5f && !inputcooldown)
-                    {
+                    if (axis.y >= 0.5f && !inputcooldown) {
                         inputcooldown = true;
                         if (SelectedOptionIndex == 0)
                             SelectedOptionIndex = CurrentViewingMenu.Count() - 1;
-                        else
-                        {
+                        else {
                             SelectedOptionIndex = SelectedOptionIndex - 1;
                         }
 
                         UpdateMenuState(new MenuOption(), null, null);
                     }
-                    if (axis.y >= -0.5f && !inputcooldown)
-                    {
+                    if (axis.y >= -0.5f && !inputcooldown) {
                         inputcooldown = true;
                         if ((SelectedOptionIndex + 1) == CurrentViewingMenu.Count())
                             SelectedOptionIndex = 0;
-                        else
-                        {
+                        else {
                             SelectedOptionIndex = SelectedOptionIndex + 1;
                         }
 
                         UpdateMenuState(new MenuOption(), null, null);
                     }
-                    if (axis.x >= 0.2f && !inputcooldown)
-                    {
+                    if (axis.x >= 0.2f && !inputcooldown) {
                         inputcooldown = true;
                         UpdateMenuState(CurrentViewingMenu[SelectedOptionIndex], null, "optionhit");
                     }
 
-                    if (axis.y <= -0.5f && axis.y <= 0.5f && axis.x <= 0.2f && inputcooldown)
-                    {
+                    if (axis.y <= -0.5f && axis.y <= 0.5f && axis.x <= 0.2f && inputcooldown) {
                         inputcooldown = false;
                     }
                 }
@@ -273,31 +283,26 @@ namespace Colossal.Menu
                 {
                     bool holding;
                     InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxisClick, out holding);
-                    if (holding)
-                    {
+                    if (holding) {
                         bool down;
                         bool select;
                         InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out down);
                         InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out select);
-                        if (down && !inputcooldown)
-                        {
+                        if (down && !inputcooldown) {
                             inputcooldown = true;
                             if ((SelectedOptionIndex + 1) == CurrentViewingMenu.Count())
                                 SelectedOptionIndex = 0;
-                            else
-                            {
+                            else {
                                 SelectedOptionIndex = SelectedOptionIndex + 1;
                             }
 
                             UpdateMenuState(new MenuOption(), null, null);
                         }
-                        if (select && !inputcooldown)
-                        {
+                        if (select && !inputcooldown) {
                             inputcooldown = true;
                             UpdateMenuState(CurrentViewingMenu[SelectedOptionIndex], null, "optionhit");
                         }
-                        if (!down && !select && inputcooldown)
-                        {
+                        if (!down && !select && inputcooldown) {
                             inputcooldown = false;
                         }
                     }
@@ -305,12 +310,11 @@ namespace Colossal.Menu
             }
 
             //DriftMode
-            Menu.driftmode = MainMenu[6].AssociatedBool;
+            Menu.driftmode = MainMenu[7].AssociatedBool;
 
             //Movement
             Plugin.excelfly = Movement[0].AssociatedBool;
             Plugin.tfly = Movement[1].AssociatedBool;
-            Plugin.wallwalk = Movement[2].AssociatedBool;
             Plugin.platforms = Movement[4].AssociatedBool;
             Plugin.upsidedownmonkey = Movement[5].AssociatedBool;
             Plugin.freezemonkey = Movement[6].AssociatedBool;
@@ -322,6 +326,11 @@ namespace Colossal.Menu
             Plugin.rgrip95 = Speed[4].AssociatedBool;
             Plugin.lgrip85 = Speed[5].AssociatedBool;
             Plugin.lgrip95 = Speed[6].AssociatedBool;
+
+            //WallWalk
+            Plugin.colossalsettingswallwalk = WallWalk[0].AssociatedBool;
+            Plugin.ghostwallwalk = WallWalk[1].AssociatedBool;
+            Plugin.blatantwallwalk = WallWalk[2].AssociatedBool;
 
             //Visual
             Plugin.chams = Visual[0].AssociatedBool;
@@ -341,89 +350,124 @@ namespace Colossal.Menu
             Plugin.breaknametags = Modders[0].AssociatedBool;
             Plugin.breakmodcheckers = Modders[1].AssociatedBool;
             Plugin.breakpunchmod = Modders[2].AssociatedBool;
+
+            MenuRGB = Settings[5].AssociatedBool;
+            if(MenuRGB) {
+                if (menurgb >= 0.1f) {
+                    MenuColour = "magenta";
+                }
+                if (menurgb >= 0.2f) {
+                    MenuColour = "red";
+                }
+                if (menurgb >= 0.3f) {
+                    MenuColour = "green";
+                }
+                if (menurgb >= 0.4f) {
+                    MenuColour = "blue";
+                }
+                if (menurgb >= 0.5f) {
+                    MenuColour = "cyan";
+                }
+                if (menurgb >= 0.6f) {
+                    MenuColour = "yellow";
+                }
+                if (menurgb >= 0.6f) {
+                    menurgb = 0;
+                }
+                string ToDraw = $"<color={MenuColour}>COLOSSAL : {MenuState}</color>\n";
+                int i = 0;
+                if (CurrentViewingMenu != null) {
+                    foreach (MenuOption opt in CurrentViewingMenu) {
+                        if (SelectedOptionIndex == i) {
+                            ToDraw = ToDraw + ">";
+                        }
+                        ToDraw = ToDraw + opt.DisplayName;
+
+                        if (opt._type == "toggle") {
+                            if (opt.AssociatedBool == true) {
+                                ToDraw = ToDraw + $" <color={MenuColour}>[ON]</color>";
+                            } else {
+                                ToDraw = ToDraw + " <color=red>[OFF]</color>";
+                            }
+                        }
+                        ToDraw = ToDraw + "\n";
+                        i++;
+                    }
+                    Testtext.text = ToDraw;
+                } else {
+                    Debug.Log("Null for some reason");
+                }
+            }
         }
-        static void UpdateMenuState(MenuOption option, string _MenuState, string OperationType)
-        {
-            try
-            {
-                if (OperationType == "optionhit")
-                {
-                    if (option._type == "submenu")
-                    {
-                        if (option.AssociatedString == "Movement")
-                        {
+        static void UpdateMenuState(MenuOption option, string _MenuState, string OperationType) {
+            try {
+                if (OperationType == "optionhit") {
+                    if (option._type == "submenu") {
+                        if (option.AssociatedString == "Movement") {
                             CurrentViewingMenu = Movement;
                             Debug.Log("<color=magenta>Movement...</color>");
                         }
-                        if (option.AssociatedString == "Visual")
-                        {
+                        if (option.AssociatedString == "Visual") {
                             CurrentViewingMenu = Visual;
                             Debug.Log("<color=magenta>Visual...</color>");
                         }
-                        if (option.AssociatedString == "Player")
-                        {
+                        if (option.AssociatedString == "Player") {
                             CurrentViewingMenu = Player;
                             Debug.Log("<color=magenta>Player...</color>");
                         }
-                        if (option.AssociatedString == "Computer")
-                        {
+                        if (option.AssociatedString == "Computer") {
                             CurrentViewingMenu = Computer;
                             Debug.Log("<color=magenta>Computer...</color>");
                         }
-                        if (option.AssociatedString == "Modders")
-                        {
+                        if (option.AssociatedString == "Modders") {
                             CurrentViewingMenu = Modders;
                             Debug.Log("<color=magenta>Modders...</color>");
                         }
-                        if (option.AssociatedString == "Account")
-                        {
+                        if (option.AssociatedString == "Account") {
                             CurrentViewingMenu = Account;
                             Debug.Log("<color=magenta>Account...</color>");
                         }
-                        if (option.AssociatedString == "DriftMode")
-                        {
+                        if (option.AssociatedString == "Settings") {
+                            CurrentViewingMenu = Settings;
+                            Debug.Log("<color=magenta>Settings...</color>");
+                        }
+                        if (option.AssociatedString == "DriftMode") {
                             CurrentViewingMenu = Account;
                             Debug.Log("<color=magenta>Account...</color>");
                         }
-                        if (option.AssociatedString == "Back")
-                        {
+                        if (option.AssociatedString == "Back") {
                             CurrentViewingMenu = MainMenu;
                             Debug.Log("<color=magenta>Back...</color>");
                         }
 
-                        if (option.AssociatedString == "Speed")
-                        {
+                        if (option.AssociatedString == "Speed") {
                             CurrentViewingMenu = Speed;
                             Debug.Log("<color=magenta>Speed...</color>");
                         }
-                        if (option.AssociatedString == "Sky")
-                        {
+                        if (option.AssociatedString == "WallWalk") {
+                            CurrentViewingMenu = WallWalk;
+                            Debug.Log("<color=magenta>WallWalk...</color>");
+                        }
+                        if (option.AssociatedString == "Sky") {
                             CurrentViewingMenu = Sky;
                         }
                         MenuState = option.AssociatedString;
                         SelectedOptionIndex = 0;
                     }
-                    if (option._type == "toggle")
-                    {
-                        if (option.AssociatedBool == false)
-                        {
+                    if (option._type == "toggle") {
+                        if (option.AssociatedBool == false) {
                             option.AssociatedBool = true;
                             Debug.Log($"<color=magenta>Toggled {option.DisplayName} : {option.AssociatedBool}</color>");
-                        }
-                        else
-                        {
+                        } else {
                             option.AssociatedBool = false;
                         }
                     }
-                    if (option._type == "button")
-                    {
+                    if (option._type == "button") {
                         //Computer
-                        if (option.AssociatedString == "disconnect")
-                        {
+                        if (option.AssociatedString == "disconnect") {
                             PhotonNetworkController.Instance.AttemptDisconnect();
                         }
-                        if (option.AssociatedString == "randomidentity")
-                        {
+                        if (option.AssociatedString == "randomidentity") {
                             string[] names =
                             {
                                 "COLOSSUS",
@@ -460,121 +504,114 @@ namespace Colossal.Menu
                             GorillaComputer.instance.savedName = names[index];
                             PlayerPrefs.SetString("GorillaLocomotion.PlayerName", names[index]);
                         }
-                        if (option.AssociatedString == "joincgt")
-                        {
+                        if (option.AssociatedString == "joincgt") {
                             PhotonNetworkController.Instance.AttemptToJoinSpecificRoom("CGT");
                         }
-                        if (option.AssociatedString == "jointtt")
-                        {
+                        if (option.AssociatedString == "jointtt") {
                             PhotonNetworkController.Instance.AttemptToJoinSpecificRoom("TTT");
                         }
-                        if (option.AssociatedString == "joincbot")
-                        {
+                        if (option.AssociatedString == "joincbot") {
                             PhotonNetworkController.Instance.AttemptToJoinSpecificRoom("CBOT");
                         }
-                        if (option.AssociatedString == "moddedcasual")
-                        {
+                        if (option.AssociatedString == "moddedcasual") {
                             GorillaComputer.instance.currentGameMode = "MODDED_MODDED_CASUALCASUAL";
                         }
-                        if (option.AssociatedString == "moddedinfection")
-                        {
+                        if (option.AssociatedString == "moddedinfection") {
                             GorillaComputer.instance.currentGameMode = "MODDED_MODDED_DEFAULTINFECTION";
                         }
 
                         //Account
-                        if (option.AssociatedString == "disconnectplayfab")
-                        {
+                        if (option.AssociatedString == "disconnectplayfab") {
                             PhotonNetwork.Disconnect();
                             PhotonNetworkController.Instance.FullDisconnect();
                             PlayFabClientAPI.ForgetAllCredentials();
                         }
-                        if (option.AssociatedString == "serverusw")
-                        {
+                        if (option.AssociatedString == "serverusw") {
                             PhotonNetworkController.Instance.FullDisconnect();
                             PhotonNetworkController.Instance.ConnectToRegion("USW");
                             PhotonNetworkController.Instance.InitiateConnection();
                         }
-                        if (option.AssociatedString == "serverus")
-                        {
+                        if (option.AssociatedString == "serverus") {
                             PhotonNetworkController.Instance.FullDisconnect();
                             PhotonNetworkController.Instance.ConnectToRegion("USW");
                             PhotonNetworkController.Instance.InitiateConnection();
                         }
-                        if (option.AssociatedString == "servereu")
-                        {
+                        if (option.AssociatedString == "servereu") {
                             PhotonNetworkController.Instance.FullDisconnect();
                             PhotonNetworkController.Instance.ConnectToRegion("EU");
                             PhotonNetworkController.Instance.InitiateConnection();
                         }
 
                         //Sky
-                        if (option.AssociatedString == "monkeycoloursky")
-                        {
+                        if (option.AssociatedString == "monkeycoloursky") {
                             GameObject gameObject = GameObject.Find("Level/newsky");
                             gameObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard");
                             gameObject.GetComponent<MeshRenderer>().material.color = new Color(GorillaTagger.Instance.myVRRig.mainSkin.material.color.r, GorillaTagger.Instance.myVRRig.mainSkin.material.color.g, GorillaTagger.Instance.myVRRig.mainSkin.material.color.b);
                         }
-                        if (option.AssociatedString == "purplesky")
-                        {
+                        if (option.AssociatedString == "purplesky") {
                             GameObject gameObject = GameObject.Find("Level/newsky");
                             gameObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard");
                             gameObject.GetComponent<MeshRenderer>().material.color = Color.magenta;
                         }
-                        if (option.AssociatedString == "redsky")
-                        {
+                        if (option.AssociatedString == "redsky") {
                             GameObject gameObject = GameObject.Find("Level/newsky");
                             gameObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard");
                             gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                         }
-                        if (option.AssociatedString == "cyansky")
-                        {
+                        if (option.AssociatedString == "cyansky") {
                             GameObject gameObject = GameObject.Find("Level/newsky");
                             gameObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard");
                             gameObject.GetComponent<MeshRenderer>().material.color = Color.cyan;
                         }
-                        if (option.AssociatedString == "greensky")
-                        {
+                        if (option.AssociatedString == "greensky") {
                             GameObject gameObject = GameObject.Find("Level/newsky");
                             gameObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard");
                             gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
                         }
-                    }
-                }
-            }
-            catch
-            {
-            }
-            string ToDraw = "<color=magenta>COLOSSAL : " + MenuState + "</color>\n";
-            int i = 0;
-            if (CurrentViewingMenu != null)
-            {
-                foreach (MenuOption opt in CurrentViewingMenu)
-                {
-                    if (SelectedOptionIndex == i)
-                    {
-                        ToDraw = ToDraw + ">";
-                    }
-                    ToDraw = ToDraw + opt.DisplayName;
 
-                    if (opt._type == "toggle")
-                    {
-                        if (opt.AssociatedBool == true)
-                        {
-                            ToDraw = ToDraw + " <color=green>[ON]</color>";
+                        if (option.AssociatedString == "menupurple") {
+                            MenuColour = "magenta";
                         }
-                        else
-                        {
-                            ToDraw = ToDraw + " <color=red>[OFF]</color>";
+                        if (option.AssociatedString == "menured") {
+                            MenuColour = "red";
+                        }
+                        if (option.AssociatedString == "menuyellow") {
+                            MenuColour = "yellow";
+                        }
+                        if (option.AssociatedString == "menugreen") {
+                            MenuColour = "green";
+                        }
+                        if (option.AssociatedString == "menublue") {
+                            MenuColour = "cyan";
                         }
                     }
-                    ToDraw = ToDraw + "\n";
-                    i++;
                 }
-                Testtext.text = ToDraw;
+            } catch {
             }
-            else
-            {
-                Debug.Log("Null for some reason");
+            if(!MenuRGB) {
+                string ToDraw = $"<color={MenuColour}>COLOSSAL : {MenuState}</color>\n";
+                int i = 0;
+                if (CurrentViewingMenu != null) {
+                    foreach (MenuOption opt in CurrentViewingMenu) {
+                        if (SelectedOptionIndex == i) {
+                            ToDraw = ToDraw + ">";
+                        }
+                        ToDraw = ToDraw + opt.DisplayName;
+
+                        if (opt._type == "toggle") {
+                            if (opt.AssociatedBool == true) {
+                                ToDraw = ToDraw + $" <color={MenuColour}>[ON]</color>";
+                            } else {
+                                ToDraw = ToDraw + " <color=red>[OFF]</color>";
+                            }
+                        }
+                        ToDraw = ToDraw + "\n";
+                        i++;
+                    }
+                    Testtext.text = ToDraw;
+                } else {
+                    Debug.Log("Null for some reason");
+                }
             }
         }
     }

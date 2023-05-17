@@ -25,43 +25,19 @@ namespace Colossal.Mods
                 colour = new Color(r, g, b);
                 colorTimer += Time.deltaTime * 2;
 
-                if (!GorillaTagger.Instance.myVRRig.photonView.Controller.CustomProperties.ContainsValue("colossal") || !GorillaTagger.Instance.myVRRig.photonView.Controller.CustomProperties.ContainsValue("colossaladmin"))
+                if (!GorillaTagger.Instance.myVRRig.photonView.Controller.CustomProperties.ContainsValue("colossal"))
                 {
-                    if(Plugin.isadmin)
+                    Hashtable hash = new Hashtable
                     {
-                        Hashtable hash = new Hashtable
-                        {
-                            { "colossaladmin", "colossaladmin" }
-                        };
-                        GorillaTagger.Instance.myVRRig.photonView.Controller.SetCustomProperties(hash);
-                    }
-                    else
-                    {
-                        Hashtable hash = new Hashtable
-                        {
                             { "colossal", "colossal" }
-                        };
-                        GorillaTagger.Instance.myVRRig.photonView.Controller.SetCustomProperties(hash);
-                    }
+                    };
+                    GorillaTagger.Instance.myVRRig.photonView.Controller.SetCustomProperties(hash);
                 }
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
                 {
                     if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !vrrig.photonView.IsMine)
                     {
                         if (vrrig.photonView.Controller.CustomProperties.ContainsValue("colossal"))
-                        {
-                            if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().isCasual)
-                            {
-                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
-                                {
-                                    vrrig.mainSkin.material.color = new Color(0f, 0f, 1f, 0.4f);
-                                    vrrig.mainSkin.material.SetFloat("_Metallic", 1f);
-                                    vrrig.mainSkin.material.SetFloat("_Glossiness", 1f);
-                                }
-                            }
-                            vrrig.playerText.color = Color.magenta;
-                        }
-                        if (vrrig.photonView.Controller.CustomProperties.ContainsValue("colossaladmin"))
                         {
                             if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().isCasual)
                             {

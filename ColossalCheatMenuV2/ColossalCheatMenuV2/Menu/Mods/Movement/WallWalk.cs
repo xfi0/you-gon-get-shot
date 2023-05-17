@@ -21,14 +21,11 @@ namespace Colossal.Mods
         private float maxD2;
         public void Update()
         {
-            if (Plugin.wallwalk)
-            {
+            if(Plugin.colossalsettingswallwalk) {
                 bool wallwalkActiveR;
                 InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out wallwalkActiveR);
-                if (wallwalkActiveR)
-                {
-                    if (!DoOnce2)
-                    {
+                if (wallwalkActiveR) {
+                    if (!DoOnce2) {
                         maxD2 = 1f;
                         layers = 512;
                         DoOnce2 = true;
@@ -37,34 +34,90 @@ namespace Colossal.Mods
                     Physics.Raycast(GorillaTagger.Instance.rightHandTransform.position, -GorillaTagger.Instance.rightHandTransform.right, out raycastHit3, 1, layers);
                     RaycastHit raycastHit4;
                     Physics.Raycast(GorillaTagger.Instance.leftHandTransform.position, GorillaTagger.Instance.leftHandTransform.right, out raycastHit4, 1, layers);
-                    if (raycastHit4.distance > raycastHit3.distance)
-                    {
+                    if (raycastHit4.distance > raycastHit3.distance) {
                         normal2 = raycastHit3.normal;
                         dist2 = raycastHit3.distance;
-                    }
-                    else
-                    {
+                    } else {
                         normal2 = raycastHit4.normal;
                         dist2 = raycastHit4.distance;
                         LeftClose2 = true;
                     }
-                    if (dist2 < maxD2)
-                    {
-                        vel2 = normal2 * (9.8f * Time.deltaTime);
+                    if (dist2 < maxD2) {
+                        vel2 = normal2 * (7.8f * Time.deltaTime);
                         GorillaTagger.Instance.bodyCollider.attachedRigidbody.velocity -= vel2;
-                    }
-                    else
-                    {
+                    } else {
                         GorillaTagger.Instance.bodyCollider.attachedRigidbody.useGravity = true;
                     }
-                }
-                else
-                {
+                } else {
                     GorillaTagger.Instance.bodyCollider.attachedRigidbody.useGravity = true;
                 }
             }
-            else
-            {
+
+            if(Plugin.ghostwallwalk) {
+                bool wallwalkActiveR;
+                InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out wallwalkActiveR);
+                if (wallwalkActiveR) {
+                    if (!DoOnce2) {
+                        maxD2 = 1f;
+                        layers = 512;
+                        DoOnce2 = true;
+                    }
+                    RaycastHit raycastHit3;
+                    Physics.Raycast(GorillaTagger.Instance.rightHandTransform.position, -GorillaTagger.Instance.rightHandTransform.right, out raycastHit3, 2, layers);
+                    RaycastHit raycastHit4;
+                    Physics.Raycast(GorillaTagger.Instance.leftHandTransform.position, GorillaTagger.Instance.leftHandTransform.right, out raycastHit4, 2, layers);
+                    if (raycastHit4.distance > raycastHit3.distance) {
+                        normal2 = raycastHit3.normal;
+                        dist2 = raycastHit3.distance;
+                    } else {
+                        normal2 = raycastHit4.normal;
+                        dist2 = raycastHit4.distance;
+                        LeftClose2 = true;
+                    }
+                    if (dist2 < maxD2) {
+                        vel2 = normal2 * (8.8f * Time.deltaTime);
+                        GorillaTagger.Instance.bodyCollider.attachedRigidbody.velocity -= vel2;
+                    } else {
+                        GorillaTagger.Instance.bodyCollider.attachedRigidbody.useGravity = true;
+                    }
+                } else {
+                    GorillaTagger.Instance.bodyCollider.attachedRigidbody.useGravity = true;
+                }
+            }
+
+            if(Plugin.blatantwallwalk) {
+                bool wallwalkActiveR;
+                InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out wallwalkActiveR);
+                if (wallwalkActiveR) {
+                    if (!DoOnce2) {
+                        maxD2 = 1f;
+                        layers = 512;
+                        DoOnce2 = true;
+                    }
+                    RaycastHit raycastHit3;
+                    Physics.Raycast(GorillaTagger.Instance.rightHandTransform.position, -GorillaTagger.Instance.rightHandTransform.right, out raycastHit3, 4, layers);
+                    RaycastHit raycastHit4;
+                    Physics.Raycast(GorillaTagger.Instance.leftHandTransform.position, GorillaTagger.Instance.leftHandTransform.right, out raycastHit4, 4, layers);
+                    if (raycastHit4.distance > raycastHit3.distance) {
+                        normal2 = raycastHit3.normal;
+                        dist2 = raycastHit3.distance;
+                    } else {
+                        normal2 = raycastHit4.normal;
+                        dist2 = raycastHit4.distance;
+                        LeftClose2 = true;
+                    }
+                    if (dist2 < maxD2) {
+                        vel2 = normal2 * (9.8f * Time.deltaTime);
+                        GorillaTagger.Instance.bodyCollider.attachedRigidbody.velocity -= vel2;
+                    } else {
+                        GorillaTagger.Instance.bodyCollider.attachedRigidbody.useGravity = true;
+                    }
+                } else {
+                    GorillaTagger.Instance.bodyCollider.attachedRigidbody.useGravity = true;
+                }
+            }
+
+            if (Plugin.colossalsettingswallwalk && Plugin.ghostwallwalk && Plugin.blatantwallwalk) {
                 Destroy(GorillaTagger.Instance.GetComponent<WallWalk>());
             }
         }
