@@ -13,36 +13,29 @@ namespace Colossal.Mods
 {
     public class BreakPunchMod : MonoBehaviour
     {
-        private float counter;
+        private float colorTimer = 0f;
+        public static Color colour = Color.red;
         public void Update()
         {
-            counter += Time.deltaTime;
-            GorillaLocomotion.Player.Instance.teleportThresholdNoVel = int.MaxValue;
+            float r = Mathf.Lerp(0f, 1f, Mathf.Abs(Mathf.Sin(colorTimer * 0.4f)));
+            float g = Mathf.Lerp(0f, 1f, Mathf.Abs(Mathf.Sin(colorTimer * 0.5f)));
+            float b = Mathf.Lerp(0f, 1f, Mathf.Abs(Mathf.Sin(colorTimer * 0.6f)));
+            colour = new Color(r, g, b);
+            colorTimer += Time.deltaTime * 2;
 
-            if (Plugin.breakpunchmod && PhotonNetwork.InRoom)
+            if (Plugin.breakpunchmod)
             {
-                var photonViews = PhotonNetwork.PhotonViews;
-                foreach (var photonView in photonViews)
-                {
-                    if (photonView.Owner != null && photonView.Owner != PhotonNetwork.LocalPlayer)
-                    {
-                        if (photonView.Controller.CustomProperties.ContainsKey("com.fault.gorillatag.punchmod"))
-                        {
-                            if(counter >= 2)
-                            {
-                                GorillaTagger.Instance.myVRRig.enabled = false;
-                                GorillaTagger.Instance.myVRRig.transform.position = photonView.transform.position;
-                                GorillaLocomotion.Player.Instance.rightHandTransform.position = photonView.transform.position;
-
-                                counter = 0;
-                            }
-                        }
-                    }
+                MeshRenderer[] particleSystems = GameObject.FindObjectsOfType<MeshRenderer>();
+                foreach (MeshRenderer system in particleSystems) {
+                    system.material.shader = Shader.Find("Standard");
+                    system.material.color = colour;
+                    system.material.SetFloat("_Glossiness", 0.5f);
+                    system.material.SetFloat("_Metallic", 6f);
                 }
             }
             else
             {
-                counter = 0;
+                
                 Destroy(GorillaTagger.Instance.GetComponent<BreakPunchMod>());
             }
         }

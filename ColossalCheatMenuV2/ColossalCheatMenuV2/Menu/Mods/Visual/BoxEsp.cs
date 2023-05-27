@@ -23,6 +23,37 @@ namespace Colossal.Mods
         {
             if (Plugin.boxesp && PhotonNetwork.InRoom)
             {
+                ThrowableBug[] bug = GameObject.FindObjectsOfType<ThrowableBug>();
+                foreach (ThrowableBug bugthing in bug) {
+                    GameObject parentObject = bugthing.GetComponentInParent<Transform>().gameObject;
+                    if(!parentObject.gameObject.GetComponent<AddBox>()) {
+                        parentObject.gameObject.AddComponent<AddBox>();
+                    }
+                    else {
+                        AddBox addbox = parentObject.GetComponent<AddBox>();
+
+                        Camera mainCamera = Camera.main;
+                        Matrix4x4 projectionMatrix = mainCamera.projectionMatrix;
+                        Vector3 objectWorldPosition = parentObject.transform.position;
+                        float objectDistanceFromCamera = Vector3.Distance(objectWorldPosition, mainCamera.transform.position);
+
+                        Matrix4x4 worldToCameraMatrix = mainCamera.worldToCameraMatrix;
+                        Vector3 objectViewportPosition = mainCamera.WorldToViewportPoint(objectWorldPosition);
+
+                        Vector4 objectClipPosition = projectionMatrix * worldToCameraMatrix * new Vector4(objectWorldPosition.x, objectWorldPosition.y, objectWorldPosition.z, 1);
+                        objectClipPosition /= objectClipPosition.w;
+
+                        objectScale = (objectDistanceFromCamera / objectClipPosition.w);
+
+                        float minScale = 2f;
+                        float maxScale = 8.5f;
+
+                        objectScale = Mathf.Clamp(objectScale, minScale, maxScale);
+                        addbox.topSide.transform.localScale = new Vector3(BoxEsp.objectScale / 40, BoxEsp.objectScale / 40, BoxEsp.objectScale / 40);
+
+                        addbox.topSide.GetComponent<Renderer>().material.color = new Color(1, 1, 0, 0.4f);
+                    }
+                }
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
                 {
                     if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !vrrig.photonView.IsMine)
@@ -54,7 +85,7 @@ namespace Colossal.Mods
                             objectScale = Mathf.Clamp(objectScale, minScale, maxScale);
                             addbox.topSide.transform.localScale = new Vector3(BoxEsp.objectScale / 40, BoxEsp.objectScale / 40, BoxEsp.objectScale / 40);
 
-                            if(!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().isCasual)
+                            if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().isCasual)
                             {
                                 if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber))
                                 {
@@ -65,10 +96,6 @@ namespace Colossal.Mods
                                     addbox.topSide.GetComponent<Renderer>().material.color = new Color(1f, 0f, 1f, 0.4f);
                                 }
                                 if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.CustomProperties.ContainsValue("colossal"))
-                                {
-                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 0f, 1f, 0.4f);
-                                }
-                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber) && vrrig.photonView.Controller.CustomProperties.ContainsValue("colossaladmin"))
                                 {
                                     addbox.topSide.GetComponent<Renderer>().material.color = ThisGuyIsUsingColossal.colour;
                                 }
@@ -89,10 +116,6 @@ namespace Colossal.Mods
                                 }
                                 if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.CustomProperties.ContainsValue("colossal"))
                                 {
-                                    addbox.topSide.GetComponent<Renderer>().material.color = new Color(0f, 0f, 1f, 0.4f);
-                                }
-                                if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.CustomProperties.ContainsValue("colossaladmin"))
-                                {
                                     addbox.topSide.GetComponent<Renderer>().material.color = ThisGuyIsUsingColossal.colour;
                                 }
                                 if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.IsMasterClient)
@@ -106,16 +129,43 @@ namespace Colossal.Mods
             }
             else
             {
-                GameObject.Destroy(GameObject.Find("Global/GorillaParent/GorillaVRRigs/Gorilla Player Networked(Clone)/HollowBox"));
-                foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
-                {
-                    if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !vrrig.photonView.IsMine)
-                    {
-                        if (vrrig.gameObject.GetComponent<AddBox>())
-                        {
-                            GameObject.Destroy(vrrig.gameObject.GetComponent<AddBox>());
+                ThrowableBug[] bug = GameObject.FindObjectsOfType<ThrowableBug>();
+                if (GameObject.Find("Floating Bug Holdable")) {
+                    foreach (ThrowableBug bugthing in bug) {
+                        GameObject parentObject = bugthing.GetComponentInParent<Transform>().gameObject;
+                        if (parentObject.gameObject.GetComponent<AddBox>()) {
+                            GameObject.Destroy(parentObject.gameObject.GetComponent<AddBox>());
                         }
                     }
+                    GameObject.Destroy(GameObject.Find("Floating Bug Holdable/HollowBox"));
+                }
+                if (GameObject.Find("Global/GorillaParent/GorillaVRRigs/Gorilla Player Networked(Clone)/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/Floating Bug Anchor/Floating Bug Holdable/HollowBox")) {
+                    foreach (ThrowableBug bugthing in bug) {
+                        GameObject parentObject = bugthing.GetComponentInParent<Transform>().gameObject;
+                        if (parentObject.gameObject.GetComponent<AddBox>()) {
+                            GameObject.Destroy(parentObject.gameObject.GetComponent<AddBox>());
+                        }
+                    }
+                    GameObject.Destroy(GameObject.Find("Global/GorillaParent/GorillaVRRigs/Gorilla Player Networked(Clone)/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/Floating Bug Anchor/Floating Bug Holdable/HollowBox"));
+                }
+                if (GameObject.Find("Global/GorillaParent/GorillaVRRigs/Gorilla Player Networked(Clone)/rig/body/shoulder.L/upper_arm.L/forearm.L/hand.R/palm.01.L/TransferrableItemRightHand/Floating Bug Anchor/Floating Bug Holdable/HollowBox")) {
+                    foreach (ThrowableBug bugthing in bug) {
+                        GameObject parentObject = bugthing.GetComponentInParent<Transform>().gameObject;
+                        if (parentObject.gameObject.GetComponent<AddBox>()) {
+                            GameObject.Destroy(parentObject.gameObject.GetComponent<AddBox>());
+                        }
+                    }
+                    GameObject.Destroy(GameObject.Find("Global/GorillaParent/GorillaVRRigs/Gorilla Player Networked(Clone)/rig/body/shoulder.L/upper_arm.L/forearm.L/hand.R/palm.01.L/TransferrableItemRightHand/Floating Bug Anchor/Floating Bug Holdable/HollowBox"));
+                }
+                if(GameObject.Find("Global/GorillaParent/GorillaVRRigs/Gorilla Player Networked(Clone)/HollowBox")) {
+                    foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>()) {
+                        if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !vrrig.photonView.IsMine) {
+                            if (vrrig.gameObject.GetComponent<AddBox>()) {
+                                GameObject.Destroy(vrrig.gameObject.GetComponent<AddBox>());
+                            }
+                        }
+                    }
+                    GameObject.Destroy(GameObject.Find("Global/GorillaParent/GorillaVRRigs/Gorilla Player Networked(Clone)/HollowBox"));
                 }
             }
         }

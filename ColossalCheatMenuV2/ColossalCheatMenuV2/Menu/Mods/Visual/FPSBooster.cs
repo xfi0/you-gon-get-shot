@@ -14,44 +14,37 @@ namespace Colossal.Mods
     {
         public void Update()
         {
-            if (Plugin.fpsbooster)
-            {
+            if (Plugin.fpsbooster) {
                 ParticleSystem[] particleSystems = GameObject.FindObjectsOfType<ParticleSystem>();
-                foreach (ParticleSystem system in particleSystems)
-                {
+                foreach (ParticleSystem system in particleSystems) {
                     system.Stop();
-                    if(system.gameObject.active) {
+                    if (system.gameObject.active) {
                         system.gameObject.SetActive(false);
                     }
                 }
                 Renderer[] renderers = GameObject.FindObjectsOfType<Renderer>();
-                foreach (Renderer renderer in renderers)
-                {
-                    if(renderer.shadowCastingMode == ShadowCastingMode.On) {
+                foreach (Renderer renderer in renderers) {
+                    if (renderer.shadowCastingMode == ShadowCastingMode.On) {
                         renderer.shadowCastingMode = ShadowCastingMode.Off;
                     }
                 }
-                if(QualitySettings.masterTextureLimit == 0) {
+                if (QualitySettings.masterTextureLimit == 0) {
                     QualitySettings.masterTextureLimit = 10;
                 }
-            }
-            else
-            {
+            } else {
                 ParticleSystem[] particleSystems = GameObject.FindObjectsOfType<ParticleSystem>();
-                foreach (ParticleSystem system in particleSystems)
-                {
-                    if(!system.gameObject.active) {
+                foreach (ParticleSystem system in particleSystems) {
+                    if (!system.gameObject.active) {
                         system.gameObject.SetActive(true);
                     }
                 }
                 Renderer[] renderers = GameObject.FindObjectsOfType<Renderer>();
-                foreach (Renderer renderer in renderers)
-                {
-                    if(renderer.shadowCastingMode!= ShadowCastingMode.Off) {
+                foreach (Renderer renderer in renderers) {
+                    if (renderer.shadowCastingMode != ShadowCastingMode.Off) {
                         renderer.shadowCastingMode = ShadowCastingMode.On;
                     }
                 }
-                if(QualitySettings.masterTextureLimit == 10) {
+                if (QualitySettings.masterTextureLimit == 10) {
                     QualitySettings.masterTextureLimit = 0;
                 }
 

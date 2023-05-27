@@ -8,7 +8,6 @@ C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debu
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\BepInEx.Harmony.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\BepInEx.Preloader.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\DevExpress.Data.v22.2.dll
-C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\GTAG_NotificationLib.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\HarmonyXInterop.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Mono.Cecil.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Mono.Security.dll
@@ -95,3 +94,16 @@ C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debu
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\obj\x64\Debug\ColossalCheatMenuV2.csproj.CopyComplete
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\obj\x64\Debug\ColossalCheatMenuV2.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\obj\x64\Debug\ColossalCheatMenuV2.pdb
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\UnityEngine.UI.NetModule.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\AstarPathfindingProject.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Sirenix.Serialization.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Sirenix.OdinInspector.Attributes.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Unity.Mathematics.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Oculus.Platform.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Backtrace.Unity.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Pathfinding.Ionic.Zip.Reduced.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Pathfinding.ClipperLib.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Pathfinding.Poly2Tri.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Sirenix.Serialization.Config.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Sirenix.Utilities.dll

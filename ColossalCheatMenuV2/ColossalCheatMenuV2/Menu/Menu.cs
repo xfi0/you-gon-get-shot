@@ -113,7 +113,7 @@ namespace Colossal.Menu
             MainMenu[6] = new MenuOption { DisplayName = "Settings", _type = "submenu", AssociatedString = "Settings" };
             MainMenu[7] = new MenuOption { DisplayName = "DriftMode", _type = "toggle", AssociatedBool = true };
 
-            Movement = new MenuOption[8];
+            Movement = new MenuOption[9];
             Movement[0] = new MenuOption { DisplayName = "ExcelFly", _type = "toggle", AssociatedBool = false };
             Movement[1] = new MenuOption { DisplayName = "TFly", _type = "toggle", AssociatedBool = false };
             Movement[2] = new MenuOption { DisplayName = "WallWalk", _type = "submenu", AssociatedString = "WallWalk" };
@@ -121,7 +121,8 @@ namespace Colossal.Menu
             Movement[4] = new MenuOption { DisplayName = "Platforms", _type = "toggle", AssociatedBool = false };
             Movement[5] = new MenuOption { DisplayName = "UpsideDown Monkey", _type = "toggle", AssociatedBool = false };
             Movement[6] = new MenuOption { DisplayName = "FreezeMonkey", _type = "toggle", AssociatedBool = false };
-            Movement[7] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            Movement[7] = new MenuOption { DisplayName = "WateryAir", _type = "toggle", AssociatedBool = false };
+            Movement[8] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
             Speed = new MenuOption[8];
             Speed[0] = new MenuOption { DisplayName = "Mosa(7.5)", _type = "toggle", AssociatedBool = false };
             Speed[1] = new MenuOption { DisplayName = "Coke(8.5)", _type = "toggle", AssociatedBool = false };
@@ -137,13 +138,14 @@ namespace Colossal.Menu
             WallWalk[2] = new MenuOption { DisplayName = "Blatant", _type = "toggle", AssociatedBool = false };
             WallWalk[3] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
-            Visual = new MenuOption[6];
+            Visual = new MenuOption[7];
             Visual[0] = new MenuOption { DisplayName = "Chams", _type = "toggle", AssociatedBool = false };
             Visual[1] = new MenuOption { DisplayName = "BoxEsp", _type = "toggle", AssociatedBool = false };
             Visual[2] = new MenuOption { DisplayName = "HollowBoxEsp", _type = "toggle", AssociatedBool = false };
             Visual[3] = new MenuOption { DisplayName = "FPSBooster", _type = "toggle", AssociatedBool = false };
             Visual[4] = new MenuOption { DisplayName = "Sky Colour", _type = "submenu", AssociatedString = "Sky" };
-            Visual[5] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            Visual[5] = new MenuOption { DisplayName = "WhyIsEveryoneLookingAtMe", _type = "toggle", AssociatedBool = false };
+            Visual[6] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
             Sky = new MenuOption[6];
             Sky[0] = new MenuOption { DisplayName = "MonkeyColour", _type = "button", AssociatedString = "monkeycoloursky" };
             Sky[1] = new MenuOption { DisplayName = "Purple", _type = "button", AssociatedString = "purplesky" };
@@ -318,6 +320,7 @@ namespace Colossal.Menu
             Plugin.platforms = Movement[4].AssociatedBool;
             Plugin.upsidedownmonkey = Movement[5].AssociatedBool;
             Plugin.freezemonkey = Movement[6].AssociatedBool;
+            Plugin.wateryair = Movement[7].AssociatedBool;
             //Speed
             Plugin.mosa = Speed[0].AssociatedBool;
             Plugin.coke = Speed[1].AssociatedBool;
@@ -337,6 +340,7 @@ namespace Colossal.Menu
             Plugin.boxesp = Visual[1].AssociatedBool;
             Plugin.hollowboxesp = Visual[2].AssociatedBool;
             Plugin.fpsbooster = Visual[3].AssociatedBool;
+            Plugin.whyiseveryonelookingatme = Visual[5].AssociatedBool;
 
             //Player
             Plugin.nofinger = Player[0].AssociatedBool;
@@ -374,28 +378,54 @@ namespace Colossal.Menu
                 if (menurgb >= 0.6f) {
                     menurgb = 0;
                 }
-                string ToDraw = $"<color={MenuColour}>COLOSSAL : {MenuState}</color>\n";
-                int i = 0;
-                if (CurrentViewingMenu != null) {
-                    foreach (MenuOption opt in CurrentViewingMenu) {
-                        if (SelectedOptionIndex == i) {
-                            ToDraw = ToDraw + ">";
-                        }
-                        ToDraw = ToDraw + opt.DisplayName;
-
-                        if (opt._type == "toggle") {
-                            if (opt.AssociatedBool == true) {
-                                ToDraw = ToDraw + $" <color={MenuColour}>[ON]</color>";
-                            } else {
-                                ToDraw = ToDraw + " <color=red>[OFF]</color>";
+                if(Plugin.sussy) {
+                    string ToDraw = $"<color={MenuColour}>SUSSY : {MenuState}</color>\n";
+                    int i = 0;
+                    if (CurrentViewingMenu != null) {
+                        foreach (MenuOption opt in CurrentViewingMenu) {
+                            if (SelectedOptionIndex == i) {
+                                ToDraw = ToDraw + ">";
                             }
+                            ToDraw = ToDraw + opt.DisplayName;
+
+                            if (opt._type == "toggle") {
+                                if (opt.AssociatedBool == true) {
+                                    ToDraw = ToDraw + $" <color={MenuColour}>[ON]</color>";
+                                } else {
+                                    ToDraw = ToDraw + " <color=red>[OFF]</color>";
+                                }
+                            }
+                            ToDraw = ToDraw + "\n";
+                            i++;
                         }
-                        ToDraw = ToDraw + "\n";
-                        i++;
+                        Testtext.text = ToDraw;
+                    } else {
+                        Debug.Log("Null for some reason");
                     }
-                    Testtext.text = ToDraw;
                 } else {
-                    Debug.Log("Null for some reason");
+                    string ToDraw = $"<color={MenuColour}>COLOSSAL : {MenuState}</color>\n";
+                    int i = 0;
+                    if (CurrentViewingMenu != null) {
+                        foreach (MenuOption opt in CurrentViewingMenu) {
+                            if (SelectedOptionIndex == i) {
+                                ToDraw = ToDraw + ">";
+                            }
+                            ToDraw = ToDraw + opt.DisplayName;
+
+                            if (opt._type == "toggle") {
+                                if (opt.AssociatedBool == true) {
+                                    ToDraw = ToDraw + $" <color={MenuColour}>[ON]</color>";
+                                } else {
+                                    ToDraw = ToDraw + " <color=red>[OFF]</color>";
+                                }
+                            }
+                            ToDraw = ToDraw + "\n";
+                            i++;
+                        }
+                        Testtext.text = ToDraw;
+                    } else {
+                        Debug.Log("Null for some reason");
+                    }
                 }
             }
         }
@@ -589,28 +619,54 @@ namespace Colossal.Menu
             } catch {
             }
             if(!MenuRGB) {
-                string ToDraw = $"<color={MenuColour}>COLOSSAL : {MenuState}</color>\n";
-                int i = 0;
-                if (CurrentViewingMenu != null) {
-                    foreach (MenuOption opt in CurrentViewingMenu) {
-                        if (SelectedOptionIndex == i) {
-                            ToDraw = ToDraw + ">";
-                        }
-                        ToDraw = ToDraw + opt.DisplayName;
-
-                        if (opt._type == "toggle") {
-                            if (opt.AssociatedBool == true) {
-                                ToDraw = ToDraw + $" <color={MenuColour}>[ON]</color>";
-                            } else {
-                                ToDraw = ToDraw + " <color=red>[OFF]</color>";
+                if (Plugin.sussy) {
+                    string ToDraw = $"<color={MenuColour}>SUSSY : {MenuState}</color>\n";
+                    int i = 0;
+                    if (CurrentViewingMenu != null) {
+                        foreach (MenuOption opt in CurrentViewingMenu) {
+                            if (SelectedOptionIndex == i) {
+                                ToDraw = ToDraw + ">";
                             }
+                            ToDraw = ToDraw + opt.DisplayName;
+
+                            if (opt._type == "toggle") {
+                                if (opt.AssociatedBool == true) {
+                                    ToDraw = ToDraw + $" <color={MenuColour}>[ON]</color>";
+                                } else {
+                                    ToDraw = ToDraw + " <color=red>[OFF]</color>";
+                                }
+                            }
+                            ToDraw = ToDraw + "\n";
+                            i++;
                         }
-                        ToDraw = ToDraw + "\n";
-                        i++;
+                        Testtext.text = ToDraw;
+                    } else {
+                        Debug.Log("Null for some reason");
                     }
-                    Testtext.text = ToDraw;
                 } else {
-                    Debug.Log("Null for some reason");
+                    string ToDraw = $"<color={MenuColour}>COLOSSAL : {MenuState}</color>\n";
+                    int i = 0;
+                    if (CurrentViewingMenu != null) {
+                        foreach (MenuOption opt in CurrentViewingMenu) {
+                            if (SelectedOptionIndex == i) {
+                                ToDraw = ToDraw + ">";
+                            }
+                            ToDraw = ToDraw + opt.DisplayName;
+
+                            if (opt._type == "toggle") {
+                                if (opt.AssociatedBool == true) {
+                                    ToDraw = ToDraw + $" <color={MenuColour}>[ON]</color>";
+                                } else {
+                                    ToDraw = ToDraw + " <color=red>[OFF]</color>";
+                                }
+                            }
+                            ToDraw = ToDraw + "\n";
+                            i++;
+                        }
+                        Testtext.text = ToDraw;
+                    } else {
+                        Debug.Log("Null for some reason");
+                    }
                 }
             }
         }
