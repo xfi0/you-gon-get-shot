@@ -17,6 +17,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using DevExpress.Utils.Design.DataAccess;
 using Mono.Cecil.Cil;
+using ExitGames.Client.Photon;
 
 namespace Colossal.Menu
 {
@@ -113,7 +114,7 @@ namespace Colossal.Menu
             MainMenu[6] = new MenuOption { DisplayName = "Settings", _type = "submenu", AssociatedString = "Settings" };
             MainMenu[7] = new MenuOption { DisplayName = "DriftMode", _type = "toggle", AssociatedBool = true };
 
-            Movement = new MenuOption[9];
+            Movement = new MenuOption[10];
             Movement[0] = new MenuOption { DisplayName = "ExcelFly", _type = "toggle", AssociatedBool = false };
             Movement[1] = new MenuOption { DisplayName = "TFly", _type = "toggle", AssociatedBool = false };
             Movement[2] = new MenuOption { DisplayName = "WallWalk", _type = "submenu", AssociatedString = "WallWalk" };
@@ -122,7 +123,8 @@ namespace Colossal.Menu
             Movement[5] = new MenuOption { DisplayName = "UpsideDown Monkey", _type = "toggle", AssociatedBool = false };
             Movement[6] = new MenuOption { DisplayName = "FreezeMonkey", _type = "toggle", AssociatedBool = false };
             Movement[7] = new MenuOption { DisplayName = "WateryAir", _type = "toggle", AssociatedBool = false };
-            Movement[8] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            Movement[8] = new MenuOption { DisplayName = "LongArms", _type = "toggle", AssociatedBool = false };
+            Movement[9] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
             Speed = new MenuOption[8];
             Speed[0] = new MenuOption { DisplayName = "Mosa(7.5)", _type = "toggle", AssociatedBool = false };
             Speed[1] = new MenuOption { DisplayName = "Coke(8.5)", _type = "toggle", AssociatedBool = false };
@@ -164,11 +166,12 @@ namespace Colossal.Menu
             Player[5] = new MenuOption { DisplayName = "InvisMonkey", _type = "toggle", AssociatedBool = false };
             Player[6] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
-            Modders = new MenuOption[4];
+            Modders = new MenuOption[5];
             Modders[0] = new MenuOption { DisplayName = "Break NameTags", _type = "toggle", AssociatedBool = false };
             Modders[1] = new MenuOption { DisplayName = "Break ModCheckers", _type = "toggle", AssociatedBool = false };
-            Modders[2] = new MenuOption { DisplayName = "Break PunchMod", _type = "toggle", AssociatedBool = false };
-            Modders[3] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            Modders[2] = new MenuOption { DisplayName = "No Snitch", _type = "button", AssociatedString = "nosnitch" };
+            Modders[3] = new MenuOption { DisplayName = "Pc Check Bypass", _type = "toggle", AssociatedBool = false };
+            Modders[4] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
             Computer = new MenuOption[8];
             Computer[0] = new MenuOption { DisplayName = "Disconnect", _type = "button", AssociatedString = "disconnect" };
@@ -321,6 +324,7 @@ namespace Colossal.Menu
             Plugin.upsidedownmonkey = Movement[5].AssociatedBool;
             Plugin.freezemonkey = Movement[6].AssociatedBool;
             Plugin.wateryair = Movement[7].AssociatedBool;
+            Plugin.longarms = Movement[8].AssociatedBool;
             //Speed
             Plugin.mosa = Speed[0].AssociatedBool;
             Plugin.coke = Speed[1].AssociatedBool;
@@ -353,7 +357,7 @@ namespace Colossal.Menu
             //Modders
             Plugin.breaknametags = Modders[0].AssociatedBool;
             Plugin.breakmodcheckers = Modders[1].AssociatedBool;
-            Plugin.breakpunchmod = Modders[2].AssociatedBool;
+            Plugin.pccheckbypass = Modders[3].AssociatedBool;
 
             MenuRGB = Settings[5].AssociatedBool;
             if(MenuRGB) {
@@ -613,6 +617,16 @@ namespace Colossal.Menu
                         }
                         if (option.AssociatedString == "menublue") {
                             MenuColour = "cyan";
+                        }
+
+                        if(option.AssociatedString == "nosnitch") {
+                            if(PhotonNetwork.InRoom) {
+                                if (!GorillaTagger.Instance.myVRRig.photonView.Controller.CustomProperties.ContainsValue("You know mod checkers are a illegal mod right :p")) {
+                                    Hashtable hash = new Hashtable();
+                                    hash.Add("mods", "You know mod checkers are a illegal mod right :p");
+                                    GorillaTagger.Instance.myVRRig.photonView.Controller.SetCustomProperties(hash);
+                                }
+                            }
                         }
                     }
                 }

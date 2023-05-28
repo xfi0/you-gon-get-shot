@@ -22,8 +22,8 @@ namespace Colossal.Mods {
                 else {
                     bool L;
                     bool R;
-                    InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out L);
-                    InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out R);
+                    InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out L);
+                    InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out R);
                     if (L && R) {
                         waterbox.transform.position = GorillaTagger.Instance.headCollider.transform.position + new Vector3(0, 1, 0);
                     }

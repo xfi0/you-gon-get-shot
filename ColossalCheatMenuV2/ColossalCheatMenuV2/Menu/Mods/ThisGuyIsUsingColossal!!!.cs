@@ -36,9 +36,12 @@ namespace Colossal.Mods
                         if (vrrig.photonView.Controller.CustomProperties.ContainsValue("colossal")) {
                             if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().isCasual) {
                                 if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber)) {
-                                    vrrig.mainSkin.material.color = colour;
-                                    vrrig.mainSkin.material.SetFloat("_Metallic", 1f);
-                                    vrrig.mainSkin.material.SetFloat("_Glossiness", 1f);
+                                    if(!vrrig.gameObject.tag.Contains("colossal")) {
+                                        vrrig.gameObject.tag = "colossal";
+                                        vrrig.mainSkin.material.color = colour;
+                                        vrrig.mainSkin.material.SetFloat("_Metallic", 1f);
+                                        vrrig.mainSkin.material.SetFloat("_Glossiness", 1f);
+                                    }
                                 }
                             }
                             vrrig.playerText.color = Color.magenta;

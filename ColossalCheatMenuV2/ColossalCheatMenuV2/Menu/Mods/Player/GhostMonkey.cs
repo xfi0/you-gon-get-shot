@@ -20,11 +20,7 @@ namespace Colossal.Mods
                 InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out ghostR);
                 if (ghostR)
                 {
-                    GorillaTagger.Instance.myVRRig.enabled = false;
-                }
-                else
-                {
-                    GorillaTagger.Instance.myVRRig.enabled = true;
+                    GorillaTagger.Instance.myVRRig.enabled = !GorillaTagger.Instance.myVRRig.enabled;
                 }
             }
             else
