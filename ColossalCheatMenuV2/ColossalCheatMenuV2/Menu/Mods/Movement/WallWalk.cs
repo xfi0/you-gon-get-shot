@@ -27,7 +27,7 @@ namespace Colossal.Mods
                 if (wallwalkActiveR) {
                     if (!DoOnce2) {
                         maxD2 = 1f;
-                        layers = 512;
+                        layers = int.MaxValue;
                         DoOnce2 = true;
                     }
                     RaycastHit raycastHit3;
@@ -59,7 +59,7 @@ namespace Colossal.Mods
                 if (wallwalkActiveR) {
                     if (!DoOnce2) {
                         maxD2 = 1f;
-                        layers = 512;
+                        layers = int.MaxValue;
                         DoOnce2 = true;
                     }
                     RaycastHit raycastHit3;
@@ -91,7 +91,7 @@ namespace Colossal.Mods
                 if (wallwalkActiveR) {
                     if (!DoOnce2) {
                         maxD2 = 1f;
-                        layers = 512;
+                        layers = int.MaxValue;
                         DoOnce2 = true;
                     }
                     RaycastHit raycastHit3;

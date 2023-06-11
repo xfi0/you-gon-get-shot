@@ -1,5 +1,4 @@
-﻿using GorillaLocomotion.Swimming;
-using GorillaNetworking;
+﻿using GorillaNetworking;
 using System;
 using System.Collections.Generic;
 using System.Linq;

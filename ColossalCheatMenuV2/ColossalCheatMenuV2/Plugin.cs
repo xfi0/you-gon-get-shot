@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using BepInEx;
 using Colossal.Menu;
 using Colossal.Mods;
-using ExitGames.Client.Photon;
 using GorillaLocomotion;
 using GorillaLocomotion.Swimming;
 using GorillaNetworking;
@@ -23,31 +22,22 @@ using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 using UnityEngine.XR;
 using Utilla;
-using Valve.Newtonsoft.Json;
-using Valve.VR;
-using static Photon.Voice.Unity.Recorder;
-using Debug = UnityEngine.Debug;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-namespace Colossal
-{
-    [BepInPlugin("org.ColossusYTTV", "ColossalCheatMenuV2", "1.0.0")]
-    public class Plugin : BaseUnityPlugin
-    {
-        private void OnEnable()
-        {
+namespace Colossal {
+    [BepInPlugin("org.ColossusYTTV.ColossalCheatMenuV2", "ColossalCheatMenuV2", "1.0.0")]
+    public class Plugin : BaseUnityPlugin {
+        private void OnEnable() {
             HarmonyLoader.ApplyHarmonyPatches();
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() {
             HarmonyLoader.RemoveHarmonyPatches();
         }
         private bool inroom = false;
         private bool doonce = false;
 
         public static Texture2D texture;
-        private Material boardmat;
+        public static Material boardmat;
 
         public static int called = 0;
         public static float instantate = 0;
@@ -89,29 +79,26 @@ namespace Colossal
         public static bool whyiseveryonelookingatme = false;
         public static bool pccheckbypass = false;
         public static bool longarms = false;
+        public static bool tagauracolossal = false;
+        public static bool tagauraghost = false;
+        public static bool tagaurablatant = false;
+        public static bool tagall = false;
+        public static bool anticrash = false;
 
-        public static string version = "2.3";
+        public static string version = "2.6";
         public static bool sussy = false;
-        public async void Awake()
-        {
-            using (WebClient client = new WebClient())
-            {
-                try
-                {
+        public async void Awake() {
+            using (WebClient client = new WebClient()) {
+                try {
                     string versiondownload = client.DownloadString("https://pastebin.com/raw/2uU6L7NZ");
-                    if (versiondownload != version)
-                    {
-                        Debug.Log("<color=magenta>Update needed... Downloading</color>");
+                    if (versiondownload != version) {
+                        CustomConsole.LogToConsole("Update needed... Downloading");
                         await update();
+                    } else {
+                        CustomConsole.LogToConsole("Up To Date!");
                     }
-                    else
-                    {
-                        Debug.Log("<color=magenta>Up To Date!</color>");
-                    }
-                }
-                catch (WebException ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
+                } catch (WebException ex) {
+                    CustomConsole.LogToConsole("Error: " + ex.Message);
                 }
             }
 
@@ -121,20 +108,17 @@ namespace Colossal
                 sussy = true;
             }
         }
-
-        public void Update()
-        {
-            if (!doonce)
-            {
+        public void Update() {
+            if (!doonce) {
                 //Loads the menus start function
                 Menu.Menu.LoadOnce();
-                Debug.Log("<color=magenta>Loaded menu start functions!</color>");
+                CustomConsole.LogToConsole("Loaded menu start functions!");
 
                 //Colours
                 boardmat = new Material(Shader.Find("Standard"));
                 boardmat.color = new Color(0.6f, 0, 0.80f);
 
-                if(GameObject.Find("Level").transform.Find("lower level").gameObject.activeSelf) {
+                if (GameObject.Find("Level").transform.Find("lower level").gameObject.activeSelf) {
                     GameObject.Find("Level/lower level/StaticUnlit/motdscreen").GetComponent<Renderer>().material = boardmat;
                     GameObject.Find("Level/lower level/StaticUnlit/screen").GetComponent<Renderer>().material = boardmat;
 
@@ -155,7 +139,7 @@ namespace Colossal
                     GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCave").GetComponent<Text>().color = Color.cyan;
                     GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCity Front").GetComponent<Text>().color = Color.cyan;
                     GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCanyon").GetComponent<Text>().color = Color.cyan;
-                    Debug.Log("<color=magenta>Loaded Colours!</color>");
+                    CustomConsole.LogToConsole("Loaded Colours!");
                 }
 
                 //just for components
@@ -163,24 +147,18 @@ namespace Colossal
 
                 doonce = true;
             }
-            if (PhotonNetwork.InRoom && !inroom)
-            {
+            if (PhotonNetwork.InRoom && !inroom) {
                 if (GameObject.Find("Level").transform.Find("lower level").gameObject.activeSelf) {
                     //getting motd
-                    using (WebClient client = new WebClient())
-                    {
-                        try
-                        {
+                    using (WebClient client = new WebClient()) {
+                        try {
                             string rawData = client.DownloadString("https://pastebin.com/raw/bhLzrd4F");
-                            Console.WriteLine($"\n<color=magenta>{rawData}</color>\n");
                             GameObject.Find("Level/lower level/UI/motd/motdtext").GetComponent<Text>().text = rawData;
-                        }
-                        catch (WebException ex)
-                        {
-                            Console.WriteLine("Error: " + ex.Message);
+                        } catch (WebException ex) {
+                            CustomConsole.LogToConsole("Error: " + ex.Message);
                         }
                     }
-                    Debug.Log("<color=magenta>Loaded MOTD!</color>");
+                    CustomConsole.LogToConsole("\nLoaded MOTD!");
 
                     GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorforest").GetComponent<Renderer>().material = boardmat;
                     GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorcave").GetComponent<Renderer>().material = boardmat;
@@ -194,39 +172,32 @@ namespace Colossal
                     GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCanyon").GetComponent<Text>().text = $"<Colossal Cheat Menu V2>\nPhoton Name: {PhotonNetwork.LocalPlayer.NickName}\nUserID: {PhotonNetwork.LocalPlayer.UserId}\nRoom Name: {PhotonNetwork.CurrentRoom.Name}   Players: {PhotonNetwork.CurrentRoom.PlayerCount}\nMaster: {PhotonNetwork.MasterClient.NickName}   Public: {PhotonNetwork.CurrentRoom.IsVisible}";
 
                     GameObject.Find("Global/GorillaUI/ForestScoreboardAnchor/GorillaScoreBoard(Clone)/Board Text").GetComponent<Text>().color = Color.cyan;
-                    Debug.Log("<color=magenta>Loaded Colours And Info!</color>");
-
+                    CustomConsole.LogToConsole("Loaded Colours And Info!\n");
                 }
                 inroom = true;
             }
-            if (!PhotonNetwork.InRoom && inroom)
-            {
+            if (!PhotonNetwork.InRoom && inroom) {
                 inroom = false;
             }
             deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
 
             Menu.Menu.Load();
             ModManager();
+
         }
-        public void FixedUpdate()
-        {
-            if (PhotonNetwork.InRoom)
-            {
+        public void FixedUpdate() {
+            if (PhotonNetwork.InRoom) {
                 instantate += Time.deltaTime;
-            }
-            else
-            {
+            } else {
                 instantate = 0;
                 called = 0;
             }
-            if (instantate >= 120)
-            {
+            if (instantate >= 120) {
                 called = 0;
             }
-            if(Menu.Menu.MenuRGB) {
+            if (Menu.Menu.MenuRGB) {
                 Menu.Menu.menurgb += Time.deltaTime;
-            }
-            else {
+            } else {
                 if (Menu.Menu.menurgb != 0) {
                     Menu.Menu.menurgb = 0;
                 }
@@ -268,27 +239,58 @@ namespace Colossal
                 }
             }
         }
-        public async Task update()
-        {
-            using (WebClient client = new WebClient())
-            {
-                try
-                {
+        public async Task update() {
+            using (WebClient client = new WebClient()) {
+                try {
                     string downloadfilelink = client.DownloadString("https://pastebin.com/raw/SqF7czTS");
                     client.DownloadFile(downloadfilelink, "BepInEx/plugins/ColossalCheatMenuV2.dll");
-                }
-                catch (WebException ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
+                } catch (WebException ex) {
+                    CustomConsole.LogToConsole("Error: " + ex.Message);
                 }
             }
         }
-        private void ModManager()
-        {
+        bool title = false;
+        private void ModManager() {
             if (GorillaTagger.Instance.gameObject.GetComponent<ThisGuyIsUsingColossal>() == null)
                 GorillaTagger.Instance.gameObject.AddComponent<ThisGuyIsUsingColossal>();
 
-            if(longarms) {
+            if (GorillaTagger.Instance.gameObject.GetComponent<CustomConsole>() == null)
+                GorillaTagger.Instance.gameObject.AddComponent<CustomConsole>();
+            if (GorillaTagger.Instance.gameObject.GetComponent<CustomConsole>() && !title) {
+                CustomConsole.LogToConsole(
+                @"
+                _________  ________  .____    ________    _________ _________   _____  .____     
+                \_   ___ \ \_____  \ |    |   \_____  \  /   _____//   _____/  /  _  \ |    |    
+                /    \  \/  /   |   \|    |    /   |   \ \_____  \ \_____  \  /  /_\  \|    |    
+                \     \____/    |    \    |___/    |    \/        \/        \/    |    \    |___ 
+                 \______  /\_______  /_______ \_______  /_______  /_______  /\____|__  /_______ \
+                        \/         \/        \/       \/        \/        \/         \/        \/
+                                Trolling lemming harder since July, 19th. 2022
+                ");
+                title = true;
+            }
+
+            if (tagall) {
+                if (GorillaTagger.Instance.gameObject.GetComponent<TagAll>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<TagAll>();
+            }
+
+            if (tagauracolossal) {
+                if (GorillaTagger.Instance.gameObject.GetComponent<TagAura>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<TagAura>();
+            }
+
+            if (tagauraghost) {
+                if (GorillaTagger.Instance.gameObject.GetComponent<TagAura>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<TagAura>();
+            }
+
+            if (tagaurablatant) {
+                if (GorillaTagger.Instance.gameObject.GetComponent<TagAura>() == null)
+                    GorillaTagger.Instance.gameObject.AddComponent<TagAura>();
+            }
+
+            if (longarms) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<LongArm>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<LongArm>();
             }

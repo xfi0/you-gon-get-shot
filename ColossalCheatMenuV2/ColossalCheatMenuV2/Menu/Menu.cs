@@ -15,23 +15,18 @@ using Photon.Pun;
 using PlayFab;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
-using DevExpress.Utils.Design.DataAccess;
-using Mono.Cecil.Cil;
 using ExitGames.Client.Photon;
 
-namespace Colossal.Menu
-{
-    public class MenuOption
-    {
-        public string DisplayName; //what gets rendered
-        public string _type; //What type of variable is associated with it
+namespace Colossal.Menu {
+    public class MenuOption {
+        public string DisplayName;
+        public string _type;
         public bool AssociatedBool;
         public string AssociatedString;
         public float AssociatedFloat;
         public int AssociatedInt;
     }
-    public class Menu
-    {
+    public class Menu {
         public static bool GUIToggled = true;
 
         static GameObject HUDObj;
@@ -58,6 +53,7 @@ namespace Colossal.Menu
         public static MenuOption[] Settings;
 
         public static MenuOption[] Speed;
+        public static MenuOption[] TagAura;
         public static MenuOption[] Presets;
         public static MenuOption[] WallWalk;
         public static MenuOption[] Sky;
@@ -66,8 +62,7 @@ namespace Colossal.Menu
         public static bool menutogglecooldown = false;
 
         public static bool driftmode = false;
-        public static void LoadOnce()
-        {
+        public static void LoadOnce() {
             MainCamera = GameObject.Find("Main Camera");
             HUDObj = new GameObject();
             HUDObj2 = new GameObject();
@@ -104,7 +99,7 @@ namespace Colossal.Menu
             HUDObj2.transform.transform.position = new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y, MainCamera.transform.position.z);
             HUDObj2.transform.rotation = MainCamera.transform.rotation;
 
-            MainMenu = new MenuOption[8];
+            MainMenu = new MenuOption[9];
             MainMenu[0] = new MenuOption { DisplayName = "Movement", _type = "submenu", AssociatedString = "Movement" };
             MainMenu[1] = new MenuOption { DisplayName = "Visual", _type = "submenu", AssociatedString = "Visual" };
             MainMenu[2] = new MenuOption { DisplayName = "Player", _type = "submenu", AssociatedString = "Player" };
@@ -113,6 +108,7 @@ namespace Colossal.Menu
             MainMenu[5] = new MenuOption { DisplayName = "Account", _type = "submenu", AssociatedString = "Account" };
             MainMenu[6] = new MenuOption { DisplayName = "Settings", _type = "submenu", AssociatedString = "Settings" };
             MainMenu[7] = new MenuOption { DisplayName = "DriftMode", _type = "toggle", AssociatedBool = true };
+            MainMenu[8] = new MenuOption { DisplayName = "AntiCrash", _type = "toggle", AssociatedBool = true };
 
             Movement = new MenuOption[10];
             Movement[0] = new MenuOption { DisplayName = "ExcelFly", _type = "toggle", AssociatedBool = false };
@@ -135,9 +131,9 @@ namespace Colossal.Menu
             Speed[6] = new MenuOption { DisplayName = "LGrip(9.5)", _type = "toggle", AssociatedBool = false };
             Speed[7] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
             WallWalk = new MenuOption[4];
-            WallWalk[0] = new MenuOption { DisplayName = "Colossal Settings", _type = "toggle", AssociatedBool = false };
-            WallWalk[1] = new MenuOption { DisplayName = "Ghost", _type = "toggle", AssociatedBool = false };
-            WallWalk[2] = new MenuOption { DisplayName = "Blatant", _type = "toggle", AssociatedBool = false };
+            WallWalk[0] = new MenuOption { DisplayName = "WallWalk (Colossal)", _type = "toggle", AssociatedBool = false };
+            WallWalk[1] = new MenuOption { DisplayName = "WallWalk (Ghost)", _type = "toggle", AssociatedBool = false };
+            WallWalk[2] = new MenuOption { DisplayName = "WallWalk (Blatant)", _type = "toggle", AssociatedBool = false };
             WallWalk[3] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
             Visual = new MenuOption[7];
@@ -156,15 +152,21 @@ namespace Colossal.Menu
             Sky[4] = new MenuOption { DisplayName = "Green", _type = "button", AssociatedString = "greensky" };
             Sky[5] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
-
-            Player = new MenuOption[7];
+            Player = new MenuOption[9];
             Player[0] = new MenuOption { DisplayName = "NoFinger", _type = "toggle", AssociatedBool = false };
             Player[1] = new MenuOption { DisplayName = "TagGun", _type = "toggle", AssociatedBool = false };
             Player[2] = new MenuOption { DisplayName = "LegMod", _type = "toggle", AssociatedBool = false };
             Player[3] = new MenuOption { DisplayName = "CreeperMonkey", _type = "toggle", AssociatedBool = false };
             Player[4] = new MenuOption { DisplayName = "GhostMonkey", _type = "toggle", AssociatedBool = false };
             Player[5] = new MenuOption { DisplayName = "InvisMonkey", _type = "toggle", AssociatedBool = false };
-            Player[6] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            Player[6] = new MenuOption { DisplayName = "TagAura", _type = "submenu", AssociatedString = "TagAura" };
+            Player[7] = new MenuOption { DisplayName = "TagAll", _type = "toggle", AssociatedBool = false };
+            Player[8] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
+            TagAura = new MenuOption[4];
+            TagAura[0] = new MenuOption { DisplayName = "TagAura (Colossal)", _type = "toggle", AssociatedBool = false };
+            TagAura[1] = new MenuOption { DisplayName = "TagAura (Ghost)", _type = "toggle", AssociatedBool = false };
+            TagAura[2] = new MenuOption { DisplayName = "TagAura (Blatant)", _type = "toggle", AssociatedBool = false };
+            TagAura[3] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
             Modders = new MenuOption[5];
             Modders[0] = new MenuOption { DisplayName = "Break NameTags", _type = "toggle", AssociatedBool = false };
@@ -204,8 +206,7 @@ namespace Colossal.Menu
 
             UpdateMenuState(new MenuOption(), null, null);
         }
-        public static void Load()
-        {
+        public static void Load() {
             bool toggle;
             bool toggle2;
 
@@ -220,8 +221,7 @@ namespace Colossal.Menu
                 menutogglecooldown = false;
             }
 
-            if (GUIToggled)
-            {
+            if (GUIToggled) {
                 HUDObj2.transform.position = new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y, MainCamera.transform.position.z);
                 HUDObj2.transform.rotation = MainCamera.transform.rotation;
 
@@ -251,8 +251,7 @@ namespace Colossal.Menu
                     UpdateMenuState(CurrentViewingMenu[SelectedOptionIndex], null, "optionhit");
                 }
 
-                if (!driftmode)
-                {
+                if (!driftmode) {
                     Vector2 axis;
                     InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out axis);
                     if (axis.y >= 0.5f && !inputcooldown) {
@@ -283,9 +282,7 @@ namespace Colossal.Menu
                     if (axis.y <= -0.5f && axis.y <= 0.5f && axis.x <= 0.2f && inputcooldown) {
                         inputcooldown = false;
                     }
-                }
-                else
-                {
+                } else {
                     bool holding;
                     InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxisClick, out holding);
                     if (holding) {
@@ -316,6 +313,7 @@ namespace Colossal.Menu
 
             //DriftMode
             Menu.driftmode = MainMenu[7].AssociatedBool;
+            Plugin.anticrash = MainMenu[8].AssociatedBool;
 
             //Movement
             Plugin.excelfly = Movement[0].AssociatedBool;
@@ -353,6 +351,11 @@ namespace Colossal.Menu
             Plugin.creepermonkey = Player[3].AssociatedBool;
             Plugin.ghostmonkey = Player[4].AssociatedBool;
             Plugin.invismonkey = Player[5].AssociatedBool;
+            Plugin.tagall = Player[7].AssociatedBool;
+            //tag aura
+            Plugin.tagauracolossal = TagAura[0].AssociatedBool;
+            Plugin.tagauraghost = TagAura[1].AssociatedBool;
+            Plugin.tagaurablatant = TagAura[2].AssociatedBool;
 
             //Modders
             Plugin.breaknametags = Modders[0].AssociatedBool;
@@ -360,7 +363,7 @@ namespace Colossal.Menu
             Plugin.pccheckbypass = Modders[3].AssociatedBool;
 
             MenuRGB = Settings[5].AssociatedBool;
-            if(MenuRGB) {
+            if (MenuRGB) {
                 if (menurgb >= 0.1f) {
                     MenuColour = "magenta";
                 }
@@ -382,7 +385,7 @@ namespace Colossal.Menu
                 if (menurgb >= 0.6f) {
                     menurgb = 0;
                 }
-                if(Plugin.sussy) {
+                if (Plugin.sussy) {
                     string ToDraw = $"<color={MenuColour}>SUSSY : {MenuState}</color>\n";
                     int i = 0;
                     if (CurrentViewingMenu != null) {
@@ -478,6 +481,10 @@ namespace Colossal.Menu
                             CurrentViewingMenu = Speed;
                             Debug.Log("<color=magenta>Speed...</color>");
                         }
+                        if (option.AssociatedString == "TagAura") {
+                            CurrentViewingMenu = TagAura;
+                            Debug.Log("<color=magenta>TagAura...</color>");
+                        }
                         if (option.AssociatedString == "WallWalk") {
                             CurrentViewingMenu = WallWalk;
                             Debug.Log("<color=magenta>WallWalk...</color>");
@@ -491,7 +498,7 @@ namespace Colossal.Menu
                     if (option._type == "toggle") {
                         if (option.AssociatedBool == false) {
                             option.AssociatedBool = true;
-                            Debug.Log($"<color=magenta>Toggled {option.DisplayName} : {option.AssociatedBool}</color>");
+                            CustomConsole.LogToConsole($"\nToggled {option.DisplayName} : {option.AssociatedBool}");
                         } else {
                             option.AssociatedBool = false;
                         }
@@ -619,8 +626,8 @@ namespace Colossal.Menu
                             MenuColour = "cyan";
                         }
 
-                        if(option.AssociatedString == "nosnitch") {
-                            if(PhotonNetwork.InRoom) {
+                        if (option.AssociatedString == "nosnitch") {
+                            if (PhotonNetwork.InRoom) {
                                 if (!GorillaTagger.Instance.myVRRig.photonView.Controller.CustomProperties.ContainsValue("You know mod checkers are a illegal mod right :p")) {
                                     Hashtable hash = new Hashtable();
                                     hash.Add("mods", "You know mod checkers are a illegal mod right :p");
@@ -632,7 +639,7 @@ namespace Colossal.Menu
                 }
             } catch {
             }
-            if(!MenuRGB) {
+            if (!MenuRGB) {
                 if (Plugin.sussy) {
                     string ToDraw = $"<color={MenuColour}>SUSSY : {MenuState}</color>\n";
                     int i = 0;
