@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ColossalCheatMenuV2",
+    "\\ColossalCheatMenuV2\\Menu",
+    "\\ColossalCheatMenuV2\\Menu\\Mods",
+    "\\ColossalCheatMenuV2\\Menu\\Mods\\AntiCrashes",
+    "\\ColossalCheatMenuV2\\Menu\\Mods\\Modders",
+    "\\ColossalCheatMenuV2\\Menu\\Mods\\Movement",
+    "\\ColossalCheatMenuV2\\Menu\\Mods\\Player",
+    "\\ColossalCheatMenuV2\\Menu\\Mods\\Visual",
+    "\\ColossalCheatMenuV2\\Patches"
+  ],
+  "SelectedNode": "\\ColossalCheatMenuV2\\Plugin.cs",
+  "PreviewInSolutionExplorer": false
+}

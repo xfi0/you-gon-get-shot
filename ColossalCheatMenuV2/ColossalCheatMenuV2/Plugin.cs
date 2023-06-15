@@ -85,7 +85,7 @@ namespace Colossal {
         public static bool tagall = false;
         public static bool anticrash = false;
 
-        public static string version = "2.6";
+        public static string version = "2.8";
         public static bool sussy = false;
         public async void Awake() {
             using (WebClient client = new WebClient()) {
