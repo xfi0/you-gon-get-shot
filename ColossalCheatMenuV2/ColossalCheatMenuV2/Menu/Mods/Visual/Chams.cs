@@ -18,7 +18,7 @@ namespace Colossal.Mods
             {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
                 {
-                    if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !vrrig.photonView.IsMine)
+                    if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !Plugin.GetPhotonViewFromVR(vrrig.gameObject).IsMine)
                     {
                         if (vrrig.mainSkin.material.name.Contains("fected"))
                         {
@@ -30,12 +30,12 @@ namespace Colossal.Mods
                             vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
                             vrrig.mainSkin.material.color = new Color(1f, 0f, 1f, 0.4f);
                         }
-                        if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.CustomProperties.ContainsValue("colossal"))
+                        if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.myPlayer.CustomProperties.ContainsValue("colossal"))
                         {
                             vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
                             vrrig.mainSkin.material.color = ThisGuyIsUsingColossal.colour;
                         }
-                        if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.photonView.Controller.IsMasterClient)
+                        if (!vrrig.mainSkin.material.name.Contains("fected") && vrrig.myPlayer.IsMasterClient)
                         {
                             vrrig.mainSkin.material.shader = Shader.Find("GUI/Text Shader");
                             vrrig.mainSkin.material.color = new Color(0f, 1f, 0f, 0.4f);
@@ -53,13 +53,13 @@ namespace Colossal.Mods
             {
                 foreach (VRRig vrrig2 in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
                 {
-                    if (!vrrig2.isOfflineVRRig && !vrrig2.isMyPlayer && !vrrig2.photonView.IsMine)
+                    if (!vrrig2.isOfflineVRRig && !vrrig2.isMyPlayer && !Plugin.GetPhotonViewFromVR(vrrig2.gameObject).IsMine)
                     {
                         if (vrrig2.mainSkin.material.shader == Shader.Find("GUI/Text Shader") && !vrrig2.isOfflineVRRig)
                         {
                             foreach (GorillaPlayerScoreboardLine gorillaPlayerScoreboardLine in UnityEngine.Object.FindObjectOfType<GorillaScoreBoard>().lines)
                             {
-                                if (gorillaPlayerScoreboardLine.linePlayer == vrrig2.photonView.Controller && gorillaPlayerScoreboardLine.linePlayer != PhotonNetwork.LocalPlayer)
+                                if (gorillaPlayerScoreboardLine.linePlayer == vrrig2.myPlayer && gorillaPlayerScoreboardLine.linePlayer != PhotonNetwork.LocalPlayer)
                                 {
                                     vrrig2.mainSkin.material = vrrig2.materialsToChangeTo[gorillaPlayerScoreboardLine.currentMatIndex];
                                     break;

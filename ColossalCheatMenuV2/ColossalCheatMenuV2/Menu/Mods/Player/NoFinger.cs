@@ -10,6 +10,7 @@ namespace Colossal.Mods
     [HarmonyPatch(typeof(VRMapIndex), "MapMyFinger", MethodType.Normal)]
     class FingerIndex
     {
+        [HarmonyPrefix]
         public static bool Prefix()
         {
             if (Plugin.nofinger)
@@ -22,6 +23,7 @@ namespace Colossal.Mods
     [HarmonyPatch(typeof(VRMapMiddle), "MapMyFinger", MethodType.Normal)]
     class MiddleIndex
     {
+        [HarmonyPrefix]
         public static bool Prefix()
         {
             if (Plugin.nofinger)
@@ -34,6 +36,7 @@ namespace Colossal.Mods
     [HarmonyPatch(typeof(VRMapThumb), "MapMyFinger", MethodType.Normal)]
     class ThumbIndex
     {
+        [HarmonyPrefix]
         public static bool Prefix()
         {
             if (Plugin.nofinger)

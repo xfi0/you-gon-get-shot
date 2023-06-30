@@ -1,4 +1,5 @@
-﻿using ExitGames.Client.Photon;
+﻿using Colossal.Menu.ClientHub;
+using ExitGames.Client.Photon;
 using HarmonyLib;
 using Photon.Pun;
 using Photon.Realtime;
@@ -11,7 +12,7 @@ using UnityEngine;
 
 namespace Colossal.Patches
 {
-    [HarmonyPatch(typeof(PhotonNetwork), "RaiseEvent")]
+    //[HarmonyPatch(typeof(PhotonNetwork), "RaiseEvent")]
     internal class Events
     {
         private static bool Prefix(byte eventCode, object eventContent, RaiseEventOptions raiseEventOptions, SendOptions sendOptions)

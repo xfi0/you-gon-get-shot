@@ -94,7 +94,6 @@ C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debu
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\obj\x64\Debug\ColossalCheatMenuV2.csproj.CopyComplete
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\obj\x64\Debug\ColossalCheatMenuV2.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\obj\x64\Debug\ColossalCheatMenuV2.pdb
-C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\UnityEngine.UI.NetModule.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\AstarPathfindingProject.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Sirenix.Serialization.dll
 C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Sirenix.OdinInspector.Attributes.dll
@@ -217,3 +216,6 @@ C:\Users\liamg\Downloads\ColossalCheatMenuV2-main (1)\ColossalCheatMenuV2-main\C
 C:\Users\liamg\Downloads\ColossalCheatMenuV2-main (1)\ColossalCheatMenuV2-main\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\Valve.Newtonsoft.Json.dll
 C:\Users\liamg\Downloads\ColossalCheatMenuV2-main (1)\ColossalCheatMenuV2-main\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\websocket-sharp.dll
 C:\Users\liamg\Downloads\ColossalCheatMenuV2-main (1)\ColossalCheatMenuV2-main\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\System.Xml.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\GTAG_NotificationLib.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\System.dll
+C:\Users\liamg\source\repos\ColossalCheatMenuV2\ColossalCheatMenuV2\bin\x64\Debug\System.Xml.dll

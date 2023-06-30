@@ -33,7 +33,7 @@ namespace Colossal.Mods
                 bool shoot = false;
                 InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxisClick, out shoot);
                 RaycastHit raycastHit;
-                Physics.Raycast(GorillaLocomotion.Player.Instance.rightHandTransform.position - GorillaLocomotion.Player.Instance.rightHandTransform.up, -GorillaLocomotion.Player.Instance.rightHandTransform.up, out raycastHit);
+                Physics.Raycast(GorillaLocomotion.Player.Instance.rightControllerTransform.position - GorillaLocomotion.Player.Instance.rightControllerTransform.up, -GorillaLocomotion.Player.Instance.rightControllerTransform.up, out raycastHit);
                 if (shoot)
                 {
                     if (radiusLine == null) {
@@ -49,7 +49,7 @@ namespace Colossal.Mods
                         radiusLine.material = lineMaterial;
                     }
                     radiusLine.SetPosition(0, raycastHit.point);
-                    radiusLine.SetPosition(1, GorillaLocomotion.Player.Instance.rightHandTransform.position);
+                    radiusLine.SetPosition(1, GorillaLocomotion.Player.Instance.rightControllerTransform.position);
                     if (radiusLine.GetPosition(0) == null) {
                         if (radiusLine != null) {
                             Destroy(radiusLine);
@@ -59,7 +59,7 @@ namespace Colossal.Mods
 
                     GorillaTagger.Instance.myVRRig.enabled = false;
                     GorillaTagger.Instance.myVRRig.transform.position = raycastHit.point;
-                    GorillaLocomotion.Player.Instance.rightHandTransform.position = raycastHit.point;
+                    GorillaLocomotion.Player.Instance.rightControllerTransform.position = raycastHit.point;
                     GorillaTagger.Instance.myVRRig.enabled = true;
                 }
                 else

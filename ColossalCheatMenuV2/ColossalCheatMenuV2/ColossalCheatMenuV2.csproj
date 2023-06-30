@@ -54,7 +54,6 @@
     <Compile Include="HarmonyLoader.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\Mods\AntiCrashes\AntiCrash.cs" />
-    <Compile Include="Menu\Mods\ColossalGamemode.cs" />
     <Compile Include="Menu\Mods\Modders\PcCheckBypass.cs" />
     <Compile Include="Menu\Mods\Movement\FreezeMonkey.cs" />
     <Compile Include="Menu\Mods\Movement\LongArm.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="Menu\Mods\Movement\WateryAir.cs" />
     <Compile Include="Menu\Mods\Player\TagAll.cs" />
     <Compile Include="Menu\Mods\Player\TagAura.cs" />
-    <Compile Include="Menu\Mods\Visual\FPSBooster.cs" />
     <Compile Include="Menu\Mods\ThisGuyIsUsingColossal!!!.cs" />
     <Compile Include="Menu\Mods\Visual\BoxEsp.cs" />
     <Compile Include="Menu\Mods\Visual\Chams.cs" />
@@ -81,6 +79,13 @@
     <Compile Include="Menu\Mods\Movement\WallWalk.cs" />
     <Compile Include="Menu\Mods\Visual\HollowBoxEsp.cs" />
     <Compile Include="Menu\Mods\Visual\WhyIsEveryoneLookingAtMe.cs" />
+    <Compile Include="Menu\NotifacationLib\Notifacations\EventNotifacation.cs" />
+    <Compile Include="Menu\NotifacationLib\Notifacations\JoinNotifacation.cs" />
+    <Compile Include="Menu\NotifacationLib\Notifacations.cs" />
+    <Compile Include="Menu\NotifacationLib\Notifacations\LeaveNotifacation.cs" />
+    <Compile Include="Menu\NotifacationLib\Notifacations\MasterChangeNotifacation.cs" />
+    <Compile Include="Menu\NotifacationLib\Notifacations\ReportNotifacation.cs" />
+    <Compile Include="Menu\Overlay.cs" />
     <Compile Include="Patches\Events.cs" />
     <Compile Include="Patches\GeneralFailMessage.cs" />
     <Compile Include="Patches\SendReport.cs" />
@@ -93,361 +98,350 @@
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x64\Debug\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Gorilla Tag\Gorilla Tag_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx, Version=5.4.19.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\BepInEx.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Harmony, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\BepInEx.Harmony.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\BepInEx.Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Preloader, Version=5.4.19.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\BepInEx.Preloader.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Data.v22.2, Version=22.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\DevExpress.Data.v22.2.dll</HintPath>
-    </Reference>
-    <Reference Include="GTAG_NotificationLib">
-      <HintPath>bin\Debug\GTAG_NotificationLib.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\BepInEx.Preloader.dll</HintPath>
     </Reference>
     <Reference Include="HarmonyXInterop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\HarmonyXInterop.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\HarmonyXInterop.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Mono.Cecil.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Mono.Security.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\Mono.Security.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour, Version=22.1.29.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\MonoMod.RuntimeDetour.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\MonoMod.RuntimeDetour.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.Utils, Version=22.1.29.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\MonoMod.Utils.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Oculus.VR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Oculus.VR.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\Oculus.VR.dll</HintPath>
     </Reference>
     <Reference Include="Photon3Unity3D, Version=4.1.6.10, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Photon3Unity3D.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\Photon3Unity3D.dll</HintPath>
     </Reference>
     <Reference Include="PhotonChat, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PhotonChat.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PhotonChat.dll</HintPath>
     </Reference>
     <Reference Include="PhotonRealtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PhotonRealtime.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PhotonRealtime.dll</HintPath>
     </Reference>
     <Reference Include="PhotonUnityNetworking, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PhotonUnityNetworking.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PhotonUnityNetworking.dll</HintPath>
     </Reference>
     <Reference Include="PhotonUnityNetworking.Demos, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PhotonUnityNetworking.Demos.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PhotonUnityNetworking.Demos.dll</HintPath>
     </Reference>
     <Reference Include="PhotonUnityNetworking.Utilities, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PhotonUnityNetworking.Utilities.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PhotonUnityNetworking.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="PhotonVoice, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PhotonVoice.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PhotonVoice.dll</HintPath>
     </Reference>
     <Reference Include="PhotonVoice.API, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PhotonVoice.API.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PhotonVoice.API.dll</HintPath>
     </Reference>
     <Reference Include="PhotonVoice.PUN, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PhotonVoice.PUN.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PhotonVoice.PUN.dll</HintPath>
     </Reference>
     <Reference Include="PhotonWebSocket, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PhotonWebSocket.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PhotonWebSocket.dll</HintPath>
     </Reference>
     <Reference Include="PlayFab, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\PlayFab.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\PlayFab.dll</HintPath>
     </Reference>
     <Reference Include="SteamVR, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\SteamVR.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\SteamVR.dll</HintPath>
     </Reference>
     <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\..\Program Files\Oculus\Software\Software\another-axiom-gorilla-tag\Gorilla Tag_Data\Managed\System.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Gorilla Tag\Gorilla Tag_Data\Managed\System.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Animation.Rigging, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Unity.Animation.Rigging.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\Unity.Animation.Rigging.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Unity.Burst.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\Unity.Burst.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InputSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Unity.InputSystem.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Interaction.Toolkit, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Unity.XR.Interaction.Toolkit.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\Unity.XR.Interaction.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AccessibilityModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.AccessibilityModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.AccessibilityModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.AIModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.AIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AndroidJNIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.AndroidJNIModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.AndroidJNIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.AnimationModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.AnimationModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ARModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.ARModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.ARModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.AudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ClothModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.ClothModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.ClothModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ClusterInputModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.ClusterInputModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.ClusterInputModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ClusterRendererModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.ClusterRendererModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CrashReportingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.CrashReportingModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.CrashReportingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.DirectorModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.DirectorModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.DirectorModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.DSPGraphModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.DSPGraphModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.DSPGraphModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.GameCenterModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.GameCenterModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.GameCenterModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.GridModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.GridModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.GridModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.InputModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.InputModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.JSONSerializeModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.JSONSerializeModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.LocalizationModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.LocalizationModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.LocalizationModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PerformanceReportingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.PerformanceReportingModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.PerformanceReportingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.Physics2DModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ScreenCaptureModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.ScreenCaptureModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SharedInternalsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.SharedInternalsModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.SharedInternalsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpriteMaskModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.SpriteMaskModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.SpriteMaskModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpriteShapeModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.SpriteShapeModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.SpriteShapeModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StreamingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.StreamingModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.StreamingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SubsystemsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.SubsystemsModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.SubsystemsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TerrainModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.TerrainModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.TerrainModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.TerrainPhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextCoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.TextCoreModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.TextCoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TilemapModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.TilemapModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.TilemapModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UIElementsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UNETModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UNETModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UNETModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityAnalyticsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UnityAnalyticsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityConnectModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UnityConnectModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UnityConnectModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UnityWebRequestModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestTextureModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VehiclesModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.VehiclesModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.VehiclesModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VFXModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.VFXModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.VFXModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VideoModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.VideoModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.VideoModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.VRModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.VRModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.WindModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.WindModule.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.WindModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\UnityEngine.XRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="Utilla, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Utilla.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Valve.Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Valve.Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\Valve.Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\websocket-sharp.dll</HintPath>
+      <HintPath>..\..\..\..\OneDrive\Desktop\⠀\Assemblys\Assemblys\websocket-sharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -19,11 +19,11 @@ namespace Colossal.Mods
         {
             if (Plugin.breakmodcheckers && PhotonNetwork.InRoom)
             {
-                if(!GorillaTagger.Instance.myVRRig.photonView.Controller.CustomProperties.ContainsValue(prop))
+                if(!Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.myVRRig.gameObject).Controller.CustomProperties.ContainsValue(prop))
                 {
                     Hashtable hash = new Hashtable();
                     hash.Add("mods", prop);
-                    GorillaTagger.Instance.myVRRig.photonView.Controller.SetCustomProperties(hash);
+                    Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.myVRRig.gameObject).Controller.SetCustomProperties(hash);
                 }
             }
             else

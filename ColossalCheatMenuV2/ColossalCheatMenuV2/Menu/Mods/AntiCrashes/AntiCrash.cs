@@ -1,4 +1,5 @@
-﻿using ExitGames.Client.Photon;
+﻿using Colossal;
+using ExitGames.Client.Photon;
 using HarmonyLib;
 using Photon.Pun;
 using Photon.Realtime;
@@ -12,9 +13,8 @@ using UnityEngine;
 using UnityEngine.XR;
 using static Colossal.Plugin;
 
-namespace Colossal.Mods
-{
-    [HarmonyPatch(typeof(PhotonNetwork), "OnEvent")]
+namespace ColossalOnevent {
+    //[HarmonyPatch(typeof(PhotonNetwork), "OnEvent")]
     internal class Instantate
     {
         private static void Prefix(ExitGames.Client.Photon.EventData photonEvent)

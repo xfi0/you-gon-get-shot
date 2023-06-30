@@ -5,23 +5,27 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using BepInEx;
 using Colossal.Menu;
+using Colossal.Menu.ClientHub;
+using Colossal.Menu.ClientHub.Notifacation;
 using Colossal.Mods;
+using Colossal.Patches;
 using GorillaLocomotion;
 using GorillaLocomotion.Swimming;
 using GorillaNetworking;
 using HarmonyLib;
 using Photon.Pun;
 using Photon.Realtime;
+using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 using UnityEngine.XR;
-using Utilla;
 
 namespace Colossal {
     [BepInPlugin("org.ColossusYTTV.ColossalCheatMenuV2", "ColossalCheatMenuV2", "1.0.0")]
@@ -43,6 +47,8 @@ namespace Colossal {
         public static float instantate = 0;
         private float rainbowtext = 0f;
         private float deltaTime = 0.0f;
+        public static float reporttimer = 0;
+        public static float mastertimer = 0;
 
         private static string textcolour = "magenta";
 
@@ -85,8 +91,23 @@ namespace Colossal {
         public static bool tagall = false;
         public static bool anticrash = false;
 
-        public static string version = "2.8";
+        public static string version = "3.2";
         public static bool sussy = false;
+        public static PhotonView GetPhotonViewFromVR(GameObject vrRig) {
+            MethodInfo getViewListMethod = AccessTools.Method(typeof(PhotonNetwork), "GetPhotonViewList");
+
+            List<PhotonView> photonViews = (List<PhotonView>)getViewListMethod.Invoke(null, null);
+
+            foreach (PhotonView photonView in photonViews) {
+                Photon.Realtime.Player owner = (Photon.Realtime.Player)AccessTools.Field(typeof(PhotonView), "ownershipTransfer").GetValue(photonView);
+
+                if (owner != null && owner.TagObject == vrRig) {
+                    return photonView;
+                }
+            }
+
+            return null;
+        }
         public async void Awake() {
             using (WebClient client = new WebClient()) {
                 try {
@@ -110,6 +131,8 @@ namespace Colossal {
         }
         public void Update() {
             if (!doonce) {
+                HarmonyLoader.ApplyHarmonyPatchesOnEvent();
+
                 //Loads the menus start function
                 Menu.Menu.LoadOnce();
                 CustomConsole.LogToConsole("Loaded menu start functions!");
@@ -186,6 +209,18 @@ namespace Colossal {
 
         }
         public void FixedUpdate() {
+            if(PhotonNetwork.InRoom) {
+                reporttimer += Time.deltaTime;
+                if(reporttimer >= 20) {
+                    reporttimer = 0;
+                }
+            }
+            if (PhotonNetwork.InRoom) {
+                mastertimer += Time.deltaTime;
+                if (mastertimer >= 20) {
+                    mastertimer = 0;
+                }
+            }
             if (PhotonNetwork.InRoom) {
                 instantate += Time.deltaTime;
             } else {
@@ -251,8 +286,8 @@ namespace Colossal {
         }
         bool title = false;
         private void ModManager() {
-            if (GorillaTagger.Instance.gameObject.GetComponent<ThisGuyIsUsingColossal>() == null)
-                GorillaTagger.Instance.gameObject.AddComponent<ThisGuyIsUsingColossal>();
+            /*if (GorillaTagger.Instance.gameObject.GetComponent<ThisGuyIsUsingColossal>() == null)
+                GorillaTagger.Instance.gameObject.AddComponent<ThisGuyIsUsingColossal>();*/
 
             if (GorillaTagger.Instance.gameObject.GetComponent<CustomConsole>() == null)
                 GorillaTagger.Instance.gameObject.AddComponent<CustomConsole>();
@@ -428,11 +463,6 @@ namespace Colossal {
             if (breaknametags) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<BreakNameTags>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<BreakNameTags>();
-            }
-
-            if (fpsbooster) {
-                if (GorillaTagger.Instance.gameObject.GetComponent<FPSBooster>() == null)
-                    GorillaTagger.Instance.gameObject.AddComponent<FPSBooster>();
             }
         }
     }

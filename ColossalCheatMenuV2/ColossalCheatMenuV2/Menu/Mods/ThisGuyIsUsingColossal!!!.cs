@@ -24,18 +24,18 @@ namespace Colossal.Mods
                 colour = new Color(r, g, b);
                 colorTimer += Time.deltaTime * 2;
 
-                if (!GorillaTagger.Instance.myVRRig.photonView.Controller.CustomProperties.ContainsValue("colossal")) {
+                if (!Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.myVRRig.gameObject).Controller.CustomProperties.ContainsValue("colossal")) {
                     Hashtable hash = new Hashtable
                     {
                             { "colossal", "colossal" }
                     };
-                    GorillaTagger.Instance.myVRRig.photonView.Controller.SetCustomProperties(hash);
+                    Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.myVRRig.gameObject).Controller.SetCustomProperties(hash);
                 }
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>()) {
-                    if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !vrrig.photonView.IsMine) {
-                        if (vrrig.photonView.Controller.CustomProperties.ContainsValue("colossal")) {
+                    if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !Plugin.GetPhotonViewFromVR(vrrig.gameObject).IsMine) {
+                        if (vrrig.myPlayer.CustomProperties.ContainsValue("colossal")) {
                             if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().isCasual) {
-                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.photonView.Owner.ActorNumber)) {
+                                if (!GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.myPlayer.ActorNumber)) {
                                     if(!vrrig.gameObject.tag.Contains("colossal")) {
                                         vrrig.gameObject.tag = "colossal";
                                         vrrig.mainSkin.material.color = colour;

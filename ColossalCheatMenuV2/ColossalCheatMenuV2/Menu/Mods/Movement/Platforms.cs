@@ -35,7 +35,7 @@ namespace Colossal.Mods
                         PlatL.GetComponent<Renderer>().material.color = Color.magenta;
                         PlatL.GetComponent<Renderer>().material.mainTexture = Plugin.texture;
                         PlatL.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                        PlatL.transform.position = GorillaLocomotion.Player.Instance.leftHandTransform.position;
+                        PlatL.transform.position = GorillaLocomotion.Player.Instance.leftControllerTransform.position;
 
                         PlatLonce = true;
                     }
@@ -54,7 +54,7 @@ namespace Colossal.Mods
                         PlatR.GetComponent<Renderer>().material.color = Color.magenta;
                         PlatR.GetComponent<Renderer>().material.mainTexture = Plugin.texture;
                         PlatR.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                        PlatR.transform.position = GorillaLocomotion.Player.Instance.rightHandTransform.position;
+                        PlatR.transform.position = GorillaLocomotion.Player.Instance.rightControllerTransform.position;
 
                         PlatRonce = true;
                     }

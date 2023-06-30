@@ -25,7 +25,7 @@ namespace Colossal.Mods
                 }
                 if (right)
                 {
-                    GorillaLocomotion.Player.Instance.transform.position += GorillaLocomotion.Player.Instance.leftHandTransform.forward * 0.45f;
+                    GorillaLocomotion.Player.Instance.transform.position += GorillaLocomotion.Player.Instance.leftControllerTransform.forward * 0.45f;
                     GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity = Vector3.zero;
                 }
             }

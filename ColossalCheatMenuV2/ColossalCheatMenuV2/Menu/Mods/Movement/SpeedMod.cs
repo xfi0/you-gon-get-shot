@@ -67,7 +67,7 @@ namespace Colossal.Mods
             {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>())
                 {
-                    if (vrrig.isOfflineVRRig && vrrig.isMyPlayer && vrrig.photonView.IsMine)
+                    if (vrrig.isOfflineVRRig && vrrig.isMyPlayer)
                     {
                         if (vrrig.mainSkin.material.name.Contains("fected"))
                         {

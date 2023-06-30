@@ -20,7 +20,7 @@ namespace Colossal.Mods
                 {
                     foreach (VRRig vrrig in Resources.FindObjectsOfTypeAll<VRRig>())
                     {
-                        if (vrrig.photonView.IsMine)
+                        if (vrrig.isMyPlayer)
                         {
                             vrrig.gameObject.transform.Find("gorilla").GetComponent<Renderer>().enabled = false;
                         }
@@ -29,7 +29,7 @@ namespace Colossal.Mods
                     {
                         foreach (VRRig vrrig2 in Resources.FindObjectsOfTypeAll<VRRig>())
                         {
-                            if (vrrig2.photonView.IsMine)
+                            if (vrrig2.isMyPlayer)
                             {
                                 UnityEngine.Object.FindObjectsOfType<VRRig>();
                             }
@@ -51,7 +51,7 @@ namespace Colossal.Mods
                 {
                     foreach (VRRig vrrig3 in Resources.FindObjectsOfTypeAll<VRRig>())
                     {
-                        if (vrrig3.photonView.IsMine)
+                        if (vrrig3.isMyPlayer)
                         {
                             vrrig3.gameObject.transform.Find("gorilla").GetComponent<Renderer>().enabled = true;
                         }
@@ -60,7 +60,7 @@ namespace Colossal.Mods
                     {
                         foreach (VRRig vrrig4 in Resources.FindObjectsOfTypeAll<VRRig>())
                         {
-                            if (vrrig4.photonView.IsMine)
+                            if (vrrig4.isMyPlayer)
                             {
                                 UnityEngine.Object.FindObjectsOfType<VRRig>();
                             }

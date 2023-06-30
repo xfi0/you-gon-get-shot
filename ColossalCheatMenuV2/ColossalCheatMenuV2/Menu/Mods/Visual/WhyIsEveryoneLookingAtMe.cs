@@ -12,7 +12,7 @@ namespace Colossal.Mods {
         public void Update() {
             if (Plugin.whyiseveryonelookingatme) {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>()) {
-                    if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer && !vrrig.photonView.IsMine) {
+                    if (!vrrig.isOfflineVRRig && !vrrig.isMyPlayer) {
                         vrrig.transform.LookAt(GorillaLocomotion.Player.Instance.transform.position);
                     }
                 }
