@@ -91,7 +91,7 @@ namespace Colossal {
         public static bool tagall = false;
         public static bool anticrash = false;
 
-        public static string version = "3.3";
+        public static string version = "3.4";
         public static bool sussy = false;
         public static PhotonView GetPhotonViewFromVR(GameObject vrRig) {
             MethodInfo getViewListMethod = AccessTools.Method(typeof(PhotonNetwork), "GetPhotonViewList");

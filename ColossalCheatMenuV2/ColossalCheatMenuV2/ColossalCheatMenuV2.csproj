@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="CustomConsole.cs" />
     <Compile Include="HarmonyLoader.cs" />
-    <Compile Include="Loader.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\Mods\AntiCrashes\AntiCrash.cs" />
     <Compile Include="Menu\Mods\Modders\PcCheckBypass.cs" />
