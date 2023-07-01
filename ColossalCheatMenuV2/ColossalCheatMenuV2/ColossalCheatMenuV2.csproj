@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="CustomConsole.cs" />
     <Compile Include="HarmonyLoader.cs" />
+    <Compile Include="Loader.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\Mods\AntiCrashes\AntiCrash.cs" />
     <Compile Include="Menu\Mods\Modders\PcCheckBypass.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="Menu\NotifacationLib\Notifacations\MasterChangeNotifacation.cs" />
     <Compile Include="Menu\NotifacationLib\Notifacations\ReportNotifacation.cs" />
     <Compile Include="Menu\Overlay.cs" />
+    <Compile Include="Patches\Bepinex\BepinexPatch.cs" />
+    <Compile Include="Patches\Bepinex\ControllerPatch.cs" />
     <Compile Include="Patches\Events.cs" />
     <Compile Include="Patches\GeneralFailMessage.cs" />
     <Compile Include="Patches\SendReport.cs" />

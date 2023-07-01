@@ -28,15 +28,15 @@ using UnityEngine.UI;
 using UnityEngine.XR;
 
 namespace Colossal {
-    [BepInPlugin("org.ColossusYTTV.ColossalCheatMenuV2", "ColossalCheatMenuV2", "1.0.0")]
-    public class Plugin : BaseUnityPlugin {
-        private void OnEnable() {
+    //[BepInPlugin("org.ColossusYTTV.ColossalCheatMenuV2", "ColossalCheatMenuV2", "1.0.0")]
+    public class Plugin : MonoBehaviour {
+        /*private void OnEnable() {
             HarmonyLoader.ApplyHarmonyPatches();
         }
 
         private void OnDisable() {
             HarmonyLoader.RemoveHarmonyPatches();
-        }
+        }*/
         private bool inroom = false;
         private bool doonce = false;
 
@@ -91,7 +91,7 @@ namespace Colossal {
         public static bool tagall = false;
         public static bool anticrash = false;
 
-        public static string version = "3.2";
+        public static string version = "3.3";
         public static bool sussy = false;
         public static PhotonView GetPhotonViewFromVR(GameObject vrRig) {
             MethodInfo getViewListMethod = AccessTools.Method(typeof(PhotonNetwork), "GetPhotonViewList");
@@ -108,27 +108,7 @@ namespace Colossal {
 
             return null;
         }
-        public async void Awake() {
-            using (WebClient client = new WebClient()) {
-                try {
-                    string versiondownload = client.DownloadString("https://pastebin.com/raw/2uU6L7NZ");
-                    if (versiondownload != version) {
-                        CustomConsole.LogToConsole("Update needed... Downloading");
-                        await update();
-                    } else {
-                        CustomConsole.LogToConsole("Up To Date!");
-                    }
-                } catch (WebException ex) {
-                    CustomConsole.LogToConsole("Error: " + ex.Message);
-                }
-            }
-
-            System.Random random = new System.Random();
-            int randomNumber = random.Next(1, 51);
-            if (randomNumber == 1) {
-                sussy = true;
-            }
-        }
+        
         public void Update() {
             if (!doonce) {
                 HarmonyLoader.ApplyHarmonyPatchesOnEvent();
@@ -242,39 +222,39 @@ namespace Colossal {
                 if (rainbowtext >= 0.1f) {
                     textcolour = "magenta";
                     GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.2f) {
                     textcolour = "red";
                     GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.3f) {
                     textcolour = "green";
                     GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.4f) {
                     textcolour = "blue";
                     GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.5f) {
                     textcolour = "cyan";
                     GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.6f) {
                     textcolour = "yellow";
                     GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.6f) {
                     rainbowtext = 0;
                 }
             }
         }
-        public async Task update() {
+        public static async Task update() {
             using (WebClient client = new WebClient()) {
                 try {
                     string downloadfilelink = client.DownloadString("https://pastebin.com/raw/SqF7czTS");
@@ -305,10 +285,10 @@ namespace Colossal {
                 title = true;
             }
 
-            if (tagall) {
+            /*if (tagall) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<TagAll>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<TagAll>();
-            }
+            }*/
 
             if (tagauracolossal) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<TagAura>() == null)
@@ -345,10 +325,10 @@ namespace Colossal {
                     GorillaTagger.Instance.gameObject.AddComponent<WateryAir>();
             }
 
-            if (freezemonkey) {
+            /*if (freezemonkey) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<FreezeMonkey>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<FreezeMonkey>();
-            }
+            }*/
 
             if (platforms) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<Platforms>() == null)
@@ -415,7 +395,7 @@ namespace Colossal {
                     GorillaTagger.Instance.gameObject.AddComponent<WallWalk>();
             }
 
-            if (chams) {
+            /*if (chams) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<Chams>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<Chams>();
             }
@@ -428,14 +408,14 @@ namespace Colossal {
             if (hollowboxesp) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<HollowBoxEsp>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<HollowBoxEsp>();
-            }
+            }*/
 
             if (creepermonkey) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<CreeperMonkey>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<CreeperMonkey>();
             }
 
-            if (ghostmonkey) {
+            /*if (ghostmonkey) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<GhostMonkey>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<GhostMonkey>();
             }
@@ -443,17 +423,17 @@ namespace Colossal {
             if (invismonkey) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<InvisMonkey>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<InvisMonkey>();
-            }
+            }*/
 
             if (legmod) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<LegMod>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<LegMod>();
             }
 
-            if (taggun) {
+            /*if (taggun) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<TagGun>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<TagGun>();
-            }
+            }*/
 
             if (breakmodcheckers) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<BreakModChecker>() == null)

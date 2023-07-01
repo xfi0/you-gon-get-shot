@@ -5,11 +5,12 @@
     "\\ColossalCheatMenuV2\\Menu",
     "\\ColossalCheatMenuV2\\Menu\\Mods",
     "\\ColossalCheatMenuV2\\Menu\\Mods\\AntiCrashes",
+    "\\ColossalCheatMenuV2\\Menu\\Mods\\Movement",
     "\\ColossalCheatMenuV2\\Menu\\Mods\\Player",
     "\\ColossalCheatMenuV2\\Menu\\NotifacationLib",
     "\\ColossalCheatMenuV2\\Menu\\NotifacationLib\\Notifacations",
     "\\ColossalCheatMenuV2\\Patches"
   ],
-  "SelectedNode": "\\ColossalCheatMenuV2\\Menu\\Mods\\AntiCrashes\\AntiCrash.cs",
+  "SelectedNode": "\\ColossalCheatMenuV2\\Plugin.cs",
   "PreviewInSolutionExplorer": false
 }
