@@ -16,5 +16,5 @@ With a Unique UI written by @lars#2469 , it stands out from the competition with
 <https://www.youtube.com/watch?v=q_JAAKS62aY>
 
 **------------------------------------**
-**||** https://discord.gg/ptQkvhmyhm **||**
+**||** https://discord.gg/x4VEPyCEGR **||**
 **------------------------------------**
