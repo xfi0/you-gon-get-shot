@@ -18,9 +18,9 @@ namespace Colossal.Mods {
             if (Plugin.tagauracolossal && PhotonNetwork.InRoom) {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>()) {
                     if (!vrrig.isMyPlayer) {
-                        float distance = Vector3.Distance(GorillaTagger.Instance.myVRRig.transform.position, vrrig.transform.position);
+                        float distance = Vector3.Distance(GorillaTagger.Instance.offlineVRRig.transform.position, vrrig.transform.position);
                         if (distance < GorillaGameManager.instance.tagDistanceThreshold / 3 && !GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.myPlayer.ActorNumber)) {
-                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.myVRRig.gameObject).Owner.ActorNumber)) {
+                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.offlineVRRig.gameObject).Owner.ActorNumber)) {
                                 if (radiusLine == null) {
                                     lineMaterial = new Material(Shader.Find("Sprites/Default"));
                                     lineMaterial.color = new Color(0.6f, 0f, 0.8f, 0.5f);
@@ -57,9 +57,9 @@ namespace Colossal.Mods {
             if (Plugin.tagauraghost && PhotonNetwork.InRoom) {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>()) {
                     if (!vrrig.isMyPlayer) {
-                        float distance = Vector3.Distance(GorillaTagger.Instance.myVRRig.transform.position, vrrig.transform.position);
+                        float distance = Vector3.Distance(GorillaTagger.Instance.offlineVRRig.transform.position, vrrig.transform.position);
                         if (distance < GorillaGameManager.instance.tagDistanceThreshold / 2 && !GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.myPlayer.ActorNumber)) {
-                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.myVRRig.gameObject).Owner.ActorNumber)) {
+                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.offlineVRRig.gameObject).Owner.ActorNumber)) {
                                 if (radiusLine == null) {
                                     lineMaterial = new Material(Shader.Find("Sprites/Default"));
                                     lineMaterial.color = new Color(0.6f, 0f, 0.8f, 0.5f);
@@ -96,9 +96,9 @@ namespace Colossal.Mods {
             if (Plugin.tagaurablatant && PhotonNetwork.InRoom) {
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>()) {
                     if (!vrrig.isMyPlayer) {
-                        float distance = Vector3.Distance(GorillaTagger.Instance.myVRRig.transform.position, vrrig.transform.position);
+                        float distance = Vector3.Distance(GorillaTagger.Instance.offlineVRRig.transform.position, vrrig.transform.position);
                         if (distance < GorillaGameManager.instance.tagDistanceThreshold && !GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.myPlayer.ActorNumber)) {
-                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.myVRRig.gameObject).Owner.ActorNumber)) {
+                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.offlineVRRig.gameObject).Owner.ActorNumber)) {
                                 if (radiusLine == null) {
                                     lineMaterial = new Material(Shader.Find("Sprites/Default"));
                                     lineMaterial.color = new Color(0.6f, 0f, 0.8f, 0.5f);

@@ -91,7 +91,7 @@ namespace Colossal {
         public static bool tagall = false;
         public static bool anticrash = false;
 
-        public static string version = "3.4";
+        public static string version = "3.5";
         public static bool sussy = false;
         public static PhotonView GetPhotonViewFromVR(GameObject vrRig) {
             MethodInfo getViewListMethod = AccessTools.Method(typeof(PhotonNetwork), "GetPhotonViewList");
@@ -121,27 +121,27 @@ namespace Colossal {
                 boardmat = new Material(Shader.Find("Standard"));
                 boardmat.color = new Color(0.6f, 0, 0.80f);
 
-                if (GameObject.Find("Level").transform.Find("lower level").gameObject.activeSelf) {
-                    GameObject.Find("Level/lower level/StaticUnlit/motdscreen").GetComponent<Renderer>().material = boardmat;
-                    GameObject.Find("Level/lower level/StaticUnlit/screen").GetComponent<Renderer>().material = boardmat;
+                if (GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.Find("TreeRoom").gameObject.activeSelf) {
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/StaticUnlit/motdscreen").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/StaticUnlit/screen").GetComponent<Renderer>().material = boardmat;
 
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorforest").GetComponent<Renderer>().material = boardmat;
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorcave").GetComponent<Renderer>().material = boardmat;
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorskyjungle").GetComponent<Renderer>().material = boardmat;
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorcosmetics").GetComponent<Renderer>().material = boardmat;
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorcanyon").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorforest").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorcave").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorskyjungle").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorcosmetics").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorcanyon").GetComponent<Renderer>().material = boardmat;
 
-                    GameObject.Find("Level/forest/ForestObjects/campgroundstructure/scoreboard/REMOVE board").GetComponent<MeshRenderer>().material = boardmat;
+                    //GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/campgroundstructure/scoreboard/REMOVE board").GetComponent<MeshRenderer>().material = boardmat;
 
-                    GameObject.Find("Level/lower level/UI/-- PhysicalComputer UI --/monitor").GetComponent<Renderer>().material = boardmat;
+                    //GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/-- PhysicalComputer UI --/monitor").GetComponent<Renderer>().material = boardmat;
 
-                    GameObject.Find("Level/lower level/UI/motd/motdtext").GetComponent<Text>().color = Color.cyan;
-                    GameObject.Find("Level/lower level/UI/motd").GetComponent<Text>().color = Color.cyan;
-                    GameObject.Find("Level/lower level/UI/motd").GetComponent<Text>().text = "UPDATES";
-                    GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenForest").GetComponent<Text>().color = Color.cyan;
-                    GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCave").GetComponent<Text>().color = Color.cyan;
-                    GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCity Front").GetComponent<Text>().color = Color.cyan;
-                    GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCanyon").GetComponent<Text>().color = Color.cyan;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/motd/motdtext").GetComponent<Text>().color = Color.cyan;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/motd").GetComponent<Text>().color = Color.cyan;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/motd").GetComponent<Text>().text = "UPDATES";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/Tree Room Texts/WallScreenForest").GetComponent<Text>().color = Color.cyan;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/Tree Room Texts/WallScreenCave").GetComponent<Text>().color = Color.cyan;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/Tree Room Texts/WallScreenCity Front").GetComponent<Text>().color = Color.cyan;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/Tree Room Texts/WallScreenCanyon").GetComponent<Text>().color = Color.cyan;
                     CustomConsole.LogToConsole("Loaded Colours!");
                 }
 
@@ -151,30 +151,30 @@ namespace Colossal {
                 doonce = true;
             }
             if (PhotonNetwork.InRoom && !inroom) {
-                if (GameObject.Find("Level").transform.Find("lower level").gameObject.activeSelf) {
+                if (GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.Find("TreeRoom").gameObject.activeSelf) {
                     //getting motd
                     using (WebClient client = new WebClient()) {
                         try {
                             string rawData = client.DownloadString("https://pastebin.com/raw/bhLzrd4F");
-                            GameObject.Find("Level/lower level/UI/motd/motdtext").GetComponent<Text>().text = rawData;
+                            GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/motd/motdtext").GetComponent<Text>().text = rawData;
                         } catch (WebException ex) {
                             CustomConsole.LogToConsole("Error: " + ex.Message);
                         }
                     }
                     CustomConsole.LogToConsole("\nLoaded MOTD!");
 
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorforest").GetComponent<Renderer>().material = boardmat;
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorcave").GetComponent<Renderer>().material = boardmat;
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorskyjungle").GetComponent<Renderer>().material = boardmat;
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorcosmetics").GetComponent<Renderer>().material = boardmat;
-                    GameObject.Find("Level/lower level/Wall Monitors Screens/wallmonitorcanyon").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorforest").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorcave").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorskyjungle").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorcosmetics").GetComponent<Renderer>().material = boardmat;
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/Wall Monitors Screens/wallmonitorcanyon").GetComponent<Renderer>().material = boardmat;
 
-                    GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenForest").GetComponent<Text>().text = $"<Colossal Cheat Menu V2>\nPhoton Name: {PhotonNetwork.LocalPlayer.NickName}\nUserID: {PhotonNetwork.LocalPlayer.UserId}\nRoom Name: {PhotonNetwork.CurrentRoom.Name}   Players: {PhotonNetwork.CurrentRoom.PlayerCount}\nMaster: {PhotonNetwork.MasterClient.NickName}   Public: {PhotonNetwork.CurrentRoom.IsVisible}";
-                    GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCave").GetComponent<Text>().text = $"<Colossal Cheat Menu V2>\nPhoton Name: {PhotonNetwork.LocalPlayer.NickName}\nUserID: {PhotonNetwork.LocalPlayer.UserId}\nRoom Name: {PhotonNetwork.CurrentRoom.Name}   Players: {PhotonNetwork.CurrentRoom.PlayerCount}\nMaster: {PhotonNetwork.MasterClient.NickName}   Public: {PhotonNetwork.CurrentRoom.IsVisible}";
-                    GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCity Front").GetComponent<Text>().text = $"<Colossal Cheat Menu V2>\nPhoton Name: {PhotonNetwork.LocalPlayer.NickName}\nUserID: {PhotonNetwork.LocalPlayer.UserId}\nRoom Name: {PhotonNetwork.CurrentRoom.Name}   Players: {PhotonNetwork.CurrentRoom.PlayerCount}\nMaster: {PhotonNetwork.MasterClient.NickName}   Public: {PhotonNetwork.CurrentRoom.IsVisible}";
-                    GameObject.Find("Level/lower level/UI/Tree Room Texts/WallScreenCanyon").GetComponent<Text>().text = $"<Colossal Cheat Menu V2>\nPhoton Name: {PhotonNetwork.LocalPlayer.NickName}\nUserID: {PhotonNetwork.LocalPlayer.UserId}\nRoom Name: {PhotonNetwork.CurrentRoom.Name}   Players: {PhotonNetwork.CurrentRoom.PlayerCount}\nMaster: {PhotonNetwork.MasterClient.NickName}   Public: {PhotonNetwork.CurrentRoom.IsVisible}";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables//UI/Tree Room Texts/WallScreenForest").GetComponent<Text>().text = $"<Colossal Cheat Menu V2>\nPhoton Name: {PhotonNetwork.LocalPlayer.NickName}\nUserID: {PhotonNetwork.LocalPlayer.UserId}\nRoom Name: {PhotonNetwork.CurrentRoom.Name}   Players: {PhotonNetwork.CurrentRoom.PlayerCount}\nMaster: {PhotonNetwork.MasterClient.NickName}   Public: {PhotonNetwork.CurrentRoom.IsVisible}";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables//UI/Tree Room Texts/WallScreenCave").GetComponent<Text>().text = $"<Colossal Cheat Menu V2>\nPhoton Name: {PhotonNetwork.LocalPlayer.NickName}\nUserID: {PhotonNetwork.LocalPlayer.UserId}\nRoom Name: {PhotonNetwork.CurrentRoom.Name}   Players: {PhotonNetwork.CurrentRoom.PlayerCount}\nMaster: {PhotonNetwork.MasterClient.NickName}   Public: {PhotonNetwork.CurrentRoom.IsVisible}";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables//UI/Tree Room Texts/WallScreenCity Front").GetComponent<Text>().text = $"<Colossal Cheat Menu V2>\nPhoton Name: {PhotonNetwork.LocalPlayer.NickName}\nUserID: {PhotonNetwork.LocalPlayer.UserId}\nRoom Name: {PhotonNetwork.CurrentRoom.Name}   Players: {PhotonNetwork.CurrentRoom.PlayerCount}\nMaster: {PhotonNetwork.MasterClient.NickName}   Public: {PhotonNetwork.CurrentRoom.IsVisible}";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables//UI/Tree Room Texts/WallScreenCanyon").GetComponent<Text>().text = $"<Colossal Cheat Menu V2>\nPhoton Name: {PhotonNetwork.LocalPlayer.NickName}\nUserID: {PhotonNetwork.LocalPlayer.UserId}\nRoom Name: {PhotonNetwork.CurrentRoom.Name}   Players: {PhotonNetwork.CurrentRoom.PlayerCount}\nMaster: {PhotonNetwork.MasterClient.NickName}   Public: {PhotonNetwork.CurrentRoom.IsVisible}";
 
-                    GameObject.Find("Global/GorillaUI/ForestScoreboardAnchor/GorillaScoreBoard(Clone)/Board Text").GetComponent<Text>().color = Color.cyan;
+                    //GameObject.Find("Environment Objects/PersistentObjects_Prefab/GorillaUI/ForestScoreboardAnchor/GorillaScoreBoard(Clone)/Board Text").GetComponent<Text>().color = Color.cyan;
                     CustomConsole.LogToConsole("Loaded Colours And Info!\n");
                 }
                 inroom = true;
@@ -217,37 +217,37 @@ namespace Colossal {
                     Menu.Menu.menurgb = 0;
                 }
             }
-            if (GameObject.Find("Level").transform.Find("lower level").gameObject.activeSelf) {
+            if (GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.Find("TreeRoom").gameObject.activeSelf) {
                 rainbowtext += Time.deltaTime;
                 if (rainbowtext >= 0.1f) {
                     textcolour = "magenta";
-                    GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct/COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.2f) {
                     textcolour = "red";
-                    GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct/COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.3f) {
                     textcolour = "green";
-                    GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct/COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.4f) {
                     textcolour = "blue";
-                    GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct/COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.5f) {
                     textcolour = "cyan";
-                    GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct/COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.6f) {
                     textcolour = "yellow";
-                    GameObject.Find("CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
-                    GameObject.Find("COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct").GetComponent<Text>().text = $"<color={textcolour}>COLOSSAL CHEAT MENU V2</color>";
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct/COC Text").GetComponent<Text>().text = $"<color=cyan>Thank you for using CCMV2, the successor to the</color><color={textcolour}> first cheat menu!</color><color=cyan> CCMV2 will be getting frequently updated with new features/FUD. \n\nContributors:\n</color><color={textcolour}>ColossusYTTV: Menu Maker/Mod Creator\nLars/LHAX: Menu Base</color><color=cyan>\nWM: No Fingers\nStarry: Creeper Monke/Tester\nAntic: Tester\nCunzaki/Plinko: Tester\nKman: BepinexPatch\n\nCurrent Menu Version: {version}</color>";
                 }
                 if (rainbowtext >= 0.6f) {
                     rainbowtext = 0;
@@ -266,8 +266,8 @@ namespace Colossal {
         }
         bool title = false;
         private void ModManager() {
-            /*if (GorillaTagger.Instance.gameObject.GetComponent<ThisGuyIsUsingColossal>() == null)
-                GorillaTagger.Instance.gameObject.AddComponent<ThisGuyIsUsingColossal>();*/
+            if (GorillaTagger.Instance.gameObject.GetComponent<ThisGuyIsUsingColossal>() == null)
+                GorillaTagger.Instance.gameObject.AddComponent<ThisGuyIsUsingColossal>();
 
             if (GorillaTagger.Instance.gameObject.GetComponent<CustomConsole>() == null)
                 GorillaTagger.Instance.gameObject.AddComponent<CustomConsole>();
@@ -285,10 +285,10 @@ namespace Colossal {
                 title = true;
             }
 
-            /*if (tagall) {
+            if (tagall) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<TagAll>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<TagAll>();
-            }*/
+            }
 
             if (tagauracolossal) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<TagAura>() == null)
@@ -325,10 +325,10 @@ namespace Colossal {
                     GorillaTagger.Instance.gameObject.AddComponent<WateryAir>();
             }
 
-            /*if (freezemonkey) {
+            if (freezemonkey) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<FreezeMonkey>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<FreezeMonkey>();
-            }*/
+            }
 
             if (platforms) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<Platforms>() == null)
@@ -415,7 +415,7 @@ namespace Colossal {
                     GorillaTagger.Instance.gameObject.AddComponent<CreeperMonkey>();
             }
 
-            /*if (ghostmonkey) {
+            if (ghostmonkey) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<GhostMonkey>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<GhostMonkey>();
             }
@@ -423,17 +423,17 @@ namespace Colossal {
             if (invismonkey) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<InvisMonkey>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<InvisMonkey>();
-            }*/
+            }
 
             if (legmod) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<LegMod>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<LegMod>();
             }
 
-            /*if (taggun) {
+            if (taggun) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<TagGun>() == null)
                     GorillaTagger.Instance.gameObject.AddComponent<TagGun>();
-            }*/
+            }
 
             if (breakmodcheckers) {
                 if (GorillaTagger.Instance.gameObject.GetComponent<BreakModChecker>() == null)

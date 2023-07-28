@@ -19,13 +19,13 @@ namespace Colossal.Mods
                 InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out freeze);
                 if (freeze)
                 {
-                    GorillaTagger.Instance.myVRRig.enabled = false;
-                    GorillaTagger.Instance.myVRRig.transform.position = GorillaLocomotion.Player.Instance.bodyCollider.transform.position;
-                    GorillaTagger.Instance.myVRRig.transform.rotation = GorillaLocomotion.Player.Instance.bodyCollider.transform.rotation;
+                    GorillaTagger.Instance.offlineVRRig.enabled = false;
+                    GorillaTagger.Instance.offlineVRRig.transform.position = GorillaLocomotion.Player.Instance.bodyCollider.transform.position;
+                    GorillaTagger.Instance.offlineVRRig.transform.rotation = GorillaLocomotion.Player.Instance.bodyCollider.transform.rotation;
                 }
                 else
                 {
-                    GorillaTagger.Instance.myVRRig.enabled = true;
+                    GorillaTagger.Instance.offlineVRRig.enabled = true;
                 }
             }
             else

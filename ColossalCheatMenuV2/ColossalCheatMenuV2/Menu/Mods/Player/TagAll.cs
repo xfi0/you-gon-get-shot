@@ -18,9 +18,9 @@ namespace Colossal.Mods {
                 GorillaLocomotion.Player.Instance.teleportThresholdNoVel = int.MaxValue;
                 foreach (VRRig vrrig in GameObject.Find("GorillaVRRigs").GetComponentsInChildren<VRRig>()) {
                     if (!vrrig.isMyPlayer) {
-                        float distance = Vector3.Distance(GorillaTagger.Instance.myVRRig.transform.position, vrrig.transform.position);
+                        float distance = Vector3.Distance(GorillaTagger.Instance.offlineVRRig.transform.position, vrrig.transform.position);
                         if (distance < GorillaGameManager.instance.tagDistanceThreshold && !GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(vrrig.myPlayer.ActorNumber)) {
-                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.myVRRig.gameObject).Owner.ActorNumber)) {
+                            if (GorillaGameManager.instance.gameObject.GetComponent<GorillaTagManager>().currentInfectedArray.Contains(Plugin.GetPhotonViewFromVR(GorillaTagger.Instance.offlineVRRig.gameObject).Owner.ActorNumber)) {
                                 if (radiusLine == null) {
                                     lineMaterial = new Material(Shader.Find("Sprites/Default"));
                                     lineMaterial.color = new Color(0.6f, 0f, 0.8f, 0.5f);
@@ -65,15 +65,15 @@ namespace Colossal.Mods {
                                     radiusLine = null;
                                 }
                             }
-                            GorillaTagger.Instance.myVRRig.transform.position = vrrig.transform.position;
-                            GorillaTagger.Instance.myVRRig.enabled = false;
-                            GorillaTagger.Instance.myVRRig.enabled = true;
+                            GorillaTagger.Instance.offlineVRRig.transform.position = vrrig.transform.position;
+                            GorillaTagger.Instance.offlineVRRig.enabled = false;
+                            GorillaTagger.Instance.offlineVRRig.enabled = true;
                         }
                     }
                 }
             } else {
                 Destroy(GorillaTagger.Instance.GetComponent<TagAll>());
-                GorillaTagger.Instance.myVRRig.enabled = true;
+                GorillaTagger.Instance.offlineVRRig.enabled = true;
                 if (radiusLine != null) {
                     Destroy(radiusLine.gameObject);
                     radiusLine = null;

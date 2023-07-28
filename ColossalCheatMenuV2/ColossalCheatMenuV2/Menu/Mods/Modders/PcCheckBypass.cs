@@ -11,15 +11,15 @@ namespace Colossal.Mods {
     public class PcCheckBypass : MonoBehaviour {
         public void Update() {
             if (Plugin.pccheckbypass) {
-                if(GameObject.Find("Level").transform.Find("mountain").gameObject.activeSelf) {
-                    if(GameObject.Find("Level/mountain/Geometry/goodigloo").activeSelf) {
-                        GameObject.Find("Level/mountain/Geometry/goodigloo").SetActive(false);
+                if(GameObject.Find("Environment Objects/LocalObjects_Prefab").transform.Find("Mountain").gameObject.activeSelf) {
+                    if(GameObject.Find("Environment Objects/LocalObjects_Prefab/Mountain/Geometry/goodigloo").activeSelf) {
+                        GameObject.Find("Environment Objects/LocalObjects_Prefab/Mountain/Geometry/goodigloo").SetActive(false);
                     }
                 }
             } else {
                 Destroy(GorillaTagger.Instance.GetComponent<PcCheckBypass>());
-                if (!GameObject.Find("Level/mountain/Geometry/goodigloo").activeSelf) {
-                    GameObject.Find("Level/mountain/Geometry/goodigloo").SetActive(true);
+                if (!GameObject.Find("Environment Objects/LocalObjects_Prefab/Mountain/Geometry/goodigloo").activeSelf) {
+                    GameObject.Find("Environment Objects/LocalObjects_Prefab/Mountain/Geometry/goodigloo").SetActive(true);
                 }
             }
         }

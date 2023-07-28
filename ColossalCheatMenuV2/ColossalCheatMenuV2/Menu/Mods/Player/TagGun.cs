@@ -57,14 +57,14 @@ namespace Colossal.Mods
                         }
                     }
 
-                    GorillaTagger.Instance.myVRRig.enabled = false;
-                    GorillaTagger.Instance.myVRRig.transform.position = raycastHit.point;
+                    GorillaTagger.Instance.offlineVRRig.enabled = false;
+                    GorillaTagger.Instance.offlineVRRig.transform.position = raycastHit.point;
                     GorillaLocomotion.Player.Instance.rightControllerTransform.position = raycastHit.point;
-                    GorillaTagger.Instance.myVRRig.enabled = true;
+                    GorillaTagger.Instance.offlineVRRig.enabled = true;
                 }
                 else
                 {
-                    GorillaTagger.Instance.myVRRig.enabled = true;
+                    GorillaTagger.Instance.offlineVRRig.enabled = true;
                     if (radiusLine != null) {
                         Destroy(radiusLine);
                         radiusLine = null;

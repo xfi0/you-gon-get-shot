@@ -24,7 +24,7 @@ namespace Colossal.Mods
                     float num = float.PositiveInfinity;
                     foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
                     {
-                        if (!vrrig.isOfflineVRRig && vrrig != GorillaTagger.Instance.myVRRig)
+                        if (vrrig != GorillaTagger.Instance.offlineVRRig)
                         {
                             float sqrMagnitude = (vrrig.transform.position - GorillaLocomotion.Player.Instance.transform.position).sqrMagnitude;
                             if (sqrMagnitude < num)
@@ -40,7 +40,7 @@ namespace Colossal.Mods
                     float num = float.PositiveInfinity;
                     foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
                     {
-                        if (!vrrig.isOfflineVRRig && vrrig != GorillaTagger.Instance.myVRRig)
+                        if (vrrig != GorillaTagger.Instance.offlineVRRig)
                         {
                             float sqrMagnitude = (vrrig.transform.position - GorillaLocomotion.Player.Instance.transform.position).sqrMagnitude;
                             if (sqrMagnitude < num)

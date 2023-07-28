@@ -20,10 +20,10 @@ namespace Colossal.Mods
                 InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(UnityEngine.XR.CommonUsages.secondaryButton, out invisL);
                 if (invisL)
                 {
-                    GorillaTagger.Instance.myVRRig.enabled = false;
-                    GorillaTagger.Instance.myVRRig.transform.position = new Vector3(GorillaLocomotion.Player.Instance.headCollider.transform.position.x, -646.46466f, GorillaLocomotion.Player.Instance.headCollider.transform.position.z);
+                    GorillaTagger.Instance.offlineVRRig.enabled = false;
+                    GorillaTagger.Instance.offlineVRRig.transform.position = new Vector3(GorillaLocomotion.Player.Instance.headCollider.transform.position.x, -646.46466f, GorillaLocomotion.Player.Instance.headCollider.transform.position.z);
                 } else {
-                    GorillaTagger.Instance.myVRRig.enabled = false;
+                    GorillaTagger.Instance.offlineVRRig.enabled = false;
                 }
             }
             else

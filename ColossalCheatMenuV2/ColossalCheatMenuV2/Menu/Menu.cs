@@ -191,9 +191,9 @@ namespace Colossal.Menu {
                     WallWalk[3] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
 
                     Visual = new MenuOption[6];
-                    Visual[0] = new MenuOption { DisplayName = "Chams", _type = "toggle", AssociatedBool = false };
-                    Visual[1] = new MenuOption { DisplayName = "BoxEsp", _type = "toggle", AssociatedBool = false };
-                    Visual[2] = new MenuOption { DisplayName = "HollowBoxEsp", _type = "toggle", AssociatedBool = false };
+                    Visual[0] = new MenuOption { DisplayName = "---", _type = "toggle", AssociatedBool = false };
+                    Visual[1] = new MenuOption { DisplayName = "---", _type = "toggle", AssociatedBool = false };
+                    Visual[2] = new MenuOption { DisplayName = "---", _type = "toggle", AssociatedBool = false };
                     Visual[3] = new MenuOption { DisplayName = "Sky Colour", _type = "submenu", AssociatedString = "Sky" };
                     Visual[4] = new MenuOption { DisplayName = "WhyIsEveryoneLookingAtMe", _type = "toggle", AssociatedBool = false };
                     Visual[5] = new MenuOption { DisplayName = "Back", _type = "submenu", AssociatedString = "Back" };
