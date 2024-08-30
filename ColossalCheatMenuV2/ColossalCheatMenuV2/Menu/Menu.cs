@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using Colossal;
+using MelonLoader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,9 @@ using Colossal.Menu.ClientHub;
 using HarmonyLib;
 using System.Reflection;
 using Photon.Realtime;
+
+[assembly: MelonInfo(typeof(MyMod), "Xfi0xcolossal", "1.0", "xfi0")]
+[assembly: MelonGame("Lemming(shitter)", "Gorilla tag")]
 
 namespace Colossal.Menu {
     public class MenuOption {
